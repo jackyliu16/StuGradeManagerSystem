@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS Learn(
 CREATE TABLE IF NOT EXISTS Teaching(
     TechNo      char(11)    NOT NULL,
     ExClassNo   char(8)     NOT NULL,
-    PRIMARY KEY(TechNo)
+    PRIMARY KEY(TechNo, ExClassNo)
 );
 
 

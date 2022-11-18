@@ -85,16 +85,18 @@ def create_sql_into_file(file_location: str, data=List[List[List[str]]]):
  
 	attr = []
 	for i in range(0, len(data)):
-		logging.debug("loop one")
 		if i % 2 == 0 :
 			attr = data[i]
 		else:
 			sheet_data = data[i]
 			table_name = attr[0]
-			logging.debug(table_name)
+			logging.debug(f"========== {table_name} =========")
 			with open(file_location, 'a+') as FILE:
+				# FILE.write(f"DELETE FROM {table_name};\n")
 				for row in data[i]:
-					# logging.debug("data: %s", row)
+					if row[0] == None :
+						break
+					logging.debug("data: %s", row)
 					sql = f"INSERT INTO {table_name} values ('"
 					sql+= "','".join(str(col) for col in row)
 					sql+= "');\n"
@@ -112,6 +114,5 @@ def main(level=logging.INFO):
 	all_data = gain_data_from_xlsx(xlsx_file)
 	create_sql_into_file(sql_file, all_data)
 
-       
 if __name__ == '__main__':
     main(logging.DEBUG)
