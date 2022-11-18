@@ -17,7 +17,7 @@ import java.util.Iterator;
 /**
  * 结果集打印机.将结果集中的数据打印成表格.
  */
-public class ResultSetPrinter {
+public class ResultSetOperation {
     public static void printResultSet(ResultSet rs) throws SQLException {
         ResultSetMetaData resultSetMetaData = rs.getMetaData();
         // 获取列数
@@ -94,5 +94,24 @@ public class ResultSetPrinter {
         System.out.println("+");
     }
 
+// Adding by github.com/jackyLiu16
+    public static ArrayList<ArrayList<String>> convertResultSetIntoArrayList(ResultSet rs) throws SQLException {
+        ResultSetMetaData resultSetMetaData = rs.getMetaData();
+        // get col number
+        int col_num = resultSetMetaData.getColumnCount();
+        // save All Data
+        ArrayList<ArrayList<String>> res = new ArrayList<>();
+        // we just convert all things into String
+        while (rs.next()) {
+            // Save Each Line
+            ArrayList<String> col_str = new ArrayList<>(col_num);   // think about optimize but failure
+            // get attr value
+            for (int i = 0; i < col_num ; i++) {
+                col_str.add(rs.getString(i+1));
+            }
+            res.add(col_str);
+        }
+        return res;
+    }
 }
-
+// END Adding

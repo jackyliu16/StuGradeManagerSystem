@@ -6,9 +6,10 @@
  * @Version:0.0
  */
 
-import Tool.ResultSetPrinter;
+import Tool.ResultSetOperation;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class TestConnection {
 
@@ -32,7 +33,9 @@ public class TestConnection {
             String sql = "select * from Student";
             ResultSet rs = stmt.executeQuery(sql);
 
-            ResultSetPrinter.printResultSet(rs);
+//            ResultSetOperation.printResultSet(rs);
+            ArrayList<ArrayList<String>> res = ResultSetOperation.convertResultSetIntoArrayList(rs);
+            System.out.println(res);
             rs.close();
             stmt.close();
             conn.close();
