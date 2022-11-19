@@ -6,11 +6,11 @@
  * @Version:0.0
  */
 
+import Tool.Logger;
 import Tool.ResultSetOperation;
 
 import java.sql.*;
 import java.util.ArrayList;
-
 public class TestConnection {
 
     // static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -18,18 +18,18 @@ public class TestConnection {
     static final String DB_URL = "jdbc:mysql://localhost:3306/CourseDB";
     static final String USER = "root";
     static final String PWD = "123456";
+    static final Logger log = new Logger();
 
     public static void main(String[] args) {
         Connection conn = null;
         Statement stmt = null;
-
         try {
             Class.forName(JDBC_DRIVER);
-            System.out.println("Connect to DataBases");
             conn = DriverManager.getConnection(DB_URL, USER, PWD);
             stmt = conn.createStatement();// statement是sql语句？connnet创建的
+            log.info("databases connect successed!");
 
-            String sql = "select * from teacher";
+            String sql = "select * from Teacher";
             ResultSet rs = stmt.executeQuery(sql);
             ResultSetOperation.printResultSet(rs); // using for debug
             ArrayList<ArrayList<String>> res = ResultSetOperation.convertResultSetIntoArrayList(rs); // using for output
@@ -37,10 +37,9 @@ public class TestConnection {
             rs.close();
             stmt.close();
             conn.close();
-        } catch (SQLException se) {
+            log.info("sql connection success !");
+        } catch (Exception se) {
             se.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             try {
                 if (stmt != null)
