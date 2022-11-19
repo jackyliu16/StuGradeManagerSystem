@@ -9,5 +9,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="mysql-connector-j-8.0.31" level="project" />
+    <orderEntry type="library" name="apache-log4j-2.19" level="project" />
   </component>
 </module>
