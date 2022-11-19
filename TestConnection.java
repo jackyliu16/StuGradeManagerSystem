@@ -27,15 +27,13 @@ public class TestConnection {
             Class.forName(JDBC_DRIVER);
             System.out.println("Connect to DataBases");
             conn = DriverManager.getConnection(DB_URL, USER, PWD);
+            stmt = conn.createStatement();//statement是sql语句？connnet创建的
 
-            stmt = conn.createStatement();
-
-            String sql = "select * from Student";
+            String sql = "select * from Course";//瞎玩的
             ResultSet rs = stmt.executeQuery(sql);
-
             ResultSetOperation.printResultSet(rs);      // using for debug
             ArrayList<ArrayList<String>> res = ResultSetOperation.convertResultSetIntoArrayList(rs); // using for output
-            System.out.println(res);
+            System.out.println(res);//怎么样把多个查询的结果输出？
             rs.close();
             stmt.close();
             conn.close();
