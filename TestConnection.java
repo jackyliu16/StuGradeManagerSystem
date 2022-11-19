@@ -33,27 +33,39 @@ public class TestConnection {
             String sql = "select * from Student";
             ResultSet rs = stmt.executeQuery(sql);
 
-//            ResultSetOperation.printResultSet(rs);
-            ArrayList<ArrayList<String>> res = ResultSetOperation.convertResultSetIntoArrayList(rs);
+            ResultSetOperation.printResultSet(rs);      // using for debug
+            ArrayList<ArrayList<String>> res = ResultSetOperation.convertResultSetIntoArrayList(rs); // using for output
             System.out.println(res);
             rs.close();
             stmt.close();
             conn.close();
-        } catch (SQLException se) {
+        }
+        catch (SQLException se)
+        {
             se.printStackTrace();
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
-        } finally {
-            try {
+        }
+        finally
+        {
+            try
+            {
                 if (stmt != null)
                     stmt.close();
-            } catch (SQLException se) {
+            }
+            catch (SQLException se)
+            {
                 // do nothing
             }
-            try {
+            try
+            {
                 if (conn != null)
                     conn.close();
-            } catch (SQLException se) {
+            }
+            catch (SQLException se)
+            {
                 se.printStackTrace();
             }
         }
