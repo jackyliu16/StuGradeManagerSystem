@@ -11,21 +11,19 @@
     https://blog.csdn.net/qq_44614026/article/details/108083958#:~:text=openpyxl%E7%AE%80%E4%BB%8B%201%20openpyxl%20%E6%9C%80%E5%A5%BD%E7%94%A8%E7%9A%84%20python%20%E6%93%8D%E4%BD%9C%20excel%20%E8%A1%A8%E6%A0%BC%E5%BA%93%EF%BC%8C%E4%BD%86%E4%B8%8D%E6%98%AF%E5%AE%98%E6%96%B9%E7%9A%84%E6%A0%87%E5%87%86%E5%BA%93%EF%BC%8C%E9%9C%80%E8%A6%81%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85,2%20%E5%8F%AF%E4%BB%A5%E8%AF%BB%E5%8F%96%E5%92%8C%E5%86%99%E5%85%A5excel%E6%96%87%E4%BB%B6%EF%BC%8C%E6%94%AF%E6%8C%81%E3%80%90.xlsx%20%2F%20.xlsm%20%2F%20.xltx%20%2F%20.xltm%E3%80%91%E6%A0%BC%E5%BC%8F%E7%9A%84%E6%96%87%E4%BB%B6%EF%BC%8C%E5%8F%AF%E5%A4%84%E7%90%86excel%E6%95%B0%E6%8D%AE%E3%80%81%E5%85%AC%E5%BC%8F%E3%80%81%E6%A0%B7%E5%BC%8F%EF%BC%8C%E4%B8%94%E5%8F%AF%E4%BB%A5%E5%9C%A8%E8%A1%A8%E6%A0%BC%E5%86%85%E6%8F%92%E5%85%A5%E5%9B%BE%E8%A1%A8
     
 '''
-import os
-import sys
-from typing import List
 import logging
 import openpyxl
 from logging.handlers import RotatingFileHandler
+from typing import List
 
 
-def log_config(level=logging.INFO):
+def log_config(logLevel=logging.INFO):
 	LOG_FORMAT = '[%(asctime)s][%(levelname)s]: %(message)s'
-	logging.basicConfig(level=level, format=LOG_FORMAT)
+	logging.basicConfig(level=logLevel, format=LOG_FORMAT)
 	# 创建RotatingFileHandler对象,满2MB为一个文件，共备份3个文件
 	log_file_handler = RotatingFileHandler(
-		filename='test.log', maxBytes=2*1024*1024, backupCount=3)
- 	# 设置日志打印格式
+		filename='test.log', maxBytes=2 * 1024 * 1024, backupCount=3)
+	# 设置日志打印格式
 	formatter = logging.Formatter(LOG_FORMAT)
 	log_file_handler.setFormatter(formatter)
 	logging.getLogger('').addHandler(log_file_handler)
@@ -106,8 +104,9 @@ def clear_file(sql_file):
     with open(sql_file, 'w') as FILE:
         FILE.truncate()
 
-def main(level=logging.INFO):
-	log_config(level)
+
+def main(logLevel=logging.INFO):
+	log_config(logLevel)
 	sql_file = "./insertData.sql"
 	xlsx_file = "./SQL_Data.xlsx"
 	clear_file(sql_file)
