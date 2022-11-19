@@ -29,7 +29,7 @@ public class TestConnection {
             conn = DriverManager.getConnection(DB_URL, USER, PWD);
             stmt = conn.createStatement();//statement是sql语句？connnet创建的
 
-            String sql = "select * from Course";//瞎玩的
+            String sql = "select * from teacher";//瞎玩的
             ResultSet rs = stmt.executeQuery(sql);
             ResultSetOperation.printResultSet(rs);      // using for debug
             ArrayList<ArrayList<String>> res = ResultSetOperation.convertResultSetIntoArrayList(rs); // using for output
