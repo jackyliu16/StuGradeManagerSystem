@@ -11,69 +11,53 @@
  *
  */
 
-import Tool.ResultSetOperation;
+import Tool.LogLevel;
+import Tool.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class DataControlCenter {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL      = "jdbc:mysql://localhost:3306/CourseDB";
-    static final String USER        = "root";
-    static final String PWD         = "123456";
-    static Logger logger      = Logger.getLogger(DataControlCenter.class.getName());
-    //severe(), warning(), info(), config(), fine(), finer(), finest()
+    static final String DB_URL = "jdbc:mysql://localhost:3306/CourseDB";
+    static final String USER = "root";
+    static final String PWD = "123456";
+    static final Logger log = new Logger(LogLevel.Debug);
     static Connection conn = null;
 
     DataControlCenter() {
-        logger.setLevel(Level.FINER);
         try {
             Class.forName(JDBC_DRIVER);
             // Driver Class Create Connect Object
             conn = DriverManager.getConnection(DB_URL, USER, PWD);
             // Create an implementation method object should include in each Query
-            logger.fine("Connection Successes");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
+            log.info("Connection Success");
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
 
     public ArrayList<ArrayList<String>> getStudentCourseGrade(String student_id) {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
-        Statement stmt = null;
-        try {
+        try (Statement stmt = conn.createStatement()) {
             String sql = String.format(
                     "SELECT Student.StuNo, Student.StuName, Learn.Grade " +
-                    "FROM Student, ExClass, Learn " +
-                    "WHERE Student.StuNo = Learn.StuNo AND Learn.ExClassNo = ExClass.ExClassNo AND Student.StuNo = '%s';", student_id);
-            logger.config(sql);
-            stmt = conn.createStatement();
+                            "FROM Student, ExClass, Learn " +
+                            "WHERE Student.StuNo = Learn.StuNo AND Learn.ExClassNo = ExClass.ExClassNo AND Student.StuNo = '%s';", student_id);
+            log.info(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
-            ResultSetOperation.printResultSet(rs);
+//            ResultSetOperation.printResultSet(rs);
             rs.close();
             stmt.close();
-            logger.fine("finish query");
+            log.info("query success!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            try {
-                if (stmt != null)
-                    stmt.close();
-            } catch (SQLException se) {
-                // do nothing
-            }
         }
+        // do nothing
         return res;
     }
 
     public static void main(String[] args) {
-        logger.setLevel(Level.FINER);
-        logger.config("1");
-        logger.info("1");
         DataControlCenter dcc  = new DataControlCenter();
         dcc.getStudentCourseGrade("20200740001");
     }
