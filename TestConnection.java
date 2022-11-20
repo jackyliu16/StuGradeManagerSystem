@@ -1,7 +1,8 @@
 import Tool.ResultSetOperation;
-import java.util.*;
+
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class TestConnection {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -49,10 +50,8 @@ public class TestConnection {
             // rs.close();
             stmt.close();
             conn.close();
-        } catch (SQLException se) {
+        } catch (Exception se) {
             se.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             try {
                 if (stmt != null)
@@ -68,5 +67,6 @@ public class TestConnection {
             }
         }
         System.out.println("END");
+        sc.close();
     }
 }
