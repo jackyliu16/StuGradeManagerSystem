@@ -98,7 +98,7 @@ public class Logger {
         if (level_into_num(logLevel) != 0) {
             if (level_into_num(logLevel) <= level_into_num(loglevel)) {
                 Thread currenThread = Thread.currentThread();
-                StackTraceElement stackTrace = currenThread.getStackTrace()[2];
+                StackTraceElement stackTrace = currenThread.getStackTrace()[4];
                 String output = String.format("[%s][%s](%s:%s): %s",
                         level_into_string(logLevel),
                         Thread.currentThread().getName(),
