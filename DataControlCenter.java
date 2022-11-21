@@ -20,7 +20,8 @@ import java.util.ArrayList;
 /**
  * a simple databases sql query provider for upper-level application
  * <p>
- * this implement will not provide any kinds of logic check of input, please make sure all input is legal.
+ * this implement will not provide any kinds of logic check of input, please
+ * make sure all input is legal.
  */
 public class DataControlCenter {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -49,9 +50,11 @@ public class DataControlCenter {
      * </p>
      *
      * @param student_id student ID
-     * @return a table which raw is each student and col is StuNo, StuName, Grade in a Course;
-     * if return empty means that there is something error in this function
-     * # TODO using a kind of exception to packaging the error for handler outside ?
+     * @return a table which raw is each student and col is StuNo, StuName, Grade in
+     *         a Course;
+     *         if return empty means that there is something error in this function
+     *         # TODO using a kind of exception to packaging the error for handler
+     *         outside ?
      */
     public ArrayList<ArrayList<String>> getStudentCourseGrade(String student_id) {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
@@ -86,10 +89,11 @@ public class DataControlCenter {
                     "SELECT * " +
                             "FROM Course, ExClass, Learn " +
                             "WHERE Course.CourseNo = ExClass.CourseNo AND ExClass.ExClassNo = Learn.ExClassNo " +
-                            "AND Learn.StuNo = \"%s\" AND Course.CourseNo = \"%s\";", student_id, course_id);
+                            "AND Learn.StuNo = \"%s\" AND Course.CourseNo = \"%s\";",
+                    student_id, course_id);
             log.debug(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
-//            ResultSetOperation.printResultSet(rs);    // 不允许添加输出，这样会使迭代器运行到结尾
+            // ResultSetOperation.printResultSet(rs); // 不允许添加输出，这样会使迭代器运行到结尾
             if (rs.next()) {
                 flag = true;
             }
@@ -119,12 +123,12 @@ public class DataControlCenter {
                     "WHERE Learn.StuNo = '%s' AND Learn.ExClassNo = '%s';", student_id, ex_course_id);
             log.debug(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
-//            ResultSetOperation.printResultSet(rs);    // 不允许添加输出，这样会使迭代器运行到结尾
+            // ResultSetOperation.printResultSet(rs); // 不允许添加输出，这样会使迭代器运行到结尾
             if (rs.next()) {
                 flag = true;
             }
             log.debug(String.format("flag is: %s", flag));
-//            rs.close();
+            // rs.close();
             stmt.close();
             log.info("query success!");
         } catch (SQLException e) {
@@ -134,11 +138,16 @@ public class DataControlCenter {
     }
 
     /**
-     * Adding a student into a ExCourse
-     *
+     * Adding a student into a ExCourse</br>
+     * 
+     * will insert a empty relationship into database, which means that grade will
+     * be 0
+     * 
      * @param student_id  Student ID
      * @param ExCourse_id ExCourse ID that Student will be inserted into
-     * @return success => true, failure => 0    # TODO if could convert it into a kind of exception?
+     * @return success => true, failure => 0
+     *         # TODO if could convert it into a kind
+     *         of exception?
      */
     public Boolean insertStudentIntoExCourse(String student_id, String ExCourse_id) {
         try (Statement stmt = conn.createStatement()) {
@@ -155,9 +164,10 @@ public class DataControlCenter {
     }
 
     /**
-     * update a student grade in a ExCourse
-     * <p>
-     * anno: caller need to make sure the student is in the course before run this function
+     * update a student grade in a ExCourse</br>
+     * 
+     * anno: caller need to make sure the student is in the course before run this
+     * function
      *
      * @param student_id  studentNo
      * @param ExCourse_id The ExClassNo that student in
@@ -189,16 +199,16 @@ public class DataControlCenter {
         }
     }
 
-
     /**
-     * a function just for test, it shouldn't been run directly or call by up-level application
+     * a function just for test, it shouldn't been run directly or call by up-level
+     * application
      *
      * @param args None
      */
     public static void main(String[] args) {
         DataControlCenter dcc = new DataControlCenter();
         dcc.getStudentCourseGrade("20200740001");
-//        System.out.println(dcc.checkIfStudentInCourse("20200740001", "00000001"));
-//        dcc.insertStudentIntoExCourse("20200740002", "00000004");
+        // System.out.println(dcc.checkIfStudentInCourse("20200740001", "00000001"));
+        // dcc.insertStudentIntoExCourse("20200740002", "00000004");
     }
 }
