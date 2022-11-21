@@ -1,1 +1,3 @@
 # StuGradeManagerSystem
+运行sql请加jar包
+controlcenter是正式的sql运行文件，ui组到时候记得对接啊
