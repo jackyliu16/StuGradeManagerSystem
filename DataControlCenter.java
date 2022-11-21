@@ -44,18 +44,23 @@ public class DataControlCenter {
 
     /**
      * Gain all grade for all courses taken by the student
+     * <p>
+     * caller need to make sure student ID is legal
+     * </p>
      *
      * @param student_id student ID
-     * @return a table which raw is each student and col is StuNo, StuName, Grade in a Course
+     * @return a table which raw is each student and col is StuNo, StuName, Grade in a Course;
+     * if return empty means that there is something error in this function
+     * # TODO using a kind of exception to packaging the error for handler outside ?
      */
     public ArrayList<ArrayList<String>> getStudentCourseGrade(String student_id) {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
-            String sql = String.format(
-                    "SELECT Student.StuNo, Student.StuName, Learn.Grade " +
-                            "FROM Student, ExClass, Learn " +
-                            "WHERE Student.StuNo = Learn.StuNo AND Learn.ExClassNo = ExClass.ExClassNo AND Student.StuNo = '%s';",
-                    student_id);
+            String sql = String.format("" +
+                    "SELECT CourseName, Grade " +
+                    "FROM Student, Course, ExClass, Learn " +
+                    "WHERE Student.StuNo = Learn.StuNo AND ExClass.ExClassNo = Learn.ExClassNo AND " +
+                    "      ExClass.CourseNo = Course.CourseNo AND Student.StuNo = \"%s\";", student_id);
             log.info(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
             rs.close();
@@ -192,7 +197,8 @@ public class DataControlCenter {
      */
     public static void main(String[] args) {
         DataControlCenter dcc = new DataControlCenter();
+        dcc.getStudentCourseGrade("20200740001");
 //        System.out.println(dcc.checkIfStudentInCourse("20200740001", "00000001"));
-        dcc.insertStudentIntoExCourse("20200740002", "00000004");
+//        dcc.insertStudentIntoExCourse("20200740002", "00000004");
     }
 }
