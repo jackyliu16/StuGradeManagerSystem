@@ -13,7 +13,7 @@
 //    static String strClassName = LogTest.class.getName();
 //    static Logger logger = Logger.getLogger(strClassName);
 //
-//    public static double divison(int value1, int value2) {
+//    public static double division(int value1, int value2) {
 //        double res = 0;
 //        try {
 //            res = value1 / value2;
@@ -25,7 +25,7 @@
 //    }
 //
 //    public static void main(String[] args) {
-//        System.out.println(divison(5, 0));
+//        System.out.println(division(5, 0));
 //    }
 //
 //}

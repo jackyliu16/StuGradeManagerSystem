@@ -8,7 +8,7 @@
  * @Version:0.0
  * @reference:
  *      basic mysql operation: https://blog.csdn.net/zollty/article/details/7291896#:~:text=%E4%B8%80%E8%88%AC%E7%94%A8%E6%B3%95%EF%BC%9AStatement%20stmt%20%3D%20conn.createStatement%20%28%29%3B,%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95%EF%BC%9AStatement%20stmt%20%3D%20conn.createStatement%20%28ResultSet.TYPE_SCROLL_SENSITIVE%2C%20ResultSet.CONCUR_READ_ONLY%29%3B
- *
+ *      doc :   https://blog.csdn.net/qq_60750453/article/details/121024414
  */
 
 import Tool.LogLevel;
@@ -17,6 +17,11 @@ import Tool.Logger;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * a simple databases sql query provider for upper-level application
+ * <p>
+ * this implement will not provide any kinds of logic check of input, please make sure all input is legal.
+ */
 public class DataControlCenter {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/CourseDB";
@@ -41,7 +46,7 @@ public class DataControlCenter {
      * Gain all grade for all courses taken by the student
      *
      * @param student_id student ID
-     * @return Array<Array < String>> for a table which show this
+     * @return ArrayList<ArrayList < String>> for a table which show this
      */
     public ArrayList<ArrayList<String>> getStudentCourseGrade(String student_id) {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
@@ -67,6 +72,7 @@ public class DataControlCenter {
      *
      * @param student_id Student ID
      * @param course_id  Course ID
+     * @return ture => student in Course, false => student wasn't in the Course
      */
     public Boolean checkIfStudentInCourse(String student_id, String course_id) {
         boolean flag = false;
@@ -97,7 +103,7 @@ public class DataControlCenter {
      *
      * @param student_id   student ID
      * @param ex_course_id The ExCourseNo
-     * @return true / false
+     * @return if student is in the ExClass(specific)
      */
     public Boolean checkIfStudentInExCourse(String student_id, String ex_course_id) {
         boolean flag = false;
@@ -127,6 +133,7 @@ public class DataControlCenter {
      *
      * @param student_id  Student ID
      * @param ExCourse_id ExCourse ID that Student will be inserted into
+     * @return success => true, failure => 0    # TODO if could convert it into a kind of exception?
      */
     public Boolean insertStudentIntoExCourse(String student_id, String ExCourse_id) {
         try (Statement stmt = conn.createStatement()) {
@@ -177,6 +184,9 @@ public class DataControlCenter {
     }
 
 
+    /**
+     * a function just for test, it shouldn't been run directly or call by up-level application
+     */
     public static void main(String[] args) {
         DataControlCenter dcc = new DataControlCenter();
 //        System.out.println(dcc.checkIfStudentInCourse("20200740001", "00000001"));

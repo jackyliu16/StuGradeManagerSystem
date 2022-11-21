@@ -1,26 +1,28 @@
 import Tool.ResultSetOperation;
-import java.util.*;
+
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 public class TestOnly {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL      = "jdbc:mysql://localhost:3306/CourseDB";
-    static final String USER        = "root";
-    static final String PWD         = "123456";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/CourseDB";
+    static final String USER = "root";
+    static final String PWD = "123456";
+
     public static void main(String[] args) {
         Connection conn = null;
-        Statement stmt  = null;
-        Scanner sc=new Scanner(System.in);
+        Statement stmt = null;
+        Scanner sc = new Scanner(System.in);
         try {
             Class.forName(JDBC_DRIVER);
             System.out.println("Successfully connected to dataBase");
             conn = DriverManager.getConnection(DB_URL, USER, PWD);
             stmt = conn.createStatement();
             System.out.println("Choosefrom:query,insert,delete");
-            String op=sc.nextLine();
-            switch(op)
-            {
-            case "query"://查询操作
+            String op = sc.nextLine();
+            switch (op) {
+                case "query"://查询操作
                 System.out.println("Enter your query here:");
                 String sqlQuery =sc.nextLine();
                 ResultSet rs = stmt.executeQuery(sqlQuery);
