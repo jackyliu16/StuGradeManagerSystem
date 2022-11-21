@@ -11,8 +11,8 @@
  *      doc :   https://blog.csdn.net/qq_60750453/article/details/121024414
  */
 
-import Tool.LogLevel;
-import Tool.Logger;
+import tool.LogLevel;
+import tool.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class DataControlCenter {
      * Gain all grade for all courses taken by the student
      *
      * @param student_id student ID
-     * @return ArrayList<ArrayList < String>> for a table which show this
+     * @return a table which raw is each student and col is StuNo, StuName, Grade in a Course
      */
     public ArrayList<ArrayList<String>> getStudentCourseGrade(String student_id) {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
@@ -72,7 +72,7 @@ public class DataControlCenter {
      *
      * @param student_id Student ID
      * @param course_id  Course ID
-     * @return ture => student in Course, false => student wasn't in the Course
+     * @return ture is student in Course, false is student wasn't in the Course
      */
     public Boolean checkIfStudentInCourse(String student_id, String course_id) {
         boolean flag = false;
@@ -151,12 +151,13 @@ public class DataControlCenter {
 
     /**
      * update a student grade in a ExCourse
+     * <p>
      * anno: caller need to make sure the student is in the course before run this function
      *
      * @param student_id  studentNo
      * @param ExCourse_id The ExClassNo that student in
      * @param grade       double grade
-     * @return true -> Succeed; false -> failure
+     * @return true then Succeed; false then failure
      */
     public Boolean updateStudentExCourseGrade(String student_id, String ExCourse_id, double grade) {
         // if student is not in the class
@@ -186,6 +187,8 @@ public class DataControlCenter {
 
     /**
      * a function just for test, it shouldn't been run directly or call by up-level application
+     *
+     * @param args None
      */
     public static void main(String[] args) {
         DataControlCenter dcc = new DataControlCenter();

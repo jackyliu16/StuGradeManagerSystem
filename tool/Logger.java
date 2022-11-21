@@ -1,4 +1,4 @@
-package Tool;
+package tool;
 /*
  * @File:   Logger.java
  * @Desc:
@@ -113,7 +113,7 @@ public class Logger {
     /**
      * 设置当前日志级别，日志级别较高的情况下会忽略较低级别的日志打印
      * <p>
-     * Error> Warn> Info> Debug> Trace
+     * `Error> Warn> Info> Debug> Trace`
      */
     public void setLevel(LogLevel logLevel) {
         loglevel = logLevel;

@@ -1,4 +1,4 @@
-package Tool;
+package tool;
 /*
  * @File:   Tool.ResultSetPrinter.java
  * @Desc
