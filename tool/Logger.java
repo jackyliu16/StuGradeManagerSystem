@@ -138,14 +138,4 @@ public class Logger {
     public void trace(String message) {
         log(LogLevel.Trace, message);
     }
-
-    public static void main(String[] args) {
-        Logger log = new Logger();
-        log.setLevel(LogLevel.Trace);
-        log.error("error message");
-        log.warn("warn message");
-        log.info("info message");
-        log.debug("debug message");
-        log.trace("trace message");
-    }
 }
