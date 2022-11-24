@@ -13,11 +13,9 @@ package tool;
  *                  https://www.cnblogs.com/makefile/p/enum-singleton.html
  */
 
-/*
-
- */
 public enum Logger {
     INSTANCE;
+
     LogLevel logLevel = LogLevel.Info;
 
     public void setLogLevel(LogLevel logLevel) {
@@ -25,7 +23,7 @@ public enum Logger {
     }
 
     public void error(String message) {
-        log(logLevel.Error, message);
+        log(LogLevel.Error, message);
     }
 
     public void warn(String message) {
@@ -114,8 +112,7 @@ public enum Logger {
                         currentThread.getName(),
                         stackTrace.getFileName(),
                         stackTrace.getLineNumber(),
-                        message
-                );
+                        message);
                 printColoredString(out_level, output);
             }
         }

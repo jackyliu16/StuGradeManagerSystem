@@ -20,14 +20,14 @@ package tool;
 //    Debug,
 //    Trace,
 //}
-public class Logger_old {
+public class LoggerOld {
     static LogLevel loglevel = null;
 
-    public Logger_old() {
+    public LoggerOld() {
         loglevel = LogLevel.Info;
     }
 
-    public Logger_old(LogLevel logLevel) {
+    public LoggerOld(LogLevel logLevel) {
         loglevel = logLevel;
     }
 

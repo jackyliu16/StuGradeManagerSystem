@@ -12,6 +12,7 @@
  */
 
 import tool.Logger;
+import tool.ResultSetOperation;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -65,6 +66,7 @@ public class DataControlCenter {
                     "      ExClass.CourseNo = Course.CourseNo AND Student.StuNo = \"%s\";", student_id);
             log.info(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
+            res = ResultSetOperation.convertResultSetIntoArrayList(rs);
             rs.close();
             stmt.close();
             log.info("query success!");
@@ -206,7 +208,8 @@ public class DataControlCenter {
      */
     public static void main(String[] args) {
         DataControlCenter dcc = new DataControlCenter();
-        dcc.getStudentCourseGrade("20200740001");
+        ArrayList<ArrayList<String>> data = dcc.getStudentCourseGrade("20200740001");
+        System.out.println(data);
         // System.out.println(dcc.checkIfStudentInCourse("20200740001", "00000001"));
         // dcc.insertStudentIntoExCourse("20200740002", "00000004");
     }
