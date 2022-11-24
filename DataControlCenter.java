@@ -21,7 +21,7 @@ import java.util.ArrayList;
  * a simple databases sql query provider for upper-level application
  * <p>
  * this implement will not provide any kinds of logic check of input, please
- * make sure all input is legal.
+ * make sure all input is legal.ceshi
  */
 public class DataControlCenter {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
