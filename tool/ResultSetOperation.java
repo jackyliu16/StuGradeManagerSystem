@@ -27,11 +27,11 @@ public class ResultSetOperation {
         int[] columnMaxLengths = new int[ColumnCount];
         // 缓存结果集,结果集可能有序,所以用ArrayList保存变得打乱顺序.
         ArrayList<String[]> results = new ArrayList<>();
-// Adding Consideration About Col length by github.com/jackyLiu16
-        for ( int col = 0 ; col < ColumnCount ; col++ ) {
-            columnMaxLengths[col] = resultSetMetaData.getColumnName(col+1).length();    // start by 1
+        // Adding Consideration About Col length by github.com/jackyLiu16
+        for (int col = 0; col < ColumnCount; col++) {
+            columnMaxLengths[col] = resultSetMetaData.getColumnName(col + 1).length(); // start by 1
         }
-// END for Adding
+        // END for Adding
         // 按行遍历
         while (rs.next()) {
             // 保存当前行所有列
@@ -70,10 +70,12 @@ public class ResultSetOperation {
      * @param columnMaxLengths  每一列最大长度的字符串的长度.
      * @throws SQLException
      */
-    private static void printColumnName(ResultSetMetaData resultSetMetaData, int[] columnMaxLengths) throws SQLException {
+    private static void printColumnName(ResultSetMetaData resultSetMetaData, int[] columnMaxLengths)
+            throws SQLException {
         int columnCount = resultSetMetaData.getColumnCount();
         for (int i = 0; i < columnCount; i++) {
-            // System.out.printf("|%" + (columnMaxLengths[i] + 1) + "s", resultSetMetaData.getColumnName(i + 1));
+            // System.out.printf("|%" + (columnMaxLengths[i] + 1) + "s",
+            // resultSetMetaData.getColumnName(i + 1));
             System.out.printf("|%" + columnMaxLengths[i] + "s", resultSetMetaData.getColumnName(i + 1));
         }
         System.out.println("|");
@@ -95,7 +97,7 @@ public class ResultSetOperation {
         System.out.println("+");
     }
 
-// Adding by github.com/jackyLiu16
+    // Adding by github.com/jackyLiu16
     public static ArrayList<ArrayList<String>> convertResultSetIntoArrayList(ResultSet rs) throws SQLException {
         ResultSetMetaData resultSetMetaData = rs.getMetaData();
         // get col number
@@ -105,10 +107,33 @@ public class ResultSetOperation {
         // we just convert all things into String
         while (rs.next()) {
             // Save Each Line
-            ArrayList<String> col_str = new ArrayList<>(col_num);   // think about optimize but failure
+            ArrayList<String> col_str = new ArrayList<>(col_num); // think about optimize but failure
             // get attr value
-            for (int i = 0; i < col_num ; i++) {
-                col_str.add(rs.getString(i+1));
+            for (int i = 0; i < col_num; i++) {
+                col_str.add(rs.getString(i + 1));
+            }
+            res.add(col_str);
+        }
+        return res;
+    }
+
+    public static ArrayList<ArrayList<String>> convertResultSetIntoArrayListWithColumnName(ResultSet rs)
+            throws SQLException {
+        ArrayList<ArrayList<String>> res = new ArrayList<>();
+        ResultSetMetaData resultSetMetaData = rs.getMetaData();
+        // get col number
+        int col_num = resultSetMetaData.getColumnCount();
+        // get first line name
+        ArrayList<String> col_name = new ArrayList<>();
+        for (int i = 0; i < col_num; i++) {
+            col_name.add(resultSetMetaData.getColumnName(i + 1));
+        }
+        res.add(col_name);
+        // convert things into string
+        while (rs.next()) {
+            ArrayList<String> col_str = new ArrayList<>(col_num);
+            for (int i = 0; i < col_num; i++) {
+                col_str.add(rs.getString(i + 1));
             }
             res.add(col_str);
         }

@@ -66,7 +66,7 @@ public class DataControlCenter {
                     "      ExClass.CourseNo = Course.CourseNo AND Student.StuNo = \"%s\";", student_id);
             log.info(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
-            res = ResultSetOperation.convertResultSetIntoArrayList(rs);
+            res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
             rs.close();
             stmt.close();
             log.info("query success!");
