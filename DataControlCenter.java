@@ -27,7 +27,7 @@ public class DataControlCenter {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/CourseDB";
     static final String USER = "root";
-    static final String PWD = "123456";
+    static final String PWD = "666666";
     static final Logger log = Logger.INSTANCE;
     static Connection conn = null;
 
@@ -208,9 +208,9 @@ public class DataControlCenter {
      */
     public static void main(String[] args) {
         DataControlCenter dcc = new DataControlCenter();
-        ArrayList<ArrayList<String>> data = dcc.getStudentCourseGrade("20200740001");
-        System.out.println(data);
-        // System.out.println(dcc.checkIfStudentInCourse("20200740001", "00000001"));
-        // dcc.insertStudentIntoExCourse("20200740002", "00000004");
+//        ArrayList<ArrayList<String>> data = dcc.getStudentCourseGrade("20200740001");
+//        System.out.println(data);
+         System.out.println(dcc.checkIfStudentInCourse("20200740001", "00000001"));
+         dcc.insertStudentIntoExCourse("20200740002", "00000004");
     }
 }
