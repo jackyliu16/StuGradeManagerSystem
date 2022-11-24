@@ -11,7 +11,6 @@
  *      doc :   https://blog.csdn.net/qq_60750453/article/details/121024414
  */
 
-import tool.LogLevel;
 import tool.Logger;
 
 import java.sql.*;
@@ -28,7 +27,7 @@ public class DataControlCenter {
     static final String DB_URL = "jdbc:mysql://localhost:3306/CourseDB";
     static final String USER = "root";
     static final String PWD = "123456";
-    static final Logger log = new Logger(LogLevel.Debug);
+    static final Logger log = Logger.INSTANCE;
     static Connection conn = null;
 
     DataControlCenter() {
@@ -139,10 +138,10 @@ public class DataControlCenter {
 
     /**
      * Adding a student into a ExCourse</br>
-     * 
+     *
      * will insert a empty relationship into database, which means that grade will
      * be 0
-     * 
+     *
      * @param student_id  Student ID
      * @param ExCourse_id ExCourse ID that Student will be inserted into
      * @return success => true, failure => 0
@@ -165,7 +164,7 @@ public class DataControlCenter {
 
     /**
      * update a student grade in a ExCourse</br>
-     * 
+     *
      * anno: caller need to make sure the student is in the course before run this
      * function
      *
