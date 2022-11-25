@@ -17,15 +17,14 @@ import tool.Logger;
 import java.sql.*;
 import java.util.ArrayList;
 
-
 //我们不负责权限管理，确保所有的输入都是合法的（默认用户会sql）
- 
+
 public class DataControlCenter {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/CourseDB";
     static final String USER = "root";
     static final String PWD = "123456";
-    static final Logger log = new Logger(LogLevel.Debug);
+    static final Logger log = Logger.INSTANCE;
     static Connection conn = null;
 
     DataControlCenter() {
@@ -50,7 +49,7 @@ public class DataControlCenter {
      * @return a table which raw is each student and col is StuNo, StuName, Grade in
      *         a Course;
      *         if return empty means that there is something error in this function
-     *         
+     * 
      */
     public ArrayList<ArrayList<String>> getStudentCourseGrade(String student_id) {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
@@ -198,7 +197,8 @@ public class DataControlCenter {
     /**
      * a function just for test, it shouldn't been run directly or call by up-level
      * application
-     *仅供测试使用，正式运行不会用main函数
+     * 仅供测试使用，正式运行不会用main函数
+     * 
      * @param args None
      */
     public static void main(String[] args) {
