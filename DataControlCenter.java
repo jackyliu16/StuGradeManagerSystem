@@ -11,24 +11,21 @@
  *      doc :   https://blog.csdn.net/qq_60750453/article/details/121024414
  */
 
+import tool.LogLevel;
 import tool.Logger;
-import tool.ResultSetOperation;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-/**
- * a simple databases sql query provider for upper-level application
- * <p>
- * this implement will not provide any kinds of logic check of input, please
- * make sure all input is legal.
- */
+
+//我们不负责权限管理，确保所有的输入都是合法的（默认用户会sql）
+ 
 public class DataControlCenter {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/CourseDB";
     static final String USER = "root";
-    static final String PWD = "666666";
-    static final Logger log = Logger.INSTANCE;
+    static final String PWD = "123456";
+    static final Logger log = new Logger(LogLevel.Debug);
     static Connection conn = null;
 
     DataControlCenter() {
@@ -53,8 +50,7 @@ public class DataControlCenter {
      * @return a table which raw is each student and col is StuNo, StuName, Grade in
      *         a Course;
      *         if return empty means that there is something error in this function
-     *         # TODO using a kind of exception to packaging the error for handler
-     *         outside ?
+     *         
      */
     public ArrayList<ArrayList<String>> getStudentCourseGrade(String student_id) {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
@@ -66,7 +62,6 @@ public class DataControlCenter {
                     "      ExClass.CourseNo = Course.CourseNo AND Student.StuNo = \"%s\";", student_id);
             log.info(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
-            res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
             rs.close();
             stmt.close();
             log.info("query success!");
@@ -139,11 +134,11 @@ public class DataControlCenter {
     }
 
     /**
-     * Adding a student into a ExCourse</br>
-     *
+     * Add a student into a ExCourse</br>
+     * 
      * will insert a empty relationship into database, which means that grade will
      * be 0
-     *
+     * 
      * @param student_id  Student ID
      * @param ExCourse_id ExCourse ID that Student will be inserted into
      * @return success => true, failure => 0
@@ -166,7 +161,7 @@ public class DataControlCenter {
 
     /**
      * update a student grade in a ExCourse</br>
-     *
+     * 
      * anno: caller need to make sure the student is in the course before run this
      * function
      *
@@ -203,14 +198,13 @@ public class DataControlCenter {
     /**
      * a function just for test, it shouldn't been run directly or call by up-level
      * application
-     *
+     *仅供测试使用，正式运行不会用main函数
      * @param args None
      */
     public static void main(String[] args) {
         DataControlCenter dcc = new DataControlCenter();
-//        ArrayList<ArrayList<String>> data = dcc.getStudentCourseGrade("20200740001");
-//        System.out.println(data);
-         System.out.println(dcc.checkIfStudentInCourse("20200740001", "00000001"));
-         dcc.insertStudentIntoExCourse("20200740002", "00000004");
+        dcc.getStudentCourseGrade("20200740001");
+        // System.out.println(dcc.checkIfStudentInCourse("20200740001", "00000001"));
+        // dcc.insertStudentIntoExCourse("20200740002", "00000004");
     }
 }

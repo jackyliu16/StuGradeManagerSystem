@@ -43,7 +43,7 @@ public enum Logger {
     }
 
     /**
-     * A stupid ways to convert log level into number
+     * A stupid way to convert log level into number
      *
      * @param logLevel Logger Level
      * @return error: 0, from error to trace from 1 to 5
