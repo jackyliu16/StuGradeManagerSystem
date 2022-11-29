@@ -11,6 +11,7 @@ package databasesOperatioins;
  *      doc :   https://blog.csdn.net/qq_60750453/article/details/121024414
  */
 
+import tool.LogLevel;
 import tool.Logger;
 
 import java.sql.*;
@@ -38,36 +39,96 @@ public class DataControlCenter {
         }
     }
 
+// Check Function
+
     /**
-     * Gain all grade for all courses taken by the student
-     * <p>
-     * caller need to make sure student ID is legal
-     * </p>
+     * Check If Student Pwd is Correct
      *
-     * @param student_id student ID
-     * @return a table which raw is each student and col is StuNo, StuName, Grade in
-     *         a Course;
-     *         if return empty means that there is something error in this function
-     * 
+     * @param Student_id An input id which indicate as a student
+     * @param password   the input password of student
+     * @return Whether the authentication was successful
      */
-    public ArrayList<ArrayList<String>> getStudentCourseGrade(String student_id) {
-        ArrayList<ArrayList<String>> res = new ArrayList<>();
+    public Boolean checkStudentPwd(String Student_id, String password) {
+        boolean flag = false;
         try (Statement stmt = conn.createStatement()) {
             String sql = String.format("" +
-                    "SELECT CourseName, Grade " +
-                    "FROM Student, Course, ExClass, Learn " +
-                    "WHERE Student.StuNo = Learn.StuNo AND ExClass.ExClassNo = Learn.ExClassNo AND " +
-                    "      ExClass.CourseNo = Course.CourseNo AND Student.StuNo = \"%s\";", student_id);
-            log.info(String.format("sql: %s", sql));
+                    "SELECT * " +
+                    "FROM Student " +
+                    "WHERE StuNo=\"%s\" AND Pwd=\"%s\" ", Student_id, password);
+            log.debug(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
-            res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
+            // ResultSetOperation.printResultSet(rs); // 不允许添加输出，这样会使迭代器运行到结尾
+            if (rs.next()) {
+                flag = true;
+            }
+            log.debug(String.format("flag is: %s", flag));
             rs.close();
             stmt.close();
             log.info("query success!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return res;
+        return flag;
+    }
+
+    /**
+     * Check If Teacher Pwd is Correct
+     *
+     * @param Tech_id  AN input id which indicate as a teacher
+     * @param password the input password of teacher
+     * @return Whether the authentication was successful
+     */
+    public Boolean checkTeacherPwd(String Tech_id, String password) {
+        boolean flag = false;
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT * " +
+                    "FROM Teacher " +
+                    "WHERE TechNo=\"%s\" AND Pwd=\"%s\" ", Tech_id, password);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            // ResultSetOperation.printResultSet(rs); // 不允许添加输出，这样会使迭代器运行到结尾
+            if (rs.next()) {
+                flag = true;
+            }
+            log.debug(String.format("flag is: %s", flag));
+            rs.close();
+            stmt.close();
+            log.info("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return flag;
+    }
+
+    /**
+     * Check If Admin Pwd is Correct
+     *
+     * @param Admin_id AN input id which indicate as a admin
+     * @param password the input password of teacher
+     * @return Whether the authentication was successful
+     */
+    public Boolean checkAdminPwd(String Admin_id, String password) {
+        boolean flag = false;
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT * " +
+                    "FROM Admin " +
+                    "WHERE ID=\"%s\" AND Password=\"%s\" ", Admin_id, password);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            // ResultSetOperation.printResultSet(rs); // 不允许添加输出，这样会使迭代器运行到结尾
+            if (rs.next()) {
+                flag = true;
+            }
+            log.debug(String.format("flag is: %s", flag));
+            rs.close();
+            stmt.close();
+            log.info("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return flag;
     }
 
     /**
@@ -132,6 +193,39 @@ public class DataControlCenter {
         return flag;
     }
 
+// Get Function
+
+    /**
+     * Gain all grade for all courses taken by the student <p>
+     * caller need to make sure student ID is legal </p>
+     *
+     * @param student_id student ID
+     * @return a table which raw is each student and col is StuNo, StuName, Grade in
+     * a Course;
+     * if return empty means that there is something error in this function
+     */
+    public ArrayList<ArrayList<String>> getStudentCourseGrade(String student_id) {
+        ArrayList<ArrayList<String>> res = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT CourseName, Grade " +
+                    "FROM Student, Course, ExClass, Learn " +
+                    "WHERE Student.StuNo = Learn.StuNo AND ExClass.ExClassNo = Learn.ExClassNo AND " +
+                    "      ExClass.CourseNo = Course.CourseNo AND Student.StuNo = \"%s\";", student_id);
+            log.info(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
+            rs.close();
+            stmt.close();
+            log.info("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+
+// Insert Function
+
     /**
      * Add a student into a ExCourse</br>
      * 
@@ -158,9 +252,11 @@ public class DataControlCenter {
         }
     }
 
+// Update Function
+
     /**
      * update a student grade in a ExCourse</br>
-     * 
+     *
      * anno: caller need to make sure the student is in the course before run this
      * function
      *
@@ -194,89 +290,6 @@ public class DataControlCenter {
         }
     }
 
-    public ArrayList<ArrayList<String>> getUser() //查询所有用户的信息
-    {
-        ArrayList<ArrayList<String>> res = new ArrayList<>();
-        try (Statement stmt = conn.createStatement()) {
-            String sql="select * from user;";
-            log.info(String.format("sql: %s", sql));
-            ResultSet rs = stmt.executeQuery(sql);
-            res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
-            rs.close();
-            stmt.close();
-            log.info("query success!");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return res;
-    }
-
-    public boolean CheckIfSomeoneIsUser(String target)//输入你想要的用户名来查询
-    {
-        boolean flag = false;
-        try (Statement stmt = conn.createStatement()) {
-            String sql = String.format("" +
-                    "SELECT * " +
-                    "FROM User " +
-                    "WHERE Uname = '%s';", target);
-            log.debug(String.format("sql: %s", sql));
-            ResultSet rs = stmt.executeQuery(sql);
-            // ResultSetOperation.printResultSet(rs); // 不允许添加输出，这样会使迭代器运行到结尾
-            if (rs.next()) //结果集不为空说明有符合要求的
-            {
-                flag = true;
-            }
-            log.debug(String.format("flag is: %s", flag));
-            // rs.close();
-            stmt.close();
-            log.info("query success!");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return flag;
-    }
-
-    public Boolean insertNewUser(String UserID, String Uname,String UPwd,String Permission)//必须按照此顺序输入！ 
-    {
-        try (Statement stmt = conn.createStatement()) {
-            String sql = String.format("insert into User values ('%s', '%s', '%s,'%s');", UserID, Uname,UPwd,Permission);
-            log.debug(String.format("sql: %s", sql));
-            int rs = stmt.executeUpdate(sql);
-            log.trace(String.format("rs: %s", rs));
-            stmt.close();
-            log.info("query success!");
-            return rs == 1;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    public Boolean UpdateUser(String UserID,String UName,String UPwd,String Permission)
-    {
-        if (!checkIfStudentInExCourse(UserID, UName)) {
-            log.error(String.format("user %s not found in the userDB %s", UName, UserID));
-            return false;
-        }
-        try (Statement stmt = conn.createStatement()) {
-            String sql = String.format("" +
-                    "UPDATE User " +
-                    "SET UserID='%s' UPwd='%s' Permission='%s' WHERE UName='%s';", UserID,UPwd,Permission,UName);
-            log.info(String.format("sql: %s", sql));
-            int rs = stmt.executeUpdate(sql);
-            stmt.close();
-            if (rs == 1) {
-                log.info("update query success!");
-                return true;
-            } else {
-                log.error(String.format("update query failure: %s", sql));
-                return false;
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-       
-    }
-
-
     /**
      * a function just for test, it shouldn't been run directly or call by up-level
      * application
@@ -285,12 +298,15 @@ public class DataControlCenter {
      * @param args None
      */
     public static void main(String[] args) {
+        log.setLogLevel(LogLevel.Debug);
         DataControlCenter dcc = new DataControlCenter();
-        ArrayList<ArrayList<String>> data = dcc.getUser();
-        System.out.println(data);
-        System.out.println(dcc.CheckIfSomeoneIsUser("SB"));
+//        ArrayList<ArrayList<String>> data = dcc.getStudentCourseGrade("20200740001");
+//        System.out.println(data);
+        System.out.println(dcc.checkStudentPwd("20200740001", "123456"));
+        System.out.println(dcc.checkStudentPwd("20200740002", "123456"));
+        System.out.println(dcc.checkTeacherPwd("20200010001", "123456"));
+        System.out.println(dcc.checkTeacherPwd("20200010001", "123466"));
         // System.out.println(dcc.checkIfStudentInCourse("20200740001", "00000001"));
         // dcc.insertStudentIntoExCourse("20200740002", "00000004");
-        
     }
 }
