@@ -194,6 +194,89 @@ public class DataControlCenter {
         }
     }
 
+    public ArrayList<ArrayList<String>> getUser() //查询所有用户的信息
+    {
+        ArrayList<ArrayList<String>> res = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            String sql="select * from user;";
+            log.info(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
+            rs.close();
+            stmt.close();
+            log.info("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+
+    public boolean CheckIfSomeoneIsUser(String target)//输入你想要的用户名来查询
+    {
+        boolean flag = false;
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT * " +
+                    "FROM User " +
+                    "WHERE Uname = '%s';", target);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            // ResultSetOperation.printResultSet(rs); // 不允许添加输出，这样会使迭代器运行到结尾
+            if (rs.next()) //结果集不为空说明有符合要求的
+            {
+                flag = true;
+            }
+            log.debug(String.format("flag is: %s", flag));
+            // rs.close();
+            stmt.close();
+            log.info("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return flag;
+    }
+
+    public Boolean insertNewUser(String UserID, String Uname,String UPwd,String Permission)//必须按照此顺序输入！ 
+    {
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("insert into User values ('%s', '%s', '%s,'%s');", UserID, Uname,UPwd,Permission);
+            log.debug(String.format("sql: %s", sql));
+            int rs = stmt.executeUpdate(sql);
+            log.trace(String.format("rs: %s", rs));
+            stmt.close();
+            log.info("query success!");
+            return rs == 1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public Boolean UpdateUser(String UserID,String UName,String UPwd,String Permission)
+    {
+        if (!checkIfStudentInExCourse(UserID, UName)) {
+            log.error(String.format("user %s not found in the userDB %s", UName, UserID));
+            return false;
+        }
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "UPDATE User " +
+                    "SET UserID='%s' UPwd='%s' Permission='%s' WHERE UName='%s';", UserID,UPwd,Permission,UName);
+            log.info(String.format("sql: %s", sql));
+            int rs = stmt.executeUpdate(sql);
+            stmt.close();
+            if (rs == 1) {
+                log.info("update query success!");
+                return true;
+            } else {
+                log.error(String.format("update query failure: %s", sql));
+                return false;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+       
+    }
+
+
     /**
      * a function just for test, it shouldn't been run directly or call by up-level
      * application
@@ -203,9 +286,11 @@ public class DataControlCenter {
      */
     public static void main(String[] args) {
         DataControlCenter dcc = new DataControlCenter();
-        ArrayList<ArrayList<String>> data = dcc.getStudentCourseGrade("20200740001");
+        ArrayList<ArrayList<String>> data = dcc.getUser();
         System.out.println(data);
+        System.out.println(dcc.CheckIfSomeoneIsUser("SB"));
         // System.out.println(dcc.checkIfStudentInCourse("20200740001", "00000001"));
         // dcc.insertStudentIntoExCourse("20200740002", "00000004");
+        
     }
 }
