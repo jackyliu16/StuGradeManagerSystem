@@ -290,11 +290,15 @@ public class DataControlCenter {
         }
     }
 
+// Delete Function
+
+    // None
+
     /**
      * a function just for test, it shouldn't been run directly or call by up-level
      * application
      * 仅供测试使用，正式运行不会用main函数
-     * 
+     *
      * @param args None
      */
     public static void main(String[] args) {
