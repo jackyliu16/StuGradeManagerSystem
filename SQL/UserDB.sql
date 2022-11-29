@@ -1,4 +1,4 @@
--- Active: 1668709374912@@127.0.0.1@3306@CourseDB
+-- Active: 1668849689028@@127.0.0.1@3306@coursedb
 
 USE CourseDB;
 
