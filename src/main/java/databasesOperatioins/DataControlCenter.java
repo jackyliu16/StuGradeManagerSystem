@@ -27,7 +27,7 @@ public class DataControlCenter {
     static final Logger log = Logger.INSTANCE;
     static Connection conn = null;
 
-    DataControlCenter() {
+    public DataControlCenter() {
         try {
             Class.forName(JDBC_DRIVER);
             // Driver Class Create Connect Object
@@ -39,7 +39,7 @@ public class DataControlCenter {
         }
     }
 
-// Check Function
+    // Check Function
 
     /**
      * Check If Student Pwd is Correct
@@ -193,16 +193,18 @@ public class DataControlCenter {
         return flag;
     }
 
-// Get Function
+    // Get Function
 
     /**
-     * Gain all grade for all courses taken by the student <p>
-     * caller need to make sure student ID is legal </p>
+     * Gain all grade for all courses taken by the student
+     * <p>
+     * caller need to make sure student ID is legal
+     * </p>
      *
      * @param student_id student ID
      * @return a table which raw is each student and col is StuNo, StuName, Grade in
-     * a Course;
-     * if return empty means that there is something error in this function
+     *         a Course;
+     *         if return empty means that there is something error in this function
      */
     public ArrayList<ArrayList<String>> getStudentCourseGrade(String student_id) {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
@@ -224,7 +226,7 @@ public class DataControlCenter {
         return res;
     }
 
-// Insert Function
+    // Insert Function
 
     /**
      * Add a student into a ExCourse</br>
@@ -252,7 +254,7 @@ public class DataControlCenter {
         }
     }
 
-// Update Function
+    // Update Function
 
     /**
      * update a student grade in a ExCourse</br>
@@ -290,7 +292,7 @@ public class DataControlCenter {
         }
     }
 
-// Delete Function
+    // Delete Function
 
     // None
 
@@ -304,8 +306,8 @@ public class DataControlCenter {
     public static void main(String[] args) {
         log.setLogLevel(LogLevel.Debug);
         DataControlCenter dcc = new DataControlCenter();
-//        ArrayList<ArrayList<String>> data = dcc.getStudentCourseGrade("20200740001");
-//        System.out.println(data);
+        // ArrayList<ArrayList<String>> data = dcc.getStudentCourseGrade("20200740001");
+        // System.out.println(data);
         System.out.println(dcc.checkStudentPwd("20200740001", "123456"));
         System.out.println(dcc.checkStudentPwd("20200740002", "123456"));
         System.out.println(dcc.checkTeacherPwd("20200010001", "123456"));
