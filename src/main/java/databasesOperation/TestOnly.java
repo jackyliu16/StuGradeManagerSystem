@@ -1,4 +1,4 @@
-package databasesOperatioins;
+package databasesOperation;
 
 import tool.LogLevel;
 import tool.Logger;
