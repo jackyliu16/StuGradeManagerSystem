@@ -365,6 +365,7 @@ class Test {
 
     private static void test_for_ex_class_insert_delete() {
         log.setLogLevel(LogLevel.Info);
+        //hello
         DataControlCenter dcc = new DataControlCenter();
         dcc.checkIfStudentInExCourse("20200740013", "00000001");
         dcc.deleteStudentFromExCourse("20200740013", "00000001");
