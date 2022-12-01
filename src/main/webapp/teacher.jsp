@@ -11,11 +11,12 @@
     <title>Title</title>
 </head>
 <body>
+    <h2>hello <%= request.getParameter("id")%>} </h2>
     <div>
-        <form action="/stu_grade_war/teacher_inquery" method="post">
+        <form action="/StuGradeManagerSystem_war/teacher_inquery.jsp" method="post">
             <button type="submit" value="query student grade"></button>
         </form>
-        <form action="/stu_grade_war/teacher_insert" method="post">
+        <form action="/StuGradeManagerSystem_war/teacher_insert.jsp" method="post">
             <button type="submit" value="insert student grade"></button>
         </form>
         <form >

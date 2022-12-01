@@ -12,7 +12,7 @@
 </head>
 <body>
     <div>
-        <form action="/stu_grade_war/teacher_insert" method="post">
+        <form action="/StuGradeManagerSystem_war/teacher_insert" method="post">
             <h3>insert student</h3>
             <div>Student ID<input></div>
             <div>Course ID<input></div>
@@ -21,7 +21,7 @@
         </form>
     </div>
     <div>
-        <form action="/stu_grade_war/teacher_insert" method="post">
+        <form action="/StuGradeManagerSystem_war/teacher_insert" method="post">
             <h3>insert student's Grade</h3>
             <div>Student ID<input name="stu_id"></div>
             <div>Course ID<input name="course_id"></div>
