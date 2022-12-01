@@ -2,9 +2,10 @@ package request;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class myHttpServelet implements Servlet {
+public abstract class myHttpServelet implements Servlet {
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
     }
@@ -37,4 +38,8 @@ public class myHttpServelet implements Servlet {
 
     protected void doGet(ServletResponse res, ServletRequest req) throws ServletException, IOException {
     }
+
+    protected abstract void doPost(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException;
+
+    protected abstract void doGet(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException;
 }

@@ -15,7 +15,7 @@
           String id = request.getParameter("id");
           request.getRequestDispatcher("/student_inquery").forward(request,response);////请求转发
           %>--%>
-          <%=request.getParameter("Stu_id")%>
+          <h1>hello! <%=request.getParameter("Stu_id")%></h1>
 
 </body>
 </html>

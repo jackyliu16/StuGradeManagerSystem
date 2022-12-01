@@ -3,6 +3,9 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import databasesOperation.DataControlCenter;
 
 import java.io.IOException;
@@ -12,7 +15,7 @@ import java.util.ArrayList;
 @WebServlet("/login")
 public class login extends myHttpServelet {
     @Override
-    protected void doGet(ServletResponse res, ServletRequest req) throws ServletException, IOException {
+    protected void doGet(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
 
         String id=req.getParameter("id");
         String password=req.getParameter("password");
@@ -41,7 +44,7 @@ public class login extends myHttpServelet {
     }
 
     @Override
-    protected void doPost(ServletResponse res, ServletRequest req) throws ServletException, IOException {
+    protected void doPost(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
         this.doGet(res,req);
     }
 }
