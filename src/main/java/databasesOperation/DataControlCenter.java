@@ -375,6 +375,7 @@ class Test {
     }
 
     public static void main(String[] args) {
+        // hello
         log.setLogLevel(LogLevel.Info);
         test_for_ex_class_insert_delete();
     }
