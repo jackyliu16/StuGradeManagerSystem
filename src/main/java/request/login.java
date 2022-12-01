@@ -3,6 +3,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,14 +15,16 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 @WebServlet("/login")
-public class login extends myHttpServelet {
+public class login extends HttpServlet {
     @Override
-    protected void doGet(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
-
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String id=req.getParameter("id");
         String password=req.getParameter("password");
         String status=req.getParameter("status");
         DataControlCenter dcc = new DataControlCenter();
+
+        Cookie cookie=new Cookie("id",id);
+        res.addCookie(cookie);
 
         if(status.equals("student")){
             /*ArrayList<ArrayList<String>> data = dcc.getStudentCourseGrade(id);*/
@@ -44,7 +48,7 @@ public class login extends myHttpServelet {
     }
 
     @Override
-    protected void doPost(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
-        this.doGet(res,req);
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        this.doGet(req,res);
     }
 }

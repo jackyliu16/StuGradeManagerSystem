@@ -17,8 +17,6 @@ public class student_inquery extends myHttpServelet{
     protected void doPost(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
         ArrayList<ArrayList<String>> Stu_id;
         DataControlCenter doc = new DataControlCenter();
-        Stu_id = doc.getStudentCourseGrade("20200740001");/*req.getParameter("id")*/
-        req.setAttribute("Stu_id", Stu_id);
         String id=new String();
         Cookie[] cookies=req.getCookies();
         for(Cookie cookie:cookies){

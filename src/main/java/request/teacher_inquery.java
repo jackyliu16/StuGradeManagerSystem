@@ -11,13 +11,6 @@ import java.io.IOException;
 @WebServlet("/teacher_inquery")
 public class teacher_inquery extends myHttpServelet{
     @Override
-    protected void doGet(ServletResponse res, ServletRequest req) {
-
-
-
-    }
-
-    @Override
     protected void doPost(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
         this.doGet(res,req);
     }
@@ -27,8 +20,5 @@ public class teacher_inquery extends myHttpServelet{
 
     }
 
-    @Override
-    protected void doPost(ServletResponse res, ServletRequest req) {
-        this.doGet(res,req);
-    }
+
 }
