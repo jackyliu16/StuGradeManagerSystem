@@ -23,7 +23,7 @@ public class DataControlCenter {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/CourseDB";
     static final String USER = "root";
-    static final String PWD = "root";
+    static final String PWD = "123456";
     static final Logger log = Logger.INSTANCE;
     static Connection conn = null;
 
@@ -193,7 +193,7 @@ public class DataControlCenter {
         return flag;
     }
 
-    // Get Function
+// Get Function
 
     /**
      * Gain all grade for all courses taken by the student
@@ -206,7 +206,7 @@ public class DataControlCenter {
      *         a Course;
      *         if return empty means that there is something error in this function
      */
-    public static ArrayList<ArrayList<String>> getStudentCourseGrade(String student_id) {
+    public ArrayList<ArrayList<String>> getStudentCourseGrade(String student_id) {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
             String sql = String.format("" +
@@ -226,14 +226,52 @@ public class DataControlCenter {
         return res;
     }
 
+    public ArrayList<ArrayList<String>> getStudentInfoBelongExCourse(String ex_course_id) {
+        ArrayList<ArrayList<String>> res = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT Student.StuNo, Student.StuName, Student.MajorNo, Learn.ExClassNo, Learn.Grade " +
+                    "FROM Student, Learn " +
+                    "WHERE Student.StuNo=Learn.StuNo " +
+                    "AND Learn.ExClassNo=\"%s\" ", ex_course_id);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+
+    public ArrayList<ArrayList<String>> getStudentInfo(String student_id) {
+        ArrayList<ArrayList<String>> res = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT * " +
+                    "FROM Student " +
+                    "WHERE Student.StuNo=\"%s\" ", student_id);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
     // Insert Function
 
     /**
      * Add a student into a ExCourse</br>
-     * 
+     *
      * will insert a empty relationship into database, which means that grade will
      * be 0
-     * 
+     *
      * @param student_id  Student ID
      * @param ExCourse_id ExCourse ID that Student will be inserted into
      * @return success => true, failure => 0
@@ -254,7 +292,7 @@ public class DataControlCenter {
         }
     }
 
-    // Update Function
+// Update Function
 
     /**
      * update a student grade in a ExCourse</br>
@@ -318,8 +356,7 @@ public class DataControlCenter {
         }
     }
 
-    // Delete Function
-
+// Delete Function
 
     public Boolean deleteStudentFromExCourse(String student_id, String ex_course_id) {
         // first check if student in Excourse
@@ -374,9 +411,15 @@ class Test {
         log.info("test_for_ex_class_insert_delete complete!");
     }
 
+    private static void test_for_get_information() {
+        DataControlCenter dcc = new DataControlCenter();
+        dcc.getStudentInfoBelongExCourse("00000001");
+        System.out.println(dcc.getStudentInfo("20200740001"));
+        log.info("finish");
+    }
+
     public static void main(String[] args) {
-        // hello
-        log.setLogLevel(LogLevel.Info);
-        test_for_ex_class_insert_delete();
+        log.setLogLevel(LogLevel.Debug);
+        test_for_get_information();
     }
 }
