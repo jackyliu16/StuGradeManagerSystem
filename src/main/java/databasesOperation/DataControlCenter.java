@@ -39,7 +39,7 @@ public class DataControlCenter {
         }
     }
 
-    // Check Function
+// Check Function
 
     /**
      * Check If Student Pwd is Correct
@@ -64,7 +64,7 @@ public class DataControlCenter {
             log.debug(String.format("flag is: %s", flag));
             rs.close();
             stmt.close();
-            log.info("query success!");
+            log.debug("query success!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -94,7 +94,7 @@ public class DataControlCenter {
             log.debug(String.format("flag is: %s", flag));
             rs.close();
             stmt.close();
-            log.info("query success!");
+            log.debug("query success!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -124,7 +124,7 @@ public class DataControlCenter {
             log.debug(String.format("flag is: %s", flag));
             rs.close();
             stmt.close();
-            log.info("query success!");
+            log.debug("query success!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -156,7 +156,7 @@ public class DataControlCenter {
             log.debug(String.format("flag is: %s", flag));
             rs.close();
             stmt.close();
-            log.info("query success!");
+            log.debug("query success!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -183,10 +183,10 @@ public class DataControlCenter {
             if (rs.next()) {
                 flag = true;
             }
-            log.debug(String.format("flag is: %s", flag));
+            log.info(String.format("flag is: %s", flag));
             // rs.close();
             stmt.close();
-            log.info("query success!");
+            log.debug("query success!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -214,12 +214,12 @@ public class DataControlCenter {
                     "FROM Student, Course, ExClass, Learn " +
                     "WHERE Student.StuNo = Learn.StuNo AND ExClass.ExClassNo = Learn.ExClassNo AND " +
                     "      ExClass.CourseNo = Course.CourseNo AND Student.StuNo = \"%s\";", student_id);
-            log.info(String.format("sql: %s", sql));
+            log.debug(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
             res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
             rs.close();
             stmt.close();
-            log.info("query success!");
+            log.debug("query success!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -247,7 +247,7 @@ public class DataControlCenter {
             int rs = stmt.executeUpdate(sql);
             log.trace(String.format("rs: %s", rs));
             stmt.close();
-            log.info("query success!");
+            log.debug("query success!");
             return rs == 1;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -277,11 +277,37 @@ public class DataControlCenter {
             String sql = String.format("" +
                     "UPDATE Learn " +
                     "SET Grade='%s' WHERE StuNo='%s' AND ExClassNo = '%s';", grade, student_id, ExCourse_id);
-            log.info(String.format("sql: %s", sql));
+            log.debug(String.format("sql: %s", sql));
             int rs = stmt.executeUpdate(sql);
             stmt.close();
             if (rs == 1) {
-                log.info("update query success!");
+                log.debug("update query success!");
+                return true;
+            } else {
+                log.error(String.format("update query failure: %s", sql));
+                return false;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Boolean updateStudentPwd(String student_id, String old_password, String new_password) {
+        // first check if student old password correct
+        if (checkStudentPwd(student_id, old_password)) {
+            return false;
+        }
+        log.debug("student password check correct");
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "UPDATE Student " +
+                    "SET Pwd=\"%s\" " +
+                    "WHERE Student.StuNo=\"%s\" ", new_password, student_id);
+            log.debug(String.format("sql: %s", sql));
+            int rs = stmt.executeUpdate(sql);
+            stmt.close();
+            if (rs == 1) {
+                log.debug("update query success!");
                 return true;
             } else {
                 log.error(String.format("update query failure: %s", sql));
@@ -294,25 +320,62 @@ public class DataControlCenter {
 
     // Delete Function
 
-    // None
 
-    /**
-     * a function just for test, it shouldn't been run directly or call by up-level
-     * application
-     * 仅供测试使用，正式运行不会用main函数
-     *
-     * @param args None
-     */
-    public static void main(String[] args) {
-        log.setLogLevel(LogLevel.Debug);
+    public Boolean deleteStudentFromExCourse(String student_id, String ex_course_id) {
+        // first check if student in Excourse
+        if (!checkIfStudentInExCourse(student_id, ex_course_id)) {
+            return false;
+        }
+        log.debug("student password check correct");
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "DELETE " +
+                    "FROM Learn " +
+                    "WHERE Learn.StuNo=\"%s\" AND Learn.ExClassNo=\"%s\" ", student_id, ex_course_id);
+            log.debug(String.format("sql: %s", sql));
+            int rs = stmt.executeUpdate(sql);
+            stmt.close();
+            if (rs == 1) {
+                log.debug("update query success!");
+                return true;
+            } else {
+                log.error(String.format("update query failure: %s", sql));
+                return false;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+}
+
+class Test {
+    static final Logger log = Logger.INSTANCE;
+
+    private static void test_for_password_update() {
         DataControlCenter dcc = new DataControlCenter();
-        // ArrayList<ArrayList<String>> data = dcc.getStudentCourseGrade("20200740001");
-        // System.out.println(data);
-        System.out.println(dcc.checkStudentPwd("20200740001", "123456"));
-        System.out.println(dcc.checkStudentPwd("20200740002", "123456"));
-        System.out.println(dcc.checkTeacherPwd("20200010001", "123456"));
-        System.out.println(dcc.checkTeacherPwd("20200010001", "123466"));
-        // System.out.println(dcc.checkIfStudentInCourse("20200740001", "00000001"));
-        // dcc.insertStudentIntoExCourse("20200740002", "00000004");
+        dcc.checkStudentPwd("20200740004", "123459");
+        System.out.println(dcc.updateStudentPwd("20200740004", "123446", "123123"));
+        dcc.checkStudentPwd("20200740004", "123123");
+        System.out.println(dcc.updateStudentPwd("20200740004", "123459", "123123"));
+        dcc.checkStudentPwd("20200740004", "123123");
+        log.info("test password update complete! ");
+    }
+
+    private static void test_for_ex_class_insert_delete() {
+        log.setLogLevel(LogLevel.Info);
+        DataControlCenter dcc = new DataControlCenter();
+        dcc.checkIfStudentInExCourse("20200740013", "00000001");
+        dcc.deleteStudentFromExCourse("20200740013", "00000001");
+        dcc.checkIfStudentInExCourse("20200740013", "00000001");
+        dcc.insertStudentIntoExCourse("20200740013", "00000001");
+        dcc.checkIfStudentInExCourse("20200740013", "00000001");
+        log.info("test_for_ex_class_insert_delete complete!");
+    }
+
+    public static void main(String[] args) {
+        log.setLogLevel(LogLevel.Info);
+        test_for_ex_class_insert_delete();
     }
 }
