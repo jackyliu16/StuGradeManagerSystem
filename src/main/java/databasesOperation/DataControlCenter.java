@@ -23,7 +23,7 @@ public class DataControlCenter {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/CourseDB";
     static final String USER = "root";
-    static final String PWD = "123456";
+    static final String PWD = "root";
     static final Logger log = Logger.INSTANCE;
     static Connection conn = null;
 
@@ -206,7 +206,7 @@ public class DataControlCenter {
      *         a Course;
      *         if return empty means that there is something error in this function
      */
-    public ArrayList<ArrayList<String>> getStudentCourseGrade(String student_id) {
+    public static ArrayList<ArrayList<String>> getStudentCourseGrade(String student_id) {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
             String sql = String.format("" +
