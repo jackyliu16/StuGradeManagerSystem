@@ -14,5 +14,11 @@
     <form action="/StuGradeManagerSystem_war/student_inquery" method="post">
       <input type="submit" value="search score">
     </form>
+    <form action="/StuGradeManagerSystem_war/student_updatepwd.jsp" method="post">
+        <input type="submit" value="change password">
+    </form>
+    <form action="/StuGradeManagerSystem_war/studentInfo" method="post">
+        <input type="submit" value="View Info">
+    </form>
 </body>
 </html>

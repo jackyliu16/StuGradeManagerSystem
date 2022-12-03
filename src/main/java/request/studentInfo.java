@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet("/student_inquery")
-public class student_inquery extends myHttpServelet{
+@WebServlet("/studentInfo")
+public class studentInfo extends myHttpServelet{
 
     @Override
     protected void doPost(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
-        ArrayList<ArrayList<String>> Stu_id;
+        ArrayList<ArrayList<String>> StuInfo;
         DataControlCenter doc = new DataControlCenter();
         String id=new String();
         Cookie[] cookies=req.getCookies();
@@ -27,9 +27,9 @@ public class student_inquery extends myHttpServelet{
             }
         }
         //System.out.println("id: "+id);
-        Stu_id = doc.getStudentCourseGrade(id);/*req.getParameter("id")*/
-        req.setAttribute("Stu_id",Stu_id);
-        req.getRequestDispatcher("/student_inquery.jsp").forward(req,res);
+        StuInfo = doc.getStudentInfo(id);/*req.getParameter("id")*/
+        req.setAttribute("StuInfo",StuInfo);
+        req.getRequestDispatcher("/studentInfo.jsp").forward(req,res);
 
     }
 

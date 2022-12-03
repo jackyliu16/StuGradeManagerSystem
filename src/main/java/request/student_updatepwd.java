@@ -8,14 +8,17 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 
-@WebServlet("/student_inquery")
-public class student_inquery extends myHttpServelet{
-
+@WebServlet("/student_updatepwd")
+public class student_updatepwd extends myHttpServelet{
     @Override
     protected void doPost(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
-        ArrayList<ArrayList<String>> Stu_id;
+        this.doGet(res,req);
+    }
+
+    @Override
+    protected void doGet(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
+        Boolean result;
         DataControlCenter doc = new DataControlCenter();
         String id=new String();
         Cookie[] cookies=req.getCookies();
@@ -26,15 +29,16 @@ public class student_inquery extends myHttpServelet{
                 break;
             }
         }
-        //System.out.println("id: "+id);
-        Stu_id = doc.getStudentCourseGrade(id);/*req.getParameter("id")*/
-        req.setAttribute("Stu_id",Stu_id);
-        req.getRequestDispatcher("/student_inquery.jsp").forward(req,res);
-
+        result = doc.updateStudentPwd(id,req.getParameter("Oldpassword"),req.getParameter("Newpassword"));
+        if(!result) {
+            res.getWriter().println("<script>alert('Wrong password')</script>");
+            res.getWriter().println("<script>window.location.href='./student_updatepwd.jsp'</script>");
+        }
+        else {
+            res.getWriter().println("<script>alert('Change Successfully')</script>");
+        }
+        //System.out.println(result);
     }
 
-    @Override
-    protected void doGet(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
-        this.doGet(res,req);
-    }
+
 }

@@ -332,7 +332,7 @@ public class DataControlCenter {
 
     public Boolean updateStudentPwd(String student_id, String old_password, String new_password) {
         // first check if student old password correct
-        if (checkStudentPwd(student_id, old_password)) {
+        if (!checkStudentPwd(student_id, old_password)) {
             return false;
         }
         log.debug("student password check correct");
@@ -421,6 +421,6 @@ class Test {
 
     public static void main(String[] args) {
         log.setLogLevel(LogLevel.Debug);
-        test_for_get_information();
+        test_for_password_update();
     }
 }
