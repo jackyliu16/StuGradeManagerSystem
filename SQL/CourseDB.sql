@@ -2,11 +2,11 @@
 
 # use For DDL Rebuild DROP DATABASE CourseDB;
 
-Drop DATABASE CourseDB;
+
 
 CREATE database CourseDB;
 
-CREATE DATABASE IF NOT EXISTS CourseDB;
+
 
 USE CourseDB;
 
@@ -82,7 +82,7 @@ CREATE TABLE
         Grade DECIMAL(5, 2) check(
             Grade >= 0
             and Grade <= 100
-        ) DEFAULT(0),
+        ) ,
         PRIMARY KEY (StuNo, ExClassNo),
         Foreign Key (StuNo) REFERENCES Student(StuNo),
         Foreign Key (ExClassNo) REFERENCES ExClass(ExClassNo)
