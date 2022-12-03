@@ -25,14 +25,14 @@ public class login extends HttpServlet {
         log.debug("hello, world");
         String id=req.getParameter("id");
         String password=req.getParameter("password");
-        String status=req.getParameter("status");
+        String status = req.getParameter("status");
         DataControlCenter dcc = new DataControlCenter();
 
         Cookie cookie=new Cookie("id",id);
         res.addCookie(cookie);
 
-        if(status.equals("student")){
-            /*ArrayList<ArrayList<String>> data = dcc.getStudentCourseGrade(id);*/
+       if(status.equals("student")){
+            //*ArrayList<ArrayList<String>> data = dcc.getStudentCourseGrade(id);*//*
             if(dcc.checkStudentPwd(id,password)){
                 req.getRequestDispatcher("/student.jsp").forward(req,res);
             }
@@ -42,17 +42,20 @@ public class login extends HttpServlet {
                 req.getRequestDispatcher("/teacher.jsp").forward(req,res);
             }
         }
-        /*else {
+        else if (status.equals("admin")){
             if(dcc.checkAdminPwd(id,password)){
                 req.getRequestDispatcher("/admin.jsp").forward(req,res);
             }
-        }*/
-        else {
-            res.getWriter().println("<script>alert('Wrong password or ID')</script>");
-            res.getWriter().println("<script>window.location.href='./login.jsp'</script>");
         }
+        else{
+           res.getWriter().println("<script>alert('Wrong Type')</script>");
+           res.getWriter().println("<script>window.location.href='./login.jsp'</script>");
+       }
+        res.getWriter().println("<script>alert('Wrong password or ID')</script>");
+        res.getWriter().println("<script>window.location.href='./login.jsp'</script>");
         System.out.println(id);
         System.out.println(password);
+        System.out.println(status);
     }
 
     @Override
