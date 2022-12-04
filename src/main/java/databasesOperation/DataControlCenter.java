@@ -23,7 +23,7 @@ public class DataControlCenter {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/CourseDB";
     static final String USER = "root";
-    static final String PWD = "root";
+    static final String PWD = "666666";
     static final Logger log = Logger.INSTANCE;
     static Connection conn = null;
 
@@ -264,6 +264,105 @@ public class DataControlCenter {
         }
         return res;
     }
+
+    public ArrayList<ArrayList<String>> getTeacherteachList(String teacher_id) {
+        ArrayList<ArrayList<String>> res = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT Course.CourseName, ExClass.year, ExClass.Semester , ExClass.ExClassNo " +
+                    "FROM Teacher,Teaching ,Course ,ExClass " +
+                    " WHERE Teacher.TechNo=\"%s\" and Teacher.TechNo=Teaching.TechNo and " +
+                    "Teaching.ExClassNo=ExClass.ExClassNo and ExClass.CourseNo=Course.CourseNo"  , teacher_id);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+
+    public ArrayList<ArrayList<String>> getStudentList() {
+        ArrayList<ArrayList<String>> res = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT student.StuNo , student.StuName , major.MajorName , department.DeptName " +
+                    "FROM student , major , department " +
+                    " WHERE student.majorNo=Major.MajorNo and major.DeptNo=department.DeptNo "+
+                    "group by student.stuNo");
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+
+    public ArrayList<ArrayList<String>> getGradeList() {
+        ArrayList<ArrayList<String>> res = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT Learn.StuNo , Course.CourseName , ExClass.year , ExClass.semester ,  Learn.Grade " +
+                    "FROM learn , ExClass , course " +
+                    " WHERE learn.ExClassNo=ExClass.ExClassNo and ExClass.courseNo=course.courseNo "+
+                    "order by Learn.ExClassNo");
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+
+    public ArrayList<ArrayList<String>> getTeacherList() {
+        ArrayList<ArrayList<String>> res = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT Teacher.TechNo , Teacher.TechName , Department.DeptName " +
+                    "FROM Teacher , Department " +
+                    " WHERE Teacher.DeptNo=Department.DeptNo ");
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+
+    public ArrayList<ArrayList<String>> getTClassList() {
+        ArrayList<ArrayList<String>> res = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT Course.courseName , ExClass.year , ExClass.semester , teacher.TechName " +
+                    "FROM Teacher , ExClass , course , teaching " +
+                    " WHERE Teacher.TechNo=teaching.TechNo and teaching.ExClassNo=ExClass.ExClassNo and" +
+                    " ExClass.courseNo=course.courseNo");
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
     // Insert Function
 
     /**
@@ -397,6 +496,11 @@ class Test {
         dcc.checkStudentPwd("20200740004", "123123");
         System.out.println(dcc.updateStudentPwd("20200740004", "123459", "123123"));
         dcc.checkStudentPwd("20200740004", "123123");
+        System.out.println(dcc.getTeacherteachList("20200010002"));
+        System.out.println(dcc.getStudentList());
+        System.out.println(dcc.getGradeList());
+        System.out.println(dcc.getTeacherList());
+        System.out.println(dcc.getTClassList());
         log.info("test password update complete! ");
     }
 
