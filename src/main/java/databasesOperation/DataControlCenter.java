@@ -225,6 +225,24 @@ public class DataControlCenter {
         }
         return res;
     }
+    public ArrayList<ArrayList<String>> getStudentExClassHIstory(String StudentID) {
+        ArrayList<ArrayList<String>> res = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT Course.CourseName,Teacher.TechName,ExClass.Year " +
+                    "FROM Course,Learn,ExClass,Teaching,Teacher " +
+                    "WHERE \"%s\"=Learn.StuNo AND Learn.ExClassNo=ExClass.ExClassNo And ExClass.ExClassNo=Course.CourseNo And Learn.ExClassNo=Teaching.ExClassNo AND Teaching.TechNo=Teacher.TechNo ", StudentID);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
 
     public ArrayList<ArrayList<String>> getStudentInfoBelongExCourse(String ex_course_id) {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
@@ -380,6 +398,34 @@ public class DataControlCenter {
     public Boolean insertStudentIntoExCourse(String student_id, String ExCourse_id) {
         try (Statement stmt = conn.createStatement()) {
             String sql = String.format("insert into Learn values ('%s', '%s', null);", student_id, ExCourse_id);
+            log.debug(String.format("sql: %s", sql));
+            int rs = stmt.executeUpdate(sql);
+            log.trace(String.format("rs: %s", rs));
+            stmt.close();
+            log.debug("query success!");
+            return rs == 1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public Boolean insertNewStudentUser(String StuNo,String StuName,String MajorNo,String Pwd)//插入新的学生用户
+    {
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("insert into Student values ('%s', '%s', '%s','%s');", StuNo, StuName,MajorNo,Pwd);
+            log.debug(String.format("sql: %s", sql));
+            int rs = stmt.executeUpdate(sql);
+            log.trace(String.format("rs: %s", rs));
+            stmt.close();
+            log.debug("query success!");
+            return rs == 1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public Boolean insertNewTeacherUser(String TechNo,String TechName,String DeptNo,String Pwd)//插入新的教师用户
+    {
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("insert into Student values ('%s', '%s', '%s','%s');", TechNo, TechName,DeptNo,Pwd);
             log.debug(String.format("sql: %s", sql));
             int rs = stmt.executeUpdate(sql);
             log.trace(String.format("rs: %s", rs));
