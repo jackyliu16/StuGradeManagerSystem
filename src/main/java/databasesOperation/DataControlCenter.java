@@ -231,7 +231,9 @@ public class DataControlCenter {
             String sql = String.format("" +
                     "SELECT Course.CourseName,Teacher.TechName,ExClass.Year " +
                     "FROM Course,Learn,ExClass,Teaching,Teacher " +
-                    "WHERE \"%s\"=Learn.StuNo AND Learn.ExClassNo=ExClass.ExClassNo And ExClass.ExClassNo=Course.CourseNo And Learn.ExClassNo=Teaching.ExClassNo AND Teaching.TechNo=Teacher.TechNo ", StudentID);
+                    "WHERE \"%s\"=Learn.StuNo AND Learn.ExClassNo=ExClass.ExClassNo And" +
+                    " ExClass.ExClassNo=Course.CourseNo And Learn.ExClassNo=Teaching.ExClassNo " +
+                    "AND Teaching.TechNo=Teacher.TechNo ", StudentID);
             log.debug(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
             res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
@@ -501,6 +503,32 @@ public class DataControlCenter {
         }
     }
 
+    public Boolean updateTeacherPwd(String teacher_id, String old_password, String new_password) {
+        // first check if student old password correct
+        if (!checkTeacherPwd(teacher_id, old_password)) {
+            return false;
+        }
+        log.debug("student password check correct");
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "UPDATE teacher " +
+                    "SET Pwd=\"%s\" " +
+                    "WHERE teacher.TechNo=\"%s\" ", new_password, teacher_id);
+            log.debug(String.format("sql: %s", sql));
+            int rs = stmt.executeUpdate(sql);
+            stmt.close();
+            if (rs == 1) {
+                log.debug("update query success!");
+                return true;
+            } else {
+                log.error(String.format("update query failure: %s", sql));
+                return false;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 // Delete Function
 
     public Boolean deleteStudentFromExCourse(String student_id, String ex_course_id) {
@@ -547,6 +575,7 @@ class Test {
         System.out.println(dcc.getGradeList());
         System.out.println(dcc.getTeacherList());
         System.out.println(dcc.getTClassList());
+        System.out.println(dcc.getStudentExClassHIstory("20200740002"));
         log.info("test password update complete! ");
     }
 

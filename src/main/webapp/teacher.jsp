@@ -14,13 +14,13 @@
     <h2>hello <%= request.getParameter("id")%>} </h2>
 
         <form action="/StuGradeManagerSystem_war/teacher_inquery" method="post">
-            <button type="submit" value="query student grade"></button>
+            <input type="submit" value="query student grade"></input>
         </form>
         <form action="/StuGradeManagerSystem_war/teacher_insert.jsp" method="post">
-            <button type="submit" value="insert student grade"></button>
+            <input type="submit" value="insert student grade"></input>
         </form>
         <form action="/StuGradeManagerSystem_war/teacher_updatepwd.jsp" method="post">
-            <button type="submit" value="change the password"></button>
+            <input type="submit" value="change the password"></input>
         </form>
 
 </body>

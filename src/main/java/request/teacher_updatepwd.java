@@ -3,14 +3,17 @@ package request;
 import databasesOperation.DataControlCenter;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@WebServlet("/teacher_updatepwd")
 public class teacher_updatepwd extends myHttpServelet{
     @Override
     protected void doPost(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
+
         Boolean result;
         DataControlCenter doc = new DataControlCenter();
         String id=new String();
@@ -22,7 +25,8 @@ public class teacher_updatepwd extends myHttpServelet{
                 break;
             }
         }
-        result = doc.updateStudentPwd(id,req.getParameter("Oldpassword"),req.getParameter("Newpassword"));
+
+        result = doc.updateTeacherPwd(id,req.getParameter("Oldpassword"),req.getParameter("Newpassword"));
         if(!result) {
             res.getWriter().println("<script>alert('Wrong password')</script>");
             res.getWriter().println("<script>window.location.href='./teacher_updatepwd.jsp'</script>");
