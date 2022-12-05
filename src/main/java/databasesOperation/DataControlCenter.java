@@ -23,7 +23,7 @@ public class DataControlCenter {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/CourseDB";
     static final String USER = "root";
-    static final String PWD = "666666";
+    static final String PWD = "123456";
     static final Logger log = Logger.INSTANCE;
     static Connection conn = null;
 
@@ -203,8 +203,8 @@ public class DataControlCenter {
      *
      * @param student_id student ID
      * @return a table which raw is each student and col is StuNo, StuName, Grade in
-     *         a Course;
-     *         if return empty means that there is something error in this function
+     * a Course;
+     * if return empty means that there is something error in this function
      */
     public ArrayList<ArrayList<String>> getStudentCourseGrade(String student_id) {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
@@ -225,6 +225,7 @@ public class DataControlCenter {
         }
         return res;
     }
+
     public ArrayList<ArrayList<String>> getStudentExClassHIstory(String StudentID) {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
@@ -292,7 +293,7 @@ public class DataControlCenter {
                     "SELECT Course.CourseName, ExClass.year, ExClass.Semester , ExClass.ExClassNo " +
                     "FROM Teacher,Teaching ,Course ,ExClass " +
                     " WHERE Teacher.TechNo=\"%s\" and Teacher.TechNo=Teaching.TechNo and " +
-                    "Teaching.ExClassNo=ExClass.ExClassNo and ExClass.CourseNo=Course.CourseNo"  , teacher_id);
+                    "Teaching.ExClassNo=ExClass.ExClassNo and ExClass.CourseNo=Course.CourseNo", teacher_id);
             log.debug(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
             res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
@@ -311,7 +312,7 @@ public class DataControlCenter {
             String sql = String.format("" +
                     "SELECT student.StuNo , student.StuName , major.MajorName , department.DeptName " +
                     "FROM student , major , department " +
-                    " WHERE student.majorNo=Major.MajorNo and major.DeptNo=department.DeptNo "+
+                    " WHERE student.majorNo=Major.MajorNo and major.DeptNo=department.DeptNo " +
                     "group by student.stuNo");
             log.debug(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
@@ -331,7 +332,7 @@ public class DataControlCenter {
             String sql = String.format("" +
                     "SELECT Learn.StuNo , Course.CourseName , ExClass.year , ExClass.semester ,  Learn.Grade " +
                     "FROM learn , ExClass , course " +
-                    " WHERE learn.ExClassNo=ExClass.ExClassNo and ExClass.courseNo=course.courseNo "+
+                    " WHERE learn.ExClassNo=ExClass.ExClassNo and ExClass.courseNo=course.courseNo " +
                     "order by Learn.ExClassNo");
             log.debug(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
@@ -387,7 +388,7 @@ public class DataControlCenter {
 
     /**
      * Add a student into a ExCourse</br>
-     *
+     * <p>
      * will insert a empty relationship into database, which means that grade will
      * be 0
      *
@@ -410,10 +411,10 @@ public class DataControlCenter {
             throw new RuntimeException(e);
         }
     }
-    public Boolean insertNewStudentUser(String StuNo,String StuName,String MajorNo,String Pwd)//插入新的学生用户
-    {
+
+    public Boolean insertNewStudentUser(String StuNo, String StuName, String MajorNo, String Pwd) {
         try (Statement stmt = conn.createStatement()) {
-            String sql = String.format("insert into Student values ('%s', '%s', '%s','%s');", StuNo, StuName,MajorNo,Pwd);
+            String sql = String.format("insert into Student values ('%s', '%s', '%s','%s');", StuNo, StuName, MajorNo, Pwd);
             log.debug(String.format("sql: %s", sql));
             int rs = stmt.executeUpdate(sql);
             log.trace(String.format("rs: %s", rs));
@@ -424,10 +425,10 @@ public class DataControlCenter {
             throw new RuntimeException(e);
         }
     }
-    public Boolean insertNewTeacherUser(String TechNo,String TechName,String DeptNo,String Pwd)//插入新的教师用户
-    {
+
+    public Boolean insertNewTeacherUser(String TechNo, String TechName, String DeptNo, String Pwd) {
         try (Statement stmt = conn.createStatement()) {
-            String sql = String.format("insert into Student values ('%s', '%s', '%s','%s');", TechNo, TechName,DeptNo,Pwd);
+            String sql = String.format("insert into Student values ('%s', '%s', '%s','%s');", TechNo, TechName, DeptNo, Pwd);
             log.debug(String.format("sql: %s", sql));
             int rs = stmt.executeUpdate(sql);
             log.trace(String.format("rs: %s", rs));
@@ -443,7 +444,7 @@ public class DataControlCenter {
 
     /**
      * update a student grade in a ExCourse</br>
-     *
+     * <p>
      * anno: caller need to make sure the student is in the course before run this
      * function
      *
@@ -529,6 +530,26 @@ public class DataControlCenter {
         }
     }
 
+    public Boolean updateStudentMajor(String student_id, String major_id) {
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "UPDATE Student " +
+                    "SET MajorNo='%s' " +
+                    "WHERE Student.StuNo= '%s' ;", major_id, student_id);
+            log.debug(String.format("sql: %s", sql));
+            int rs = stmt.executeUpdate(sql);
+            stmt.close();
+            if (rs == 1) {
+                log.debug("update query success!");
+                return true;
+            } else {
+                log.error(String.format("update query failure: %s", sql));
+                return false;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 // Delete Function
 
     public Boolean deleteStudentFromExCourse(String student_id, String ex_course_id) {
@@ -558,10 +579,41 @@ public class DataControlCenter {
 
     }
 
+    public Boolean deleteTeachingRelationship(String tech_no, String ex_class_no) {
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "DELETE " +
+                    "FROM Teaching " +
+                    "WHERE Teaching.TechNo = '%s' AND Teaching.ExClassNo = '%s' ", tech_no, ex_class_no);
+            log.debug(String.format("sql: %s", sql));
+            int rs = stmt.executeUpdate(sql);
+            stmt.close();
+            if (rs == 1) {
+                log.debug("update query success!");
+                return true;
+            } else {
+                log.error(String.format("update query failure: %s", sql));
+                return false;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
 
 class Test {
     static final Logger log = Logger.INSTANCE;
+
+    private static void test_for_update_major() {
+        DataControlCenter dcc = new DataControlCenter();
+        dcc.updateStudentMajor("20200740012", "0002");
+    }
+
+    private static void test_for_delete_teaching() {
+        DataControlCenter dcc = new DataControlCenter();
+        dcc.deleteTeachingRelationship("20200010004", "00000004");
+    }
 
     private static void test_for_password_update() {
         DataControlCenter dcc = new DataControlCenter();
@@ -600,6 +652,6 @@ class Test {
 
     public static void main(String[] args) {
         log.setLogLevel(LogLevel.Debug);
-        test_for_password_update();
+        test_for_update_major();
     }
 }
