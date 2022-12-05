@@ -13,20 +13,20 @@
 <body>
     <div>
         <form action="/StuGradeManagerSystem_war/teacher_insert" method="post">
-            <h3>insert student</h3>
-            <div>Student ID<input></div>
-            <div>Course ID<input></div>
+            <h3>insert student into the Exclass</h3>
+            <div>Student ID<input name="stu_id"></div>
+            <div>Course ID<input name="stu_id"></div>
 
-            <button type="submit"></button>
+            <input type="submit"/>
         </form>
     </div>
     <div>
-        <form action="/StuGradeManagerSystem_war/teacher_insert" method="post">
-            <h3>insert student's Grade</h3>
+        <form action="/StuGradeManagerSystem_war/teacher_updateGrade" method="post">
+            <h3>update student's Grade</h3>
             <div>Student ID<input name="stu_id"></div>
             <div>Course ID<input name="course_id"></div>
             <div>Grade<input name="grade"></div>
-            <button type="submit"></button>
+            <input type="submit"/>
 
         </form>
     </div>

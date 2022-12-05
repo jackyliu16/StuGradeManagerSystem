@@ -364,7 +364,7 @@ public class DataControlCenter {
         return res;
     }
 
-    public ArrayList<ArrayList<String>> getTClassList() {
+    public ArrayList<ArrayList<String>> getClassList() {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
             String sql = String.format("" +
@@ -574,7 +574,7 @@ class Test {
         System.out.println(dcc.getStudentList());
         System.out.println(dcc.getGradeList());
         System.out.println(dcc.getTeacherList());
-        System.out.println(dcc.getTClassList());
+        System.out.println(dcc.getClassList());
         System.out.println(dcc.getStudentExClassHIstory("20200740002"));
         log.info("test password update complete! ");
     }
