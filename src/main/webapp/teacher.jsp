@@ -12,16 +12,15 @@
 </head>
 <body>
     <h2>hello <%= request.getParameter("id")%>} </h2>
-    <div>
-        <form action="/StuGradeManagerSystem_war/teacher_inquery.jsp" method="post">
-            <button type="submit" value="query student grade"></button>
+
+        <form action="/StuGradeManagerSystem_war/teacher_inquery" method="post">
+            <input type="submit" value="query student grade"></input>
         </form>
         <form action="/StuGradeManagerSystem_war/teacher_insert.jsp" method="post">
-            <button type="submit" value="insert student grade"></button>
+            <input type="submit" value="insert student grade"></input>
         </form>
-        <form >
-            <button type="submit" value="manage personal information"></button>
+        <form action="/StuGradeManagerSystem_war/teacher_updatepwd.jsp" method="post">
+            <input type="submit" value="change the password"></input>
         </form>
-    </div>
 </body>
 </html>

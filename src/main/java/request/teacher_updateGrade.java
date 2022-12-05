@@ -3,24 +3,22 @@ package request;
 import databasesOperation.DataControlCenter;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-@WebServlet("/teacher_insert")
-public class teacher_insert extends myHttpServelet{
+@WebServlet("/teacher_updateGrade")
+public class teacher_updateGrade extends myHttpServelet{
     @Override
     protected void doPost(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
         Boolean result;
         String stu_id=req.getParameter("stu_id");
         String course_id=req.getParameter("course_id");
-
+        String grade = req.getParameter("grade");
+        Double grade_number=Double.parseDouble(grade);
         DataControlCenter dcc = new DataControlCenter();
 
-        result=dcc.insertStudentIntoExCourse(stu_id,course_id);
+        result=dcc.updateStudentExCourseGrade(stu_id,course_id,grade_number);
         if(!result) {
             res.getWriter().println("<script>alert('Wrong ')</script>");
             res.getWriter().println("<script>window.location.href='./teacher_insert.jsp'</script>");
