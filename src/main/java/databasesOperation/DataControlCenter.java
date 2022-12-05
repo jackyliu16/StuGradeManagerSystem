@@ -23,7 +23,7 @@ public class DataControlCenter {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/CourseDB";
     static final String USER = "root";
-    static final String PWD = "666666";
+    static final String PWD = "123456";
     static final Logger log = Logger.INSTANCE;
     static Connection conn = null;
 
@@ -572,5 +572,8 @@ class Test {
     public static void main(String[] args) {
         log.setLogLevel(LogLevel.Debug);
         test_for_password_update();
+        DataControlCenter dcc1=new DataControlCenter();
+        ArrayList<ArrayList<String>> t1=dcc1.getStudentExClassHIstory("20200740001");
+        System.out.println(t1);
     }
 }
