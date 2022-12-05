@@ -23,7 +23,7 @@ public class DataControlCenter {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/CourseDB";
     static final String USER = "root";
-    static final String PWD = "666666";
+    static final String PWD = "123456";
     static final Logger log = Logger.INSTANCE;
     static Connection conn = null;
 
