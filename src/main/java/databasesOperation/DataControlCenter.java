@@ -23,7 +23,7 @@ public class DataControlCenter {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/CourseDB";
     static final String USER = "root";
-    static final String PWD = "root";
+    static final String PWD = "123456";
     static final Logger log = Logger.INSTANCE;
     static Connection conn = null;
 
@@ -226,15 +226,29 @@ public class DataControlCenter {
         return res;
     }
 
-    public ArrayList<ArrayList<String>> getStudentExClassHIstory(String StudentID) {
+    /**
+     * get student course information by student id (without grade output)
+     *
+     * @param student_id
+     * @return
+     */
+    public ArrayList<ArrayList<String>> getStudentExClassHistory(String student_id) {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
             String sql = String.format("" +
-                    "SELECT Course.CourseName,Teacher.TechName,ExClass.Year " +
-                    "FROM Course,Learn,ExClass,Teaching,Teacher " +
-                    "WHERE Learn.StuNo=\"%s\" AND Learn.ExClassNo=ExClass.ExClassNo And" +
-                    " ExClass.CourseNo=Course.CourseNo And Learn.ExClassNo=Teaching.ExClassNo " +
-                    "AND Teaching.TechNo=Teacher.TechNo ", StudentID);
+                    "WITH b as ( " +
+                    "   WITH a AS (" +
+                    "SELECT Course.CourseName, Student.StuNo, Student.StuName, ExClass.ExClassNo " +
+                    "FROM Course, ExClass, Learn, Student " +
+                    "WHERE Course.CourseNo = ExClass.CourseNo AND ExClass.ExClassNo = Learn.ExClassNo AND Learn.StuNo = Student.StuNo " +
+                    "AND Student.StuNo = \"%s\" " +
+                    ")" +
+                    "SELECT a.CourseName, a.StuName, Teaching.TechNo " +
+                    "FROM a LEFT JOIN Teaching on a.ExClassNo = Teaching.ExClassNo " +
+                    ") " +
+                    "SELECT b.CourseName, b.StuName, Teacher.TechName " +
+                    "FROM Teacher LEFT JOIN b on Teacher.TechNo = b.TechNo ;" +
+                    "", student_id);
             log.debug(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
             res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
@@ -627,7 +641,7 @@ class Test {
         System.out.println(dcc.getGradeList());
         System.out.println(dcc.getTeacherList());
         System.out.println(dcc.getClassList());
-        System.out.println(dcc.getStudentExClassHIstory("20200740002"));
+        System.out.println(dcc.getStudentExClassHistory("20200740002"));
         log.info("test password update complete! ");
     }
 
@@ -650,8 +664,13 @@ class Test {
         log.info("finish");
     }
 
+    private static void check_for_student_history() {
+        DataControlCenter dcc = new DataControlCenter();
+        System.out.println(dcc.getStudentExClassHistory("20200740001"));
+    }
+
     public static void main(String[] args) {
         log.setLogLevel(LogLevel.Debug);
-        test_for_password_update();
+        check_for_student_history();
     }
 }

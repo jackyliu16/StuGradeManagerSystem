@@ -26,7 +26,7 @@ public class student_inqueryclass extends myHttpServelet{
                 break;
             }
         }
-        Stu_class = doc.getStudentExClassHIstory(id);
+        Stu_class = doc.getStudentExClassHistory(id);
 /*      String strRequest = "request传值";
         String strSession = "session传值";
         request.setAttribute("strRequest", strRequest);
