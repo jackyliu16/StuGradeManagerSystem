@@ -22,6 +22,5 @@
         <form action="/StuGradeManagerSystem_war/teacher_updatepwd.jsp" method="post">
             <input type="submit" value="change the password"></input>
         </form>
-
 </body>
 </html>

@@ -33,6 +33,7 @@ public class teacher_updatepwd extends myHttpServelet{
         }
         else {
             res.getWriter().println("<script>alert('Change Successfully')</script>");
+            res.getWriter().println("<script>window.location.href='./teacher.jsp'</script>");
         }
 
     }
