@@ -23,7 +23,7 @@ public class DataControlCenter {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/CourseDB";
     static final String USER = "root";
-    static final String PWD = "123456";
+    static final String PWD = "root";
     static final Logger log = Logger.INSTANCE;
     static Connection conn = null;
 
@@ -203,8 +203,8 @@ public class DataControlCenter {
      *
      * @param student_id student ID
      * @return a table which raw is each student and col is StuNo, StuName, Grade in
-     * a Course;
-     * if return empty means that there is something error in this function
+     *         a Course;
+     *         if return empty means that there is something error in this function
      */
     public ArrayList<ArrayList<String>> getStudentCourseGrade(String student_id) {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
@@ -232,8 +232,8 @@ public class DataControlCenter {
             String sql = String.format("" +
                     "SELECT Course.CourseName,Teacher.TechName,ExClass.Year " +
                     "FROM Course,Learn,ExClass,Teaching,Teacher " +
-                    "WHERE \"%s\"=Learn.StuNo AND Learn.ExClassNo=ExClass.ExClassNo And" +
-                    " ExClass.ExClassNo=Course.CourseNo And Learn.ExClassNo=Teaching.ExClassNo " +
+                    "WHERE Learn.StuNo=\"%s\" AND Learn.ExClassNo=ExClass.ExClassNo And" +
+                    " ExClass.CourseNo=Course.CourseNo And Learn.ExClassNo=Teaching.ExClassNo " +
                     "AND Teaching.TechNo=Teacher.TechNo ", StudentID);
             log.debug(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
@@ -388,7 +388,7 @@ public class DataControlCenter {
 
     /**
      * Add a student into a ExCourse</br>
-     * <p>
+     *
      * will insert a empty relationship into database, which means that grade will
      * be 0
      *
