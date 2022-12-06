@@ -202,18 +202,25 @@ public class DataControlCenter {
      * </p>
      *
      * @param student_id student ID
-     * @return a table which raw is each student and col is StuNo, StuName, Grade in
-     *         a Course;
-     *         if return empty means that there is something error in this function
+     * @return a table which raw is each student and col is ExClassNo, CourseName, Grade, Year, Semester in
+     * a Course;
+     * if return empty means that there is something error in this function
      */
     public ArrayList<ArrayList<String>> getStudentCourseGrade(String student_id) {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
             String sql = String.format("" +
-                    "SELECT CourseName, Grade " +
-                    "FROM Student, Course, ExClass, Learn " +
-                    "WHERE Student.StuNo = Learn.StuNo AND ExClass.ExClassNo = Learn.ExClassNo AND " +
-                    "      ExClass.CourseNo = Course.CourseNo AND Student.StuNo = \"%s\";", student_id);
+                    "WITH b AS ( " +
+                    "   select ExClassNo, TechName from ( " +
+                    "       select ExClass.ExClassNo, Teaching.TechNo " +
+                    "       from ExClass LEFT JOIN Teaching ON Teaching.ExClassNo = ExClass.ExClassNo " +
+                    "   ) as a " +
+                    "   LEFT JOIN Teacher ON Teacher.TechNo = a.TechNo ORDER BY ExClassNo " +
+                    ") " +
+                    "SELECT ExClass.ExClassNo, Course.CourseName, Learn.Grade, ExClass.Year, ExClass.semester, b.TechName " +
+                    "FROM Student, Learn, ExClass, b, Course\n" +
+                    "WHERE Student.StuNo = Learn.StuNo AND ExClass.ExClassNo = Learn.ExClassNo AND ExClass.ExClassNo = b.ExClassNo AND ExClass.CourseNo = Course.CourseNo " +
+                    "AND Student.StuNo = \"%s\" ;", student_id);
             log.debug(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
             res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
@@ -669,8 +676,13 @@ class Test {
         System.out.println(dcc.getStudentExClassHistory("20200740001"));
     }
 
+    private static void check_for_get_student_grade() {
+        DataControlCenter dcc = new DataControlCenter();
+        System.out.println(dcc.getStudentCourseGrade("20200740001"));
+    }
+
     public static void main(String[] args) {
         log.setLogLevel(LogLevel.Debug);
-        check_for_student_history();
+        check_for_get_student_grade();
     }
 }
