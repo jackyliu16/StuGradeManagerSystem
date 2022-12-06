@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
 <link type = "text/css" rel = "stylesheet" href = "css/font.css"/>
 
+
 	<!--basic_css-->
 	<link rel="stylesheet" href="css/xadmin.css" type = "text/css">
 	<link rel="stylesheet" href="layui/css/layui.css" media="all" type = "text/css">
@@ -24,23 +25,23 @@
 	</style>
 
 <meta charset="UTF-8">
-<title>学生成绩管理系统</title>
+<title>Student Achievement Management System</title>
 </head>
 <body>
 
 
 	<!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="#">学生成绩管理系统</a><a href="#"></a></div>
+        <div class="logo"><a href="#">Hello!!User</a><a href="#"></a></div>
         <div class="left_open">
-            <i title="展开左侧栏" class="iconfont">&#xe699;</i>
+            <i title="展开左侧栏" class="iconfont">&#9668;</i>
         </div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
             <a href="javascript:;">admin</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a onclick="x_admin_show('个人信息','userinfo.html')">个人信息</a></dd>             
-              <dd><a href="login.jsp">退出</a></dd>
+              <dd><a onclick="x_admin_show('个人信息','userinfo.html')">information</a></dd>             
+              <dd><a href="login.jsp">exit</a></dd>
             </dl>
           </li>
         </ul>
@@ -53,96 +54,39 @@
         <ul id="nav">
              <li>
                 <a _href="mainfunction.html">
-                    <i class="iconfont">&#xe724;</i>
-                    <cite>主页面</cite>
+                    <cite>Main Page</cite>
                 </a>                                                       
              <li>
               <li>
                 <a href="javascript:;">
-                    <i class="iconfont">&#xe726;</i>
-                    <cite>老师操作</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
+                    <cite>Teacher action</cite>
+                    <i class="nav_right">&#xe699;</i>
                 </a>
                 <ul class="sub-menu">
                     <li>
                         <a _href="t_studentgradestatic.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>学生成绩统计</cite>
+                            <cite>Student achievement statistics</cite>
                             
                         </a>
                     </li >
                     <li>
                         <a _href="t_stugradelist.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>学生成绩详情</cite>
+                            <cite>Details of student achievements</cite>
                             
                         </a>
                     </li>
                     
                     <li>
                         <a _href="stu_manager.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>学生管理</cite>
+                            <cite>Student management</cite>
                         </a>
                     </li>
                     
                 </ul>
             </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe6b8;</i>
-                    <cite>学生操作</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="studentgrade.jsp">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>学生成绩结果</cite>
-                            
-                        </a>
-                    </li >
-                   
-                    <li>
-                        <a _href="studentgradestatic.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>学生成绩统计</cite>
-                            
-                        </a>
-                    </li>
-                    
-                </ul>
-            </li>
+            
            
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe6ae;</i>
-                    <cite>系统管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="syslog.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>日志情况</cite>
-                        </a>
-                    </li >
-                     
-                     <li>
-                        <a _href="th_manager.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>教师用户管理</cite>
-                        </a>
-                    </li >
-                    
-                    <li>
-                        <a _href="authority_list.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>权限管理</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>
+            
         </ul>
       </div>
     </div>
@@ -152,7 +96,7 @@
     <div class="page-content">
         <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
           <ul class="layui-tab-title">
-            <li>主页显示</li>
+            <li>Main Page</li>
           </ul>
           <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">

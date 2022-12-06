@@ -1,6 +1,8 @@
+@charset "UTF-8";
+
 /*
- 作者：2602812659@qq.com
-日期：2018-07-27
+ 浣滆�咃細2602812659@qq.com
+鏃ユ湡锛�2018-07-27
 */
 @charset "utf-8";
 /* CSS Document */
@@ -251,7 +253,7 @@ table tr th span{
     float: right;
     cursor: pointer;
 }
-/*弹框-开始*/
+/*寮规-寮�濮�*/
 .mask_box{
 	display: none;
 }
@@ -346,7 +348,7 @@ table tr th span{
 	overflow-y: scroll;
 	margin-top: 10px;
 }
-/*弹框-结束*/
+/*寮规-缁撴潫*/
 @media screen and (min-width: 320px) and (max-width: 375px){
 	.box_block{
 		padding: 0 5px;

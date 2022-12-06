@@ -18,14 +18,14 @@
     <script src="scripts/jquery.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="js/xadmin.js"></script>
-	<title>学生成绩列表</title>
+	<title>list of student grades</title>
 	</head>
 	
 	<body>
 	<div class="x-body">
        <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so" action="" id="searchByInfo"  method="post">               
-          <input type="text" name="searchtime" id="searchtime" placeholder="输入查询时间" autocomplete="off" class="layui-input">
+          <input type="text" name="searchtime" id="searchtime" placeholder="Select a semester" autocomplete="off" class="layui-input">
           <button class="layui-btn layui-btn-danger"  onclick="searchByInfo()"><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
@@ -33,15 +33,15 @@
       <table class="layui-table">
         <thead>
           <tr>
-            <th>编号</th>
-            <th>学生姓名</th>
-            <th>学号</th>           
-            <th>考试批次</th>      
-            <th>学生成绩</th>
-            <th>操作日期</th>  
-            <th>添加日期</th>  
-            <th>内容简介</th>        
-            <th>操作</th>
+            <th>ID</th>
+            <th>Academy</th>            
+            <th>Name</th>
+            <th>StuNum</th>           
+            <th>Subject</th>      
+            <th>Grade</th>
+            <th>ExamDate</th>  
+            <th>AddDate</th>  
+            <th>Other</th>        
         </thead>
         <tbody>
           <tr>          
@@ -54,11 +54,8 @@
             <td>7</td>
             <td>8</td>
            
-            <td class="td-manage">
-              <a title="查看详情"  onclick="stuInfo_edit('this','${bk.stu_id}')" href="javascript:;">
-                <i class="layui-icon">&#xe609;</i>
-              </a>
-              
+            <td>
+            9
             </td>
           </tr>
         </tbody>
@@ -66,13 +63,13 @@
       
    <!--page begin-->
    <div class="am-cf">
-          共1条记录, 每页 5 条, 当前为 2 页
+
    <div class="am-fr">
     <ul class="am-pagination">
-      <li><a href="javascript:;" onclick="book_getFirstPage(this,'${sessionScope.currentPage}')" >首页</a></li>
-      <li><a href="javascript:;" onclick="book_getPriverPage('${sessionScope.dataCount}','${sessionScope.currentPage}')" >上一页</a></li>
-      <li><a href="javascript:;" onclick="book_getNextPage('${sessionScope.dataCount}','${sessionScope.currentPage}')" >下一页</a></li>
-      <li><a href="javascript:;" onclick="book_getLastPAge(this,'${sessionScope.dataCount}')" >尾页</a></li>
+      <li><a href="javascript:;" onclick="book_getFirstPage(this,'${sessionScope.currentPage}')" >Home</a></li>
+      <li><a href="javascript:;" onclick="book_getPriverPage('${sessionScope.dataCount}','${sessionScope.currentPage}')" >Previous</a></li>
+      <li><a href="javascript:;" onclick="book_getNextPage('${sessionScope.dataCount}','${sessionScope.currentPage}')" >Next</a></li>
+      <li><a href="javascript:;" onclick="book_getLastPAge(this,'${sessionScope.dataCount}')" >Last</a></li>
     </ul>
   </div>
   </div>
@@ -106,17 +103,7 @@ layui.use('laydate', function(){
   });
   });
 
-//用户自定义相关函数
-function bookInfo_delete(obj,getid){  
-	layer.confirm('确定删除？', {btn: ['确定','取消']},
-	 function(){
-        //发送删除的请求
-        $("#sendOrder").attr("action","${pageContext.request.contextPath}/stuinfo?action=delBookData&book_id="+getid).submit();
-        layer.msg('已经删除', {icon: 1});
-      }, function(){
-        layer.msg('取消删除', {});
-      });
-}
+
 
 //图书信息搜索
 function searchByInfo(){
@@ -128,7 +115,7 @@ function searchByInfo(){
 	  layer.msg('至少填写一个查询信息', {icon: 0.5});
 	  return false;
    }else{ 
-      //put your code in here
+      
   }
   }
 }
@@ -142,7 +129,7 @@ function book_getFirstPage(obj,currentPage){
 //上一页
 function book_getPriverPage(dataCount,currentPage){
    if(currentPage==1){
-      layer.msg('已是首页', {icon: 0.5});
+      layer.msg('First', {icon: 0.5});
    }else{
    $("#sendOrder").attr("action","${pageContext.request.contextPath}/stuinfo?action=showBookData&currentPage="+(currentPage-1)).submit();
   }
@@ -151,7 +138,7 @@ function book_getPriverPage(dataCount,currentPage){
 function book_getNextPage(dataCount,currentPage){
    var endPage=Number(dataCount)/Number(10);
    if(currentPage>=endPage){
-      layer.msg('已是尾页', {icon: 0.5});
+      layer.msg('Last', {icon: 0.5});
    }else{
     var nextPage=Number(currentPage)+Number(1);
     $("#sendOrder").attr("action","${pageContext.request.contextPath}/stuinfo?action=showBookData&currentPage="+nextPage).submit();

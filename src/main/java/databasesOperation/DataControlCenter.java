@@ -23,7 +23,7 @@ public class DataControlCenter {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/CourseDB";
     static final String USER = "root";
-    static final String PWD = "666666";
+    static final String PWD = "root";
     static final Logger log = Logger.INSTANCE;
     static Connection conn = null;
 
@@ -229,10 +229,10 @@ public class DataControlCenter {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
             String sql = String.format("" +
-                    "SELECT Course.CourseName,Teacher.TechName,ExClass.Year " +
+                    "SELECT Course.CourseName,Teacher.TechName, ExClass.Year " +
                     "FROM Course,Learn,ExClass,Teaching,Teacher " +
-                    "WHERE \"%s\"=Learn.StuNo AND Learn.ExClassNo=ExClass.ExClassNo And" +
-                    " ExClass.ExClassNo=Course.CourseNo And Learn.ExClassNo=Teaching.ExClassNo " +
+                    "WHERE Learn.StuNo=\"%s\" AND Learn.ExClassNo=ExClass.ExClassNo And" +
+                    " ExClass.CourseNo=Course.CourseNo And Learn.ExClassNo=Teaching.ExClassNo " +
                     "AND Teaching.TechNo=Teacher.TechNo ", StudentID);
             log.debug(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
@@ -575,7 +575,8 @@ class Test {
         System.out.println(dcc.getGradeList());
         System.out.println(dcc.getTeacherList());
         System.out.println(dcc.getTClassList());
-        System.out.println(dcc.getStudentExClassHIstory("20200740002"));
+        System.out.println(1111111);
+        System.out.println(dcc.getStudentExClassHIstory("20200740001"));
         log.info("test password update complete! ");
     }
 

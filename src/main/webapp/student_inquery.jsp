@@ -24,7 +24,7 @@
               }
           %>
           <h1>hello! <%=id%></h1>
-          ${Stu_id}
+          ${Stu_class}
 
 </body>
 </html>

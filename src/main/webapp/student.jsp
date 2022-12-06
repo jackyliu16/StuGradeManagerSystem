@@ -20,5 +20,8 @@
     <form action="/StuGradeManagerSystem_war/studentInfo" method="post">
         <input type="submit" value="View Info">
     </form>
+    <form action="/StuGradeManagerSystem_war/student_inqueryclass" method="post">
+        <input type="submit" value="View Class">
+    </form>
 </body>
 </html>
