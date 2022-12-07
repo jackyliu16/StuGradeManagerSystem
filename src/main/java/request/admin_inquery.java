@@ -35,7 +35,7 @@ public class admin_inquery extends myHttpServelet{
             result=dcc.getClassList();
         }
         req.setAttribute("result",result);
-        req.getRequestDispatcher("/admin_inquery.jsp").forward(req,res);
+        req.getRequestDispatcher("/admin_inquery_result.jsp").forward(req,res);
 
     }
 

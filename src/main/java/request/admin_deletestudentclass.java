@@ -7,28 +7,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 
-@WebServlet("/admin_register")
-public class admin_register extends myHttpServelet{
+@WebServlet("/admin_deletestudentclass")
+public class admin_deletestudentclass extends myHttpServelet{
     @Override
     protected void doPost(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
-        String type = req.getParameter("status");
         String id = req.getParameter("id");
-        String Name = req.getParameter("Name");
-        String No = req.getParameter("No");
-        String pwd = req.getParameter("pwd");
+        String exclass_id = req.getParameter("exclass_id");
+
         DataControlCenter dcc = new DataControlCenter();
         Boolean result;
 
-        if(type.equals("student"))
-        {
-            result=dcc.insertNewStudentUser(id,Name,No,pwd);
-        }
-        else
-        {
-            result=dcc.insertNewTeacherUser(id,Name,No,pwd);
-        }
+        result=dcc.deleteStudentFromExCourse(id,exclass_id);
+
         if(result){
             res.getWriter().println("<script>alert('Register success')</script>");
         }
@@ -37,6 +28,6 @@ public class admin_register extends myHttpServelet{
 
     @Override
     protected void doGet(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
-        this.doPost(res, req);
+        this.doPost(res,req);
     }
 }

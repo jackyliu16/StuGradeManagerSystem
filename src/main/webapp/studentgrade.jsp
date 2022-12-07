@@ -1,5 +1,6 @@
+<%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -18,62 +19,116 @@
     <script src="scripts/jquery.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="js/xadmin.js"></script>
+
+	<style type="text/css">
+	a:link {
+	text-decoration: none;
+	color: black;
+}
+   .layui-table{
+       width: 300px;
+       border: 1px;
+       margin-left: 200px;
+   }*+p, *+hr, *+ul, *+ol, *+dl, *+blockquote, *+pre, *+address, *+fieldset, *+figure {
+        margin-top: 0rem;
+    }
+	</style>
+
 	<title>list of student grades</title>
 	</head>
 	
 	<body>
+	<!-- 顶部开始 -->
+    <div class="container">
+        <div class="logo"><a href="#">Hello!!User</a><a href="#"></a></div>
+        <div class="left_open">
+            <i title="展开左侧栏" class="iconfont">&#9668;</i>
+        </div>
+        <ul class="layui-nav right" lay-filter="">
+          <li class="layui-nav-item">
+            <a href="javascript:;">admin</a>
+            <dl class="layui-nav-child"> <!-- 二级菜单 -->
+              <dd><a onclick="x_admin_show('个人信息','information.jsp')">information</a></dd>             
+              <dd><a href="login.jsp">exit</a></dd>
+            </dl>
+          </li>
+        </ul>
+    </div>
+    <!-- 顶部结束 -->
 	<div class="x-body">
        <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so" action="" id="searchByInfo"  method="post">               
           <input type="text" name="searchtime" id="searchtime" placeholder="Select a semester" autocomplete="off" class="layui-input">
-          <button class="layui-btn layui-btn-danger"  onclick="searchByInfo()"><i class="layui-icon">&#xe615;</i></button>
+          <button class="layui-btn layui-btn-danger"><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
-      <hr color="green">
-      <table class="layui-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Academy</th>            
-            <th>Name</th>
-            <th>StuNum</th>           
-            <th>Subject</th>      
-            <th>Grade</th>
-            <th>ExamDate</th>  
-            <th>AddDate</th>  
-            <th>Other</th>        
-        </thead>
-        <tbody>
-          <tr>          
-            <td>1 </td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
-            <td>6</td>
-            <td>7</td>
-            <td>8</td>
+      
+      <!-- 中部开始 -->
+     <!-- 左侧菜单开始 -->
+    <div class="left-nav">
+      <div id="side-nav">
+        <ul id="nav">
+             <li>
+                <a _href="NewFile1.jsp">
+                    <cite>Main Page</cite>
+                </a>                                                       
+             <li>
+             
+            <li>
+                <a href="javascript:;">
+                    <cite>Student action</cite>
+                    <i class="nav_right">&#xe699;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="studentgrade.jsp">
+                            <cite>Student achievement results</cite>
+                            
+                        </a>
+                    </li >
+                   
+                    <li>
+                        <a _href="StuGradeStatic.jsp">
+                            <cite>Student achievement statistics</cite>
+                            
+                        </a>
+                    </li>
+                    
+                </ul>
+            </li>
            
-            <td>
-            9
-            </td>
-          </tr>
-        </tbody>
+            
+        </ul>
+      </div>
+    </div>
+      
+      
+      
+      
+      
+      <hr color="green">
+      <table class = "layui-table">
+
+
+        <%
+            ArrayList<ArrayList<String>>list;
+            list = (ArrayList<ArrayList<String>>) request.getAttribute("Stu_id");
+        %>
+
+        <%
+            for(int i=0;i<list.size();i=i+1)
+            {
+        %>
+        <tr>
+            <th><%=list.get(i).get(0)%></th>
+            <th><%=list.get(i).get(1)%></th>
+        </tr>
+        <%
+            }
+        %>
       </table>
       
-   <!--page begin-->
-   <div class="am-cf">
 
-   <div class="am-fr">
-    <ul class="am-pagination">
-      <li><a href="javascript:;" onclick="book_getFirstPage(this,'${sessionScope.currentPage}')" >Home</a></li>
-      <li><a href="javascript:;" onclick="book_getPriverPage('${sessionScope.dataCount}','${sessionScope.currentPage}')" >Previous</a></li>
-      <li><a href="javascript:;" onclick="book_getNextPage('${sessionScope.dataCount}','${sessionScope.currentPage}')" >Next</a></li>
-      <li><a href="javascript:;" onclick="book_getLastPAge(this,'${sessionScope.dataCount}')" >Last</a></li>
-    </ul>
-  </div>
-  </div>
-  <!--page end-->
   </div>
  
  <!--用户操作使用form表单提交信息-->
@@ -105,50 +160,6 @@ layui.use('laydate', function(){
 
 
 
-//图书信息搜索
-function searchByInfo(){
-  var getBookName = $("#bookname").val();
-  var getBookauthor = $("#author").val();
-  var form = document.getElementById("searchByInfo");
-  form.onsubmit = function(form){
-  if (getBookName == "" && getBookauthor == ""){
-	  layer.msg('至少填写一个查询信息', {icon: 0.5});
-	  return false;
-   }else{ 
-      
-  }
-  }
-}
-
-
-//--------------------mysql数据库分页显示操作---------------------------------
-//首页
-function book_getFirstPage(obj,currentPage){
-   $("#sendOrder").attr("action","${pageContext.request.contextPath}/stuinfo?action=showBookData&currentPage=1").submit();  
-}
-//上一页
-function book_getPriverPage(dataCount,currentPage){
-   if(currentPage==1){
-      layer.msg('First', {icon: 0.5});
-   }else{
-   $("#sendOrder").attr("action","${pageContext.request.contextPath}/stuinfo?action=showBookData&currentPage="+(currentPage-1)).submit();
-  }
-}
-//下一页(注意，这里每页是10条记录)
-function book_getNextPage(dataCount,currentPage){
-   var endPage=Number(dataCount)/Number(10);
-   if(currentPage>=endPage){
-      layer.msg('Last', {icon: 0.5});
-   }else{
-    var nextPage=Number(currentPage)+Number(1);
-    $("#sendOrder").attr("action","${pageContext.request.contextPath}/stuinfo?action=showBookData&currentPage="+nextPage).submit();
-   }
-}
-//尾页
-function book_getLastPAge(obj,dataCount){
-    var laetPage= Math.ceil(dataCount/10);
-    $("#sendOrder").attr("action","${pageContext.request.contextPath}/stuinfo?action=showBookData&currentPage="+laetPage).submit();  
-}
 
 </script>	
 </body>

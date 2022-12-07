@@ -53,7 +53,7 @@
     <div id="side-nav">
         <ul id="nav">
             <li>
-                <a href="MainPage.html">
+                <a _href="MainPage.html">
                     <cite>Main Page</cite>
                 </a>
             <li>
@@ -65,14 +65,14 @@
                     <li>
                         <form action="/StuGradeManagerSystem_war/teacher_inqueryGrade" method="post" name="form1">
                             <a href="javascript:document.form1.submit();">
-                                <cite>Student Grade List</cite>
+                                <cite>Student Class List</cite>
                             </a>
                         </form>
                     </li >
                     <li>
                         <form action="/StuGradeManagerSystem_war/teacher_inqueryclass" method="post" name="form2">
                             <a href="javascript:document.form2.submit();">
-                                <cite>Teacher class List</cite>
+                                <cite>Teacher Gclass List</cite>
                             </a>
                         </form>
                     </li >
@@ -86,7 +86,7 @@
                     <li>
                         <form action="/StuGradeManagerSystem_war/teacher_updateGrade.jsp" method="post" name="form4">
                             <a href="javascript:document.form4.submit();">
-                                <cite>update student grade</cite>
+                                <cite>insert student grade</cite>
                             </a>
                         </form>
                     </li>
@@ -101,6 +101,9 @@
 
                 </ul>
             </li>
+
+
+
         </ul>
     </div>
 </div>
@@ -118,11 +121,16 @@
             </blockquote>
         </div>
         <div class="layui-fluid" style="font-size: 60px">
-            <font class="text" >
-                1.文件上传时候文件大小不得超过3G内容。<br>
-                2.文件上传时候文件大小不得超过3G内容。<br>
-                3.文件上传时候文件大小不得超过3G内容。<br>
-            </font>
+            <form action="/StuGradeManagerSystem_war/teacher_insertstudent" method="post">
+                <a>student id</a>
+                <input placeholder="please enter the student id" name="stu_id">
+                <br/><br/>
+                <a>course id</a>
+                <input placeholder="please enter the course id" name="course_id">
+                <br/><br/>
+                <input type="submit" >
+                <br/>
+            </form>
         </div>
     </div>
 </div>

@@ -8,25 +8,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/admin_update")
-public class admin_update extends myHttpServelet{
+@WebServlet("/admin_registerstudent")
+public class admin_registerstudent extends myHttpServelet{
     @Override
     protected void doPost(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
-        String id = req.getParameter("id");
-        String major = req.getParameter("major");
 
+        String id = req.getParameter("id");
+        String Name = req.getParameter("Name");
+        String No = req.getParameter("No");
+        String pwd = req.getParameter("pwd");
         DataControlCenter dcc = new DataControlCenter();
         Boolean result;
 
-        result=dcc.updateStudentMajor(id,major);
+        result=dcc.insertNewStudentUser(id,Name,No,pwd);
+
         if(result){
             res.getWriter().println("<script>alert('Register success')</script>");
         }
         res.getWriter().println("<script>window.location.href='./admin.jsp'</script>");
     }
-
     @Override
     protected void doGet(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
-        this.doPost(res, req);
+        this.doPost(res,req);
     }
 }

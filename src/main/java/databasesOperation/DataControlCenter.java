@@ -23,7 +23,7 @@ public class DataControlCenter {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/CourseDB";
     static final String USER = "root";
-    static final String PWD = "root";
+    static final String PWD = "666666";
     static final Logger log = Logger.INSTANCE;
     static Connection conn = null;
 
@@ -305,7 +305,24 @@ public class DataControlCenter {
         }
         return res;
     }
-
+    public String getTeacherName(String teacher_id) {
+        ArrayList<ArrayList<String>> res = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT techname " +
+                    "FROM Teacher" +
+                    " WHERE Teacher.TechNo=\"%s\" ", teacher_id);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            res = ResultSetOperation.convertResultSetIntoArrayList(rs);
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res.isEmpty() ?"" :res.get(0).get(0);
+    }
     public ArrayList<ArrayList<String>> getStudentList() {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
@@ -629,6 +646,7 @@ class Test {
         System.out.println(dcc.getClassList());
         System.out.println(dcc.getStudentExClassHIstory("20200740002"));
         log.info("test password update complete! ");
+        System.out.println(dcc.getTeacherName("20200010002"));
     }
 
     private static void test_for_ex_class_insert_delete() {

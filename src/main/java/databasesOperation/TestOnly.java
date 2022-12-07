@@ -7,7 +7,7 @@ public class TestOnly {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/CourseDB";
     static final String USER = "root";
-    static final String PWD = "123456";
+    static final String PWD = "666666";
     static Logger log = Logger.INSTANCE;
 
     private static void log_test() {
