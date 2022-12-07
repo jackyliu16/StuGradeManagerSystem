@@ -66,28 +66,28 @@
                     <li>
                         <form action="/StuGradeManagerSystem_war/student_inquery" method="post" name="form1">
                             <a href="Javascript:document.form1.submit()">
-                                <cite>Student achievement results</cite>
+                                <cite>Student Grade List</cite>
                             </a>
                         </form>
                     </li >
                     <li>
                         <form action="/StuGradeManagerSystem_war/student_inqueryclass" method="post" name="form2">
                             <a href="Javascript:document.form2.submit()">
-                                <cite>Student belong class</cite>
+                                <cite>Student Class List</cite>
                             </a>
                         </form>
                     </li>
                     <li>
                         <form action="/StuGradeManagerSystem_war/StuGradeStaticpost.jsp" method="post" name="form3">
                             <a href="Javascript:document.form3.submit()">
-                                <cite>Student achievement statistics</cite>
+                                <cite>Student Grade Statistics</cite>
                             </a>
                         </form>
                     </li>
                     <li>
                         <form action="/StuGradeManagerSystem_war/information.jsp" method="post" name="form4">
                             <a href="Javascript:document.form4.submit()">
-                                <cite>information</cite>
+                                <cite>Information</cite>
                             </a>
                         </form>
                     </li>
@@ -102,18 +102,24 @@
     <!-- <div class="x-slide_left"></div> -->
     <!-- 左侧菜单结束 -->
     <!-- 右侧主体开始 -->
-    <%--<div class="page-content">
-        <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
-          <ul class="layui-tab-title">
-            <li>Main Page</li>
-          </ul>
-          <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show">
-                <iframe src='' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+    <div class="page-content">
+        <div class="container">
+            <div class="layui-fluid" style="font-max-size: xxx-large">
+                <blockquote class="layui-elem-quote">
+                    <marquee onmouseover="this.stop()" onmouseout="this.start()" behavior="alternate">
+                        <font class="text">Welcome to SCNU Student Management System !</font>
+                    </marquee>
+                </blockquote>
             </div>
-          </div>
+            <div class="layui-fluid" style="font-size: 60px">
+                <font class="text" >
+                    1.文件上传时候文件大小不得超过3G内容。<br>
+                    2.文件上传时候文件大小不得超过3G内容。<br>
+                    3.文件上传时候文件大小不得超过3G内容。<br>
+                </font>
+            </div>
         </div>
-    </div>--%>
+    </div>
     <!-- 右侧主体结束 -->
     <!-- 中部结束 -->
     <!-- 底部开始 -->

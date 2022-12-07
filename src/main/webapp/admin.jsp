@@ -15,7 +15,7 @@
       <form action="/StuGradeManagerSystem_war/admin_inquery" method="post">
             <div>
                   <span>view the </span>
-                  <input type="text" name="type" placeholder="请选择查询类型" autocomplete="off" list="list" required>
+                  <input type="text" name="type" placeholder="Please input search type" autocomplete="off" list="list" required>
                   <datalist id="list">
                         <option>student</option>
                         <option>teacher</option>
@@ -65,7 +65,7 @@
             </div>
             <div>
                   <span>what is the status:</span>
-                  <input type="text" name="status" placeholder="请选择查询类型" autocomplete="off" list="list3" required>
+                  <input type="text" name="status" placeholder="Please input search type" autocomplete="off" list="list3" required>
                   <datalist id="list3">
                         <option>student</option>
                         <option>teacher</option>

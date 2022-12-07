@@ -57,7 +57,7 @@ margin-top: 0rem;
     <div class="container">
         <div class="logo"><a href="#">Hello!!Student</a><a href="#"></a></div>
         <div class="left_open">
-            <i title="展开左侧栏" class="iconfont">&#9668;</i>
+            <i title="Expand left" class="iconfont">&#9668;</i>
         </div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
@@ -90,28 +90,28 @@ margin-top: 0rem;
 					<li>
 						<form action="/StuGradeManagerSystem_war/student_inquery" method="post" name="form1">
 							<a href="Javascript:document.form1.submit()">
-								<cite>Student achievement results</cite>
+								<cite>Student Grade List</cite>
 							</a>
 						</form>
 					</li >
 					<li>
 						<form action="/StuGradeManagerSystem_war/student_inqueryclass" method="post" name="form2">
 							<a href="Javascript:document.form2.submit()">
-								<cite>Student belong class</cite>
+								<cite>Student Class List</cite>
 							</a>
 						</form>
 					</li>
 					<li>
 						<form action="/StuGradeManagerSystem_war/StuGradeStaticpost.jsp" method="post" name="form3">
 							<a href="Javascript:document.form3.submit()">
-								<cite>Student achievement statistics</cite>
+								<cite>Student Grade Statistics</cite>
 							</a>
 						</form>
 					</li>
 					<li>
 						<form action="/StuGradeManagerSystem_war/information.jsp" method="post" name="form4">
 							<a href="Javascript:document.form4.submit()">
-								<cite>information</cite>
+								<cite>Information</cite>
 							</a>
 						</form>
 					</li>
@@ -141,8 +141,8 @@ margin-top: 0rem;
 		%>
 	<div class="layui-tab page-content-wrap long">
 		  <ul class="layui-tab-title">
-		    <li class="layui-this">修改资料</li>
-		    <li >修改密码</li>
+		    <li class="layui-this">Change Information</li>
+		    <li >Change Password</li>
 		  </ul>
 		  <div class="layui-tab-content">
 		    <div class="layui-tab-item layui-show">
@@ -156,19 +156,19 @@ margin-top: 0rem;
 				   <div class="layui-form-item">
 				    <label class="layui-form-label ">Password：</label>
 				    <div class="layui-input-block">
-				      <input type="password" name="password" required  lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input" value="123456">
+				      <input type="password" name="password" required  lay-verify="required" autocomplete="off" class="layui-input" value="123456">
 				    </div>
 				  </div>
 				  <div class="layui-form-item">
 				    <label class="layui-form-label ">e-mail：</label>
 				    <div class="layui-input-block">
-				      <input type="text" name="email" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="5303588521@qq.com">
+				      <input type="text" name="email" required  lay-verify="required" autocomplete="off" class="layui-input" value="5303588521@qq.com">
 				    </div>
 				  </div>
 				  <div class="layui-form-item layui-form-text">
 				    <label class="layui-form-label ">other：</label>
 				    <div class="layui-input-block">
-				      <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+				      <textarea name="desc" placeholder="Please input context" class="layui-textarea"></textarea>
 				    </div>
 				  </div>
 				  <%--<div class="layui-form-item">
@@ -187,26 +187,26 @@ margin-top: 0rem;
 						<label class="layui-form-label ii">Name：<%=name%></label>
 					</div>
 				  <div class="layui-form-item">
-				    <label class="layui-form-label">oldpassword：</label>
+				    <label class="layui-form-label">OldPassword：</label>
 				    <div class="layui-input-block">
-				      <input type="password" name="oldpassword" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+						  <input type="password" name="oldpassword" required lay-verify="required" placeholder="Please input old password" autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				  <div class="layui-form-item">
-				    <label class="layui-form-label">newpassword：</label>
+				    <label class="layui-form-label">NewPassword：</label>
 				    <div class="layui-input-block">
-				      <input type="password" name="newpassword" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+				      <input type="password" name="newpassword" required lay-verify="required" placeholder="Please input new password" autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				  <div class="layui-form-item">
-				    <label class="layui-form-label">repeat：</label>
+				    <label class="layui-form-label">Repeat：</label>
 				    <div class="layui-input-block">
-				      <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+				      <input type="password" name="password" required lay-verify="required" placeholder="Please repeat new password" autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				  <div class="layui-form-item">
 				    <div class="layui-input-block">
-				      <button class="layui-btn layui-btn-normal" lay-submit lay-filter="adminPassword">立即提交</button>
+				      <button class="layui-btn layui-btn-normal" lay-submit lay-filter="adminPassword">Submit</button>
 				    </div>
 				  </div>
 				</form>
@@ -218,7 +218,7 @@ margin-top: 0rem;
     
     
     <div class="footer">
-        <div class="copyright" align="center">华南师范大学</div>  
+        <div class="copyright" align="center">South China Normal University</div>
     </div>
     
     
