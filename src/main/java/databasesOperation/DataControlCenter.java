@@ -214,13 +214,13 @@ public class DataControlCenter {
         return res.isEmpty() ? "" : res.get(0).get(0);
     }
 
-    public String getExClassGradeForStudent(String student_id, String ex_class_no) {
+    public ArrayList<ArrayList<String>> getExClassGradeForStudent(String student_id, String ex_class_no) {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
             String sql = String.format("" +
-                    "SELECT Learn.Grade " +
-                    "FROM Student, Learn, ExClass " +
-                    "WHERE Student.StuNo = Learn.StuNo AND Learn.ExClassNo = ExClass.ExClassNo " +
+                    "SELECT Student.StuNo, Student.StuName, Course.CourseName, Learn.Grade, ExClass.Year, ExClass.semester " +
+                    "FROM Student, Learn, ExClass, Course " +
+                    "WHERE Student.StuNo = Learn.StuNo AND Learn.ExClassNo = ExClass.ExClassNo AND ExClass.CourseNo = Course.CourseNo " +
                     "AND ExClass.ExClassNo = \"%s\" AND Student.StuNo = \"%s\" ;", ex_class_no, student_id);
             log.debug(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
@@ -231,7 +231,7 @@ public class DataControlCenter {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return res.isEmpty() ? "" : res.get(0).get(0);
+        return res;
     }
 
     /**
@@ -750,6 +750,6 @@ class Test {
 
     public static void main(String[] args) {
         log.setLogLevel(LogLevel.Debug);
-        check_for_student_history();
+        check_get_student_exclass_grade();
     }
 }
