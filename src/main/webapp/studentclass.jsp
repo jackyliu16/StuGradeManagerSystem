@@ -25,7 +25,6 @@
 	text-decoration: none;
 	color: black;
 }
-
    .layui-table{
        width: 300px;
        border: 1px;
@@ -73,10 +72,10 @@
       <div id="side-nav">
         <ul id="nav">
              <li>
-                 <a href="StuMain.jsp">
-                     <cite>Main Page</cite>
-                 </a>
-            <li>
+                <a _href="NewFile1.jsp">
+                    <cite>Main Page</cite>
+                </a>                                                       
+             <li>
              
             <li>
                 <a href="javascript:;">
@@ -113,16 +112,18 @@
                     </li>
                 </ul>
             </li>
-           
-            
         </ul>
       </div>
     </div>
+    <!-- <div class="x-slide_left"></div> -->
+    <!-- 左侧菜单结束 -->
       <hr color="green">
       <table class = "layui-table">
+
+
         <%
             ArrayList<ArrayList<String>>list;
-            list = (ArrayList<ArrayList<String>>) request.getAttribute("Stu_id");
+            list = (ArrayList<ArrayList<String>>) request.getAttribute("Stu_class");
         %>
 
         <%
@@ -137,10 +138,9 @@
             }
         %>
       </table>
+      
+
   </div>
-    <div class="footer">
-        <div class="copyright" align="center">华南师范大学</div>
-    </div>
  
  <!--用户操作使用form表单提交信息-->
  <form action="" id="sendOrder" name="sendOrder" method="post">

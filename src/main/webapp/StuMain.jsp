@@ -1,6 +1,5 @@
-<%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
@@ -26,23 +25,22 @@
 	</style>
 
 <meta charset="UTF-8">
-<title>Student Achievement Management System</title>
+<title>Home</title>
 </head>
 <body>
 
 
 	<!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="#">Hello!!User</a><a href="#"></a></div>
+        <div class="logo"><a href="#">Hello! Teacher</a><a href="#"></a></div>
         <div class="left_open">
-            <i title="展开左侧栏" class="iconfont">&#9668;</i>
+            <i title="Expand the left column" class="iconfont">&#9668;</i>
         </div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
+            <a href="javascript:;">Teacher</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a onclick="x_admin_show('个人信息','userinfo.html')">information</a></dd>             
-              <dd><a href="login.jsp">exit</a></dd>
+              <dd><a href="Login.jsp">Exit</a></dd>
             </dl>
           </li>
         </ul>
@@ -54,38 +52,46 @@
       <div id="side-nav">
         <ul id="nav">
              <li>
-                <a _href="mainfunction.html">
-                    <cite>Main Page</cite>
-                </a>                                                       
-             <li>
-             
+                 <a href="StuMain.jsp">
+                     <cite>Main Page</cite>
+                 </a>
             <li>
+              <li>
                 <a href="javascript:;">
-                    <cite>Student action</cite>
-                    <i class="nav_right">&#xe699;</i>
+                    <cite>Teacher action</cite>
                 </a>
-
                 <ul class="sub-menu">
                     <li>
-                        <%--<%
-                        ArrayList<ArrayList<String>>list;
-                        list = (ArrayList<ArrayList<String>>) request.getAttribute("Stu_id");
-                        ArrayList<ArrayList<String>>Stu_id = list;
-                        request.setAttribute("Stu_id", Stu_id);
-                        %>--%>
-                        <a _href="studentgrade.jsp">
-                            <cite>Student achievement results</cite>
-                        </a>
+                        <form action="/StuGradeManagerSystem_war/student_inquery" method="post" name="form1">
+                            <a href="Javascript:document.form1.submit()">
+                                <cite>Student achievement results</cite>
+                            </a>
+                        </form>
                     </li >
-                   
                     <li>
-                        <a _href="StuGradeStatic.jsp">
-                            <cite>Student achievement statistics</cite>
-                        </a>
+                        <form action="/StuGradeManagerSystem_war/student_inqueryclass" method="post" name="form2">
+                            <a href="Javascript:document.form2.submit()">
+                                <cite>Student belong class</cite>
+                            </a>
+                        </form>
                     </li>
-                    
+                    <li>
+                        <form action="/StuGradeManagerSystem_war/StuGradeStatic.jsp" method="post" name="form3">
+                            <a href="Javascript:document.form3.submit()">
+                                <cite>Student achievement statistics</cite>
+                            </a>
+                        </form>
+                    </li>
+                    <li>
+                        <form action="/StuGradeManagerSystem_war/information.jsp" method="post" name="form4">
+                            <a href="Javascript:document.form4.submit()">
+                                <cite>information</cite>
+                            </a>
+                        </form>
+                    </li>
                 </ul>
             </li>
+            
            
             
         </ul>
@@ -101,7 +107,7 @@
           </ul>
           <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <iframe src='mainfunction.html' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                <iframe src='' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
             </div>
           </div>
         </div>
@@ -110,7 +116,7 @@
     <!-- 中部结束 -->
     <!-- 底部开始 -->
     <div class="footer">
-        <div class="copyright" align="center">South China Normal University</div>  
+        <div class="copyright" align="center">South China Normal University</div>
     </div>
  
 

@@ -19,17 +19,100 @@
     <script src="scripts/jquery.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="js/xadmin.js"></script>
-    <script src="js/echarts.min.js"></script> 
+    <script src="js/echarts.min.js"></script>
+        <style>
+            *+p, *+hr, *+ul, *+ol, *+dl, *+blockquote, *+pre, *+address, *+fieldset, *+figure {
+                margin-top: 0rem;
+            }
+            a:link {
+                text-decoration: none;
+                color: black;
+            }
+            ol,ul{
+                padding-left: 0em;
+            }
+        </style>
 	<title>Exam score information</title>
 	</head>
 	
 	<body>
+    <!-- 顶部开始 -->
+    <div class="container">
+        <div class="logo"><a href="#">Hello!!User</a><a href="#"></a></div>
+        <div class="left_open">
+            <i title="展开左侧栏" class="iconfont">&#9668;</i>
+        </div>
+        <ul class="layui-nav right" lay-filter="">
+            <li class="layui-nav-item">
+                <a href="javascript:">admin</a>
+                <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                    <dd><a onclick="x_admin_show('个人信息','information.jsp')">information</a></dd>
+                    <dd><a href="login.jsp">exit</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+    <!-- 顶部结束 -->
+
+
+        <!-- 中部开始 -->
+        <!-- 左侧菜单开始 -->
+        <div class="left-nav">
+            <div id="side-nav">
+                <ul id="nav">
+                    <li>
+                        <a href="StuMain.jsp">
+                            <cite>Main Page</cite>
+                        </a>
+                    <li>
+
+                    <li>
+                        <a href="javascript:">
+                            <cite>Student action</cite>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <form action="/StuGradeManagerSystem_war/student_inquery" method="post" name="form1">
+                                    <a href="Javascript:document.form1.submit()">
+                                        <cite>Student achievement results</cite>
+                                    </a>
+                                </form>
+                            </li >
+                            <li>
+                                <form action="/StuGradeManagerSystem_war/student_inqueryclass" method="post" name="form2">
+                                    <a href="Javascript:document.form2.submit()">
+                                        <cite>Student belong class</cite>
+                                    </a>
+                                </form>
+                            </li>
+                            <li>
+                                <form action="/StuGradeManagerSystem_war/StuGradeStatic.jsp" method="post" name="form3">
+                                    <a href="Javascript:document.form3.submit()">
+                                        <cite>Student achievement statistics</cite>
+                                    </a>
+                                </form>
+                            </li>
+                            <li>
+                                <form action="/StuGradeManagerSystem_war/information.jsp" method="post" name="form4">
+                                    <a href="Javascript:document.form4.submit()">
+                                        <cite>information</cite>
+                                    </a>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+        <!-- <div class="x-slide_left"></div> -->
+        <!-- 左侧菜单结束 -->
 	<div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so" action="" id="searchByInfo"  method="post">
+        <form class="layui-form layui-col-md12 x-so" action="/StuGradeManagerSystem_war/studentDump" id="searchByInfo"  method="post">
           
-          <input class="layui-input" placeholder="semester" name="examWeek" id="examWeek">
-          <input class="layui-input" placeholder="subject" name="examSub" id="examSub">                    
+          <input class="layui-input" placeholder="exclass" name="exclass" id="examWeek">
           <button class="layui-btn layui-btn-danger" onclick="searchByInfo()"><i class="layui-icon">&#xe615;</i>
           </button>
         </form>
@@ -46,7 +129,7 @@
             <th>grade</th>       
         </thead>
         <tbody>
-        <%
+        <%--<%
             ArrayList<ArrayList<String>>list;
             list = (ArrayList<ArrayList<String>>) request.getAttribute("Stu_id");
         %>
@@ -62,7 +145,7 @@
 
         <%
             }
-        %>
+        %>--%>
           <tr>
             <td>1</td>
             <td>张三</td>
@@ -78,12 +161,10 @@
  <hr class="layui-bg-green">
  <!--echart_part-->
  <div id="container"  style="height: 380px"></div>
- 
-<!--
-	作者：offline
-	时间：2021-01-19
-	描述：基本操作的js内容
---> 
+
+    <div class="footer">
+        <div class="copyright" align="center">华南师范大学</div>
+    </div>
 <script>
 //layui自启动
 layui.use('layer', function(){
@@ -105,7 +186,7 @@ layui.use('laydate', function(){
 
 
 //图书信息搜索
-function searchByInfo(){
+/*function searchByInfo(){
   var getBookName = $("#bookname").val();
   var getBookauthor = $("#author").val();
   var form = document.getElementById("searchByInfo");
@@ -114,11 +195,11 @@ function searchByInfo(){
 	  layer.msg('至少填写一个查询信息', {icon: 0.5});
 	  return false;
    }else{ 
-      $("#searchByInfo").attr("action","${pageContext.request.contextPath}/BookServlet?action=searchByCnd&bookname="+getBookName+"&bookauthor="+getBookauthor).submit();
+      $("#searchByInfo").attr("action","${pageContext.request.contextPath}/StuGradeStatic.jsp?action=searchByCnd&bookname="+getBookName+"&bookauthor="+getBookauthor).submit();
   }
   }
-}
-</script>	
+}*/
+</script>
 
 
 
@@ -140,7 +221,7 @@ option = {
     legend: {
         orient: 'vertical',
         left: 'left',
-        data: ['0~20', '20~40', '40~60', '60~80', '80~100']
+        data: ['0~60', '60~70', '70~80', '80~90', '90~100']
     },
     series: [
         {
@@ -149,11 +230,11 @@ option = {
             radius: '55%',
             center: ['50%', '60%'],
             data: [
-                {value: 3, name: '0~20'},
-                {value: 4, name: '20~40'},
-                {value: 6, name: '40~60'},
-                {value: 1, name: '60~80'},
-                {value: 2, name: '80~100'}
+                {value: ${a}, name: '0~60'},
+                {value: ${b}, name: '60~70'},
+                {value: ${c}, name: '70~80'},
+                {value: ${d}, name: '80~90'},
+                {value: ${e}, name: '90~100'}
             ],
             emphasis: {
                 itemStyle: {

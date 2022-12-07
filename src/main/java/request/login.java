@@ -34,7 +34,7 @@ public class login extends HttpServlet {
        if(status.equals("student")){
             //*ArrayList<ArrayList<String>> data = dcc.getStudentCourseGrade(id);*//*
             if(dcc.checkStudentPwd(id,password)){
-                req.getRequestDispatcher("/student.jsp").forward(req,res);
+                req.getRequestDispatcher("/StuMain.jsp").forward(req,res);
             }
         }
         else if (status.equals("teacher")) {
@@ -53,9 +53,6 @@ public class login extends HttpServlet {
        }
         res.getWriter().println("<script>alert('Wrong password or ID')</script>");
         res.getWriter().println("<script>window.location.href='./login.jsp'</script>");
-        System.out.println(id);
-        System.out.println(password);
-        System.out.println(status);
     }
 
     @Override

@@ -38,7 +38,8 @@ public class student_inquery extends myHttpServelet{
 %>*/
 
         req.setAttribute("Stu_id", Stu_id);
-        req.getRequestDispatcher("/StuMain.jsp").forward(req,res);
+        System.out.println(Stu_id);
+        req.getRequestDispatcher("/studentgrade.jsp").forward(req,res);
     }
 
     @Override

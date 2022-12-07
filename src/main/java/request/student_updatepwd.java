@@ -29,15 +29,20 @@ public class student_updatepwd extends myHttpServelet{
                 break;
             }
         }
-        result = doc.updateStudentPwd(id,req.getParameter("Oldpassword"),req.getParameter("Newpassword"));
-        if(!result) {
-            res.getWriter().println("<script>alert('Wrong password')</script>");
-            res.getWriter().println("<script>window.location.href='./student_updatepwd.jsp'</script>");
+        if(req.getParameter("newpassword").equals(req.getParameter("password"))) {
+            result = doc.updateStudentPwd(id, req.getParameter("oldpassword"), req.getParameter("newpassword"));
+            if (!result) {
+                res.getWriter().println("<script>alert('Wrong password')</script>");
+                res.getWriter().println("<script>window.location.href='./information.jsp'</script>");
+            } else {
+                res.getWriter().println("<script>alert('Change Successfully')</script>");
+                res.getWriter().println("<script>window.location.href='./information.jsp'</script>");
+            }
         }
         else {
-            res.getWriter().println("<script>alert('Change Successfully')</script>");
+            res.getWriter().println("<script>alert('Not same password')</script>");
+            res.getWriter().println("<script>window.location.href='./information.jsp'</script>");
         }
-        //System.out.println(result);
     }
 
 

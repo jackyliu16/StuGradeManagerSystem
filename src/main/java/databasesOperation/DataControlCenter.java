@@ -306,6 +306,7 @@ public class DataControlCenter {
         return res;
     }
 
+
     public ArrayList<ArrayList<String>> getStudentList() {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
@@ -627,7 +628,7 @@ class Test {
         System.out.println(dcc.getGradeList());
         System.out.println(dcc.getTeacherList());
         System.out.println(dcc.getClassList());
-        System.out.println(dcc.getStudentExClassHIstory("20200740002"));
+        System.out.println(dcc.getStudentExClassHIstory("20200740001"));
         log.info("test password update complete! ");
     }
 
