@@ -723,7 +723,7 @@ class Test {
     private static void check_get_student_name_by_student_id() {
         DataControlCenter dcc = new DataControlCenter();
         System.out.println(dcc.getStudentName("20200740001"));
-        System.out.println(dcc.getStudentName("20200740029"));
+        System.out.println(dcc.getStudentName("20200740031"));
     }
 
     private static void check_get_student_exclass_grade() {
