@@ -64,13 +64,13 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="t_studentgradestatic.html">
+                        <a _href="studentgrade.jsp">
                             <cite>Student achievement statistics</cite>
                             
                         </a>
                     </li >
                     <li>
-                        <a _href="t_stugradelist.html">
+                        <a _href="StuGradeStatic.jsp">
                             <cite>Details of student achievements</cite>
                             
                         </a>
