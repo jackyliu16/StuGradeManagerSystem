@@ -55,13 +55,13 @@ margin-top: 0rem;
 	<body>
   <!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="#">Hello!!User</a><a href="#"></a></div>
+        <div class="logo"><a href="#">Hello!!Teacher</a><a href="#"></a></div>
         <div class="left_open">
             <i title="展开左侧栏" class="iconfont">&#9668;</i>
         </div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
+            <a href="javascript:;">teacher</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
               <dd><a href="login.jsp">exit</a></dd>
             </dl>
@@ -75,9 +75,11 @@ margin-top: 0rem;
       <div id="side-nav">
         <ul id="nav">
              <li>
-                <a href="StuMain.jsp">
-                    <cite>Main Page</cite>
-                </a>                                                       
+				 <form action="/StuGradeManagerSystem_war/teacher.jsp" method="post" name="form7">
+					 <a href="javascript:document.form7.submit();">
+						 <cite>Main Page</cite>
+					 </a>
+				 </form>
              <li>
              
             <li>
@@ -116,7 +118,7 @@ margin-top: 0rem;
 					<li>
 						<form action="/StuGradeManagerSystem_war/teacher_information.jsp" method="post" name="form5">
 							<a href="javascript:document.form5.submit();">
-								<cite>update password</cite>
+								<cite>information</cite>
 							</a>
 						</form>
 					</li>
@@ -146,8 +148,8 @@ margin-top: 0rem;
 		%>
 	<div class="layui-tab page-content-wrap long">
 		  <ul class="layui-tab-title">
-		    <li class="layui-this">修改资料</li>
-		    <li >修改密码</li>
+		    <li class="layui-this">Change Information</li>
+		    <li >Change Password</li>
 		  </ul>
 		  <div class="layui-tab-content">
 		    <div class="layui-tab-item layui-show">
@@ -194,24 +196,24 @@ margin-top: 0rem;
 				  <div class="layui-form-item">
 				    <label class="layui-form-label">oldpassword：</label>
 				    <div class="layui-input-block">
-				      <input type="password" name="Oldpassword" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+				      <input type="password" name="Oldpassword" required lay-verify="required" placeholder="Please input old password" autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				  <div class="layui-form-item">
 				    <label class="layui-form-label">newpassword：</label>
 				    <div class="layui-input-block">
-				      <input type="password" name="Newpassword" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+				      <input type="password" name="Newpassword" required lay-verify="required" placeholder="Please input new password" autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				  <div class="layui-form-item">
 				    <label class="layui-form-label">repeat：</label>
 				    <div class="layui-input-block">
-				      <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+				      <input type="password" name="password" required lay-verify="required" placeholder="Please repeat new password" autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				  <div class="layui-form-item">
 				    <div class="layui-input-block">
-				      <button class="layui-btn layui-btn-normal" lay-submit lay-filter="adminPassword">立即提交</button>
+				      <button class="layui-btn layui-btn-normal" lay-submit lay-filter="adminPassword">submit</button>
 				    </div>
 				  </div>
 				</form>

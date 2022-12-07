@@ -32,16 +32,15 @@
 
 <!-- 顶部开始 -->
 <div class="container">
-    <div class="logo"><a href="#">Hello! Teacher</a><a href="#"></a></div>
+    <div class="logo"><a href="#">Hello! Admin</a><a href="#"></a></div>
     <div class="left_open">
         <i title="Expand the left column" class="iconfont">&#9668;</i>
     </div>
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
-            <a href="javascript:;">Teacher</a>
+            <a href="javascript:;">admin</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                <dd><a onclick="x_admin_show('Information','Information.jsp')">Information</a></dd>
-                <dd><a href="Login.jsp">Exit</a></dd>
+                <dd><a href="login.jsp">Exit</a></dd>
             </dl>
         </li>
     </ul>
@@ -53,9 +52,11 @@
     <div id="side-nav">
         <ul id="nav">
             <li>
-                <a _href="MainPage.html">
-                    <cite>Main Page</cite>
-                </a>
+                <form action="/StuGradeManagerSystem_war/admin.jsp" method="post" name="form7">
+                    <a href="javascript:document.form7.submit();">
+                        <cite>Main Page</cite>
+                    </a>
+                </form>
             <li>
             <li>
                 <a href="javascript:;">

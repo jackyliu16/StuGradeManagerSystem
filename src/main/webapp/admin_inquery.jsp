@@ -99,34 +99,7 @@
 
 
 
-    //--------------------mysql数据库分页显示操作---------------------------------
-    //首页
-    function book_getFirstPage(obj,currentPage){
-        $("#sendOrder").attr("action","${pageContext.request.contextPath}/stuinfo?action=showBookData&currentPage=1").submit();
-    }
-    //上一页
-    function book_getPriverPage(dataCount,currentPage){
-        if(currentPage==1){
-            layer.msg('First', {icon: 0.5});
-        }else{
-            $("#sendOrder").attr("action","${pageContext.request.contextPath}/stuinfo?action=showBookData&currentPage="+(currentPage-1)).submit();
-        }
-    }
-    //下一页(注意，这里每页是10条记录)
-    function book_getNextPage(dataCount,currentPage){
-        var endPage=Number(dataCount)/Number(10);
-        if(currentPage>=endPage){
-            layer.msg('Last', {icon: 0.5});
-        }else{
-            var nextPage=Number(currentPage)+Number(1);
-            $("#sendOrder").attr("action","${pageContext.request.contextPath}/stuinfo?action=showBookData&currentPage="+nextPage).submit();
-        }
-    }
-    //尾页
-    function book_getLastPAge(obj,dataCount){
-        var laetPage= Math.ceil(dataCount/10);
-        $("#sendOrder").attr("action","${pageContext.request.contextPath}/stuinfo?action=showBookData&currentPage="+laetPage).submit();
-    }
+
 
 </script>
 </body>

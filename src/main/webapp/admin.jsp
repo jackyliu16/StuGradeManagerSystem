@@ -39,10 +39,9 @@
       </div>
       <ul class="layui-nav right" lay-filter="">
             <li class="layui-nav-item">
-                  <a href="javascript:;">Teacher</a>
+                  <a href="javascript:;">admin</a>
                   <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                        <dd><a onclick="x_admin_show('Information','Information.jsp')">Information</a></dd>
-                        <dd><a href="Login.jsp">Exit</a></dd>
+                        <dd><a href="login.jsp">Exit</a></dd>
                   </dl>
             </li>
       </ul>
@@ -54,9 +53,11 @@
       <div id="side-nav">
             <ul id="nav">
                   <li>
-                        <a _href="MainPage.html">
+                        <form action="/StuGradeManagerSystem_war/admin.jsp" method="post" name="form7">
+                        <a href="javascript:document.form7.submit();">
                               <cite>Main Page</cite>
                         </a>
+                        </form>
                   <li>
                   <li>
                         <a href="javascript:;">
