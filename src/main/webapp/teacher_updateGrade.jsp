@@ -86,7 +86,7 @@
           <li>
             <form action="/StuGradeManagerSystem_war/teacher_updateGrade.jsp" method="post" name="form4">
               <a href="javascript:document.form4.submit();">
-                <cite>insert student grade</cite>
+                <cite>update student grade</cite>
               </a>
             </form>
           </li>
