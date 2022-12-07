@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/admin_update")
-public class admin_update extends myHttpServelet{
+@WebServlet("/admin_updatemajor")
+public class admin_updatemajor extends myHttpServelet{
     @Override
     protected void doPost(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
         String id = req.getParameter("id");
@@ -21,6 +21,9 @@ public class admin_update extends myHttpServelet{
         result=dcc.updateStudentMajor(id,major);
         if(result){
             res.getWriter().println("<script>alert('Register success')</script>");
+        }
+        else {
+            res.getWriter().println("<script>alert('Wrong')</script>");
         }
         res.getWriter().println("<script>window.location.href='./admin.jsp'</script>");
     }

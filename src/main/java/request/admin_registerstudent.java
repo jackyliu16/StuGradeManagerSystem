@@ -25,6 +25,9 @@ public class admin_registerstudent extends myHttpServelet{
         if(result){
             res.getWriter().println("<script>alert('Register success')</script>");
         }
+        else {
+            res.getWriter().println("<script>alert('Wrong')</script>");
+        }
         res.getWriter().println("<script>window.location.href='./admin.jsp'</script>");
     }
     @Override

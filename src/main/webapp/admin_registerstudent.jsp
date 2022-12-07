@@ -32,7 +32,7 @@
 
 <!-- 顶部开始 -->
 <div class="container">
-    <div class="logo"><a href="#">Hello! Teacher</a><a href="#"></a></div>
+    <div class="logo"><a href="#">Hello! Admin</a><a href="#"></a></div>
     <div class="left_open">
         <i title="Expand the left column" class="iconfont">&#9668;</i>
     </div>
