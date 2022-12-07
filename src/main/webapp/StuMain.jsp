@@ -32,15 +32,15 @@
 
 	<!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="#">Hello! Teacher</a><a href="#"></a></div>
+        <div class="logo"><a href="#">Hello! Student</a><a href="#"></a></div>
         <div class="left_open">
             <i title="Expand the left column" class="iconfont">&#9668;</i>
         </div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
-            <a href="javascript:;">Teacher</a>
+            <a href="javascript:;">Student</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a href="Login.jsp">Exit</a></dd>
+              <dd><a href="login.jsp">Exit</a></dd>
             </dl>
           </li>
         </ul>
@@ -52,13 +52,15 @@
       <div id="side-nav">
         <ul id="nav">
              <li>
-                 <a href="StuMain.jsp">
-                     <cite>Main Page</cite>
-                 </a>
+                 <form action="/StuGradeManagerSystem_war/StuMain.jsp" method="post" name="form5">
+                     <a href="Javascript:document.form5.submit()">
+                       <cite>Main Page</cite>
+                     </a>
+                 </form>
             <li>
               <li>
                 <a href="javascript:;">
-                    <cite>Teacher action</cite>
+                    <cite>Student action</cite>
                 </a>
                 <ul class="sub-menu">
                     <li>
@@ -76,7 +78,7 @@
                         </form>
                     </li>
                     <li>
-                        <form action="/StuGradeManagerSystem_war/StuGradeStatic.jsp" method="post" name="form3">
+                        <form action="/StuGradeManagerSystem_war/StuGradeStaticpost.jsp" method="post" name="form3">
                             <a href="Javascript:document.form3.submit()">
                                 <cite>Student achievement statistics</cite>
                             </a>
@@ -100,7 +102,7 @@
     <!-- <div class="x-slide_left"></div> -->
     <!-- 左侧菜单结束 -->
     <!-- 右侧主体开始 -->
-    <div class="page-content">
+    <%--<div class="page-content">
         <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
           <ul class="layui-tab-title">
             <li>Main Page</li>
@@ -111,7 +113,7 @@
             </div>
           </div>
         </div>
-    </div>
+    </div>--%>
     <!-- 右侧主体结束 -->
     <!-- 中部结束 -->
     <!-- 底部开始 -->

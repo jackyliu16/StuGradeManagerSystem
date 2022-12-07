@@ -44,7 +44,7 @@
         </div>
         <ul class="layui-nav right" lay-filter="">
             <li class="layui-nav-item">
-                <a href="javascript:">student</a>
+                <a href="javascript:">Student</a>
                 <dl class="layui-nav-child"> <!-- 二级菜单 -->
                     <dd><a href="login.jsp">exit</a></dd>
                 </dl>
@@ -109,7 +109,6 @@
         </div>
         <!-- <div class="x-slide_left"></div> -->
         <!-- 左侧菜单结束 -->
-    <div class="page-content">
 	<div class="x-body">
       <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so" action="/StuGradeManagerSystem_war/studentDump" id="searchByInfo"  method="post">
@@ -121,7 +120,7 @@
       </div>
       <hr>
       <table class="layui-table">
-          <%
+          <%--<%
               ArrayList<ArrayList<String>>list;
               list = (ArrayList<ArrayList<String>>) request.getAttribute("Stu_id");
           %>
@@ -140,7 +139,7 @@
           </tr>
           <%
               }
-          %>
+          %>--%>
       </table>
   </div>
  <hr class="layui-bg-green">
@@ -149,7 +148,6 @@
 
     <div class="footer">
         <div class="copyright" align="center">华南师范大学</div>
-    </div>
     </div>
 <script>
 //layui自启动

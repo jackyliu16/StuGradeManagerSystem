@@ -15,9 +15,9 @@ public class studentDump extends myHttpServelet{
 
     @Override
     protected void doPost(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
-        ArrayList<ArrayList<String>> Stu_Rank;
+        ArrayList<ArrayList<String>> Stu_Rank,Stu_id;
         DataControlCenter doc = new DataControlCenter();
-        /*String id=new String();
+        String id=new String();
         Cookie[] cookies=req.getCookies();
         for(Cookie cookie:cookies){
             String name=cookie.getName();
@@ -25,7 +25,7 @@ public class studentDump extends myHttpServelet{
                 id=cookie.getValue();
                 break;
             }
-        }*/
+        }
 
         int a=0,b=0,c=0,d=0,e=0;
         String exclass=req.getParameter("exclass");
@@ -53,7 +53,10 @@ public class studentDump extends myHttpServelet{
                 e++;
             }
         }
+        DataControlCenter docc = new DataControlCenter();
+        Stu_id = docc.getExClassGradeForStudent(id,exclass);
 
+        req.setAttribute("Stu_id", Stu_id);
         req.setAttribute("a", a);
         req.setAttribute("b", b);
         req.setAttribute("c", c);

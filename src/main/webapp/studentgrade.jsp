@@ -27,7 +27,7 @@
 }
 
    .layui-table{
-       width: 300px;
+       width: 1000px;
        border: 1px;
        margin-left: 200px;
    }*+p, *+hr, *+ul, *+ol, *+dl, *+blockquote, *+pre, *+address, *+fieldset, *+figure {
@@ -44,28 +44,27 @@
 	<body>
 	<!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="#">Hello!!User</a><a href="#"></a></div>
+        <div class="logo"><a href="#">Hello!!Student</a><a href="#"></a></div>
         <div class="left_open">
             <i title="展开左侧栏" class="iconfont">&#9668;</i>
         </div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
+            <a href="javascript:;">student</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a onclick="x_admin_show('个人信息','information.jsp')">information</a></dd>             
               <dd><a href="login.jsp">exit</a></dd>
             </dl>
           </li>
         </ul>
     </div>
     <!-- 顶部结束 -->
-	<div class="x-body">
+	<%--<div class="x-body">
        <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so" action="" id="searchByInfo"  method="post">               
           <input type="text" name="searchtime" id="searchtime" placeholder="Select a semester" autocomplete="off" class="layui-input">
           <button class="layui-btn layui-btn-danger"><i class="layui-icon">&#xe615;</i></button>
         </form>
-      </div>
+      </div>--%>
       
       <!-- 中部开始 -->
      <!-- 左侧菜单开始 -->
@@ -73,9 +72,11 @@
       <div id="side-nav">
         <ul id="nav">
              <li>
-                 <a href="StuMain.jsp">
-                     <cite>Main Page</cite>
-                 </a>
+                 <form action="/StuGradeManagerSystem_war/StuMain.jsp" method="post" name="form5">
+                     <a href="Javascript:document.form5.submit()">
+                         <cite>Main Page</cite>
+                     </a>
+                 </form>
             <li>
              
             <li>
@@ -98,7 +99,7 @@
                         </form>
                     </li>
                     <li>
-                        <form action="/StuGradeManagerSystem_war/StuGradeStatic.jsp" method="post" name="form3">
+                        <form action="/StuGradeManagerSystem_war/StuGradeStaticpost.jsp" method="post" name="form3">
                             <a href="Javascript:document.form3.submit()">
                                 <cite>Student achievement statistics</cite>
                             </a>
@@ -132,6 +133,9 @@
         <tr>
             <th><%=list.get(i).get(0)%></th>
             <th><%=list.get(i).get(1)%></th>
+            <th><%=list.get(i).get(2)%></th>
+            <th><%=list.get(i).get(3)%></th>
+            <th><%=list.get(i).get(4)%></th>
         </tr>
         <%
             }

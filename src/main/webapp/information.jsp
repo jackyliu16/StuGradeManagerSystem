@@ -1,5 +1,6 @@
+<%@ page import="databasesOperation.DataControlCenter" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+		 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
@@ -45,18 +46,22 @@ margin-top: 0rem;
 		width: 135px;
 		padding-left: 0px;
 	}
+	.ii{
+		width: 110px;
+		padding-left: 0px;
+	}
     </style>
 	</head>
 	<body>
   <!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="#">Hello!!User</a><a href="#"></a></div>
+        <div class="logo"><a href="#">Hello!!Student</a><a href="#"></a></div>
         <div class="left_open">
             <i title="展开左侧栏" class="iconfont">&#9668;</i>
         </div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
+            <a href="javascript:;">student</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
               <dd><a href="login.jsp">exit</a></dd>
             </dl>
@@ -70,9 +75,11 @@ margin-top: 0rem;
       <div id="side-nav">
         <ul id="nav">
              <li>
-                <a href="StuMain.jsp">
-                    <cite>Main Page</cite>
-                </a>                                                       
+				 <form action="/StuGradeManagerSystem_war/StuMain.jsp" method="post" name="form5">
+					 <a href="Javascript:document.form5.submit()">
+						 <cite>Main Page</cite>
+					 </a>
+				 </form>
              <li>
              
             <li>
@@ -95,7 +102,7 @@ margin-top: 0rem;
 						</form>
 					</li>
 					<li>
-						<form action="/StuGradeManagerSystem_war/StuGradeStatic.jsp" method="post" name="form3">
+						<form action="/StuGradeManagerSystem_war/StuGradeStaticpost.jsp" method="post" name="form3">
 							<a href="Javascript:document.form3.submit()">
 								<cite>Student achievement statistics</cite>
 							</a>
@@ -129,6 +136,8 @@ margin-top: 0rem;
 					break;
 				}
 			}
+			DataControlCenter doc = new DataControlCenter();
+			String name = doc.getStudentName(id);
 		%>
 	<div class="layui-tab page-content-wrap long">
 		  <ul class="layui-tab-title">
@@ -142,22 +151,22 @@ margin-top: 0rem;
 					   <label class="layui-form-label iii">ID：<%=id%></label>
 				   </div>
 					<div class="layui-form-item">
-				      <label class="layui-form-label iii">ID：<%=id%></label>
+				      <label class="layui-form-label ii">Name：<%=name%></label>
 				    </div>
 				   <div class="layui-form-item">
-				    <label class="layui-form-label ">密码：</label>
+				    <label class="layui-form-label ">Password：</label>
 				    <div class="layui-input-block">
 				      <input type="password" name="password" required  lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input" value="123456">
 				    </div>
 				  </div>
 				  <div class="layui-form-item">
-				    <label class="layui-form-label ">邮箱：</label>
+				    <label class="layui-form-label ">e-mail：</label>
 				    <div class="layui-input-block">
 				      <input type="text" name="email" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="5303588521@qq.com">
 				    </div>
 				  </div>
 				  <div class="layui-form-item layui-form-text">
-				    <label class="layui-form-label ">备注：</label>
+				    <label class="layui-form-label ">other：</label>
 				    <div class="layui-input-block">
 				      <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
 				    </div>
@@ -171,26 +180,26 @@ margin-top: 0rem;
 		    </div>
 		    <div class="layui-tab-item">
 		    	<form class="layui-form" v style="width: 90%;padding-top: 20px;" action="/StuGradeManagerSystem_war/student_updatepwd" method="post">
+					<div class="layui-form-item">
+						<label class="layui-form-label iii">ID：<%=id%></label>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label ii">Name：<%=name%></label>
+					</div>
 				  <div class="layui-form-item">
-				    <label class="layui-form-label">用户名：</label>
-				    <div class="layui-input-block">
-				      <input type="text" name="username" disabled autocomplete="off" class="layui-input layui-disabled" value="admin">
-				    </div>
-				  </div>
-				  <div class="layui-form-item">
-				    <label class="layui-form-label">旧密码：</label>
+				    <label class="layui-form-label">oldpassword：</label>
 				    <div class="layui-input-block">
 				      <input type="password" name="oldpassword" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				  <div class="layui-form-item">
-				    <label class="layui-form-label">新密码：</label>
+				    <label class="layui-form-label">newpassword：</label>
 				    <div class="layui-input-block">
 				      <input type="password" name="newpassword" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				  <div class="layui-form-item">
-				    <label class="layui-form-label">重复密码：</label>
+				    <label class="layui-form-label">repeat：</label>
 				    <div class="layui-input-block">
 				      <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
 				    </div>

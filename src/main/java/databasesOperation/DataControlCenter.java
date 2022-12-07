@@ -224,7 +224,7 @@ public class DataControlCenter {
                     "AND ExClass.ExClassNo = \"%s\" AND Student.StuNo = \"%s\" ;", ex_class_no, student_id);
             log.debug(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
-            res = ResultSetOperation.convertResultSetIntoArrayList(rs);
+            res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
             rs.close();
             stmt.close();
             log.debug("query success!");
