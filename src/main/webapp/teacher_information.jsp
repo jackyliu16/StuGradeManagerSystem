@@ -102,14 +102,14 @@ margin-top: 0rem;
 					<li>
 						<form action="/StuGradeManagerSystem_war/teacher_insertstudent.jsp" method="post" name="form3">
 							<a href="javascript:document.form3.submit();">
-								<cite>update student grade</cite>
+								<cite>insert student grade</cite>
 							</a>
 						</form>
 					</li>
 					<li>
 						<form action="/StuGradeManagerSystem_war/teacher_updateGrade.jsp" method="post" name="form4">
 							<a href="javascript:document.form4.submit();">
-								<cite>insert student grade</cite>
+								<cite>update student grade</cite>
 							</a>
 						</form>
 					</li>
