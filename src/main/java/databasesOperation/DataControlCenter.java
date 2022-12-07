@@ -195,6 +195,45 @@ public class DataControlCenter {
 
 // Get Function
 
+    public String getStudentName(String student_id) {
+        ArrayList<ArrayList<String>> res = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT Student.StuName " +
+                    "FROM Student " +
+                    "WHERE Student.StuNo = '%s' ", student_id);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            res = ResultSetOperation.convertResultSetIntoArrayList(rs);
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res.isEmpty() ? "" : res.get(0).get(0);
+    }
+
+    public String getExClassGradeForStudent(String student_id, String ex_class_no) {
+        ArrayList<ArrayList<String>> res = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT Learn.Grade " +
+                    "FROM Student, Learn, ExClass " +
+                    "WHERE Student.StuNo = Learn.StuNo AND Learn.ExClassNo = ExClass.ExClassNo " +
+                    "AND ExClass.ExClassNo = \"%s\" AND Student.StuNo = \"%s\" ;", ex_class_no, student_id);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            res = ResultSetOperation.convertResultSetIntoArrayList(rs);
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res.isEmpty() ? "" : res.get(0).get(0);
+    }
+
     /**
      * Gain all grade for all courses taken by the student
      * <p>
@@ -681,8 +720,20 @@ class Test {
         System.out.println(dcc.getStudentCourseGrade("20200740001"));
     }
 
+    private static void check_get_student_name_by_student_id() {
+        DataControlCenter dcc = new DataControlCenter();
+        System.out.println(dcc.getStudentName("20200740001"));
+        System.out.println(dcc.getStudentName("20200740031"));
+    }
+
+    private static void check_get_student_exclass_grade() {
+        DataControlCenter dcc = new DataControlCenter();
+        System.out.println(dcc.getExClassGradeForStudent("20200740001", "00001015"));
+        System.out.println(dcc.getExClassGradeForStudent("20200740001", "00000015"));
+    }
+
     public static void main(String[] args) {
         log.setLogLevel(LogLevel.Debug);
-        check_for_get_student_grade();
+        check_get_student_name_by_student_id();
     }
 }
