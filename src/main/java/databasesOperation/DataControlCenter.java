@@ -513,7 +513,7 @@ public class DataControlCenter {
             log.debug("query success!");
             return rs == 1;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return false;
         }
     }
 
@@ -527,7 +527,7 @@ public class DataControlCenter {
             log.debug("query success!");
             return rs == 1;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return false;
         }
     }
 
