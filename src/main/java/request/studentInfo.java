@@ -29,7 +29,7 @@ public class studentInfo extends myHttpServelet{
         //System.out.println("id: "+id);
         StuInfo = doc.getStudentInfo(id);/*req.getParameter("id")*/
         req.setAttribute("StuInfo",StuInfo);
-        req.getRequestDispatcher("/studentInfo.jsp").forward(req,res);
+        req.getRequestDispatcher("/information.jsp").forward(req,res);
 
     }
 

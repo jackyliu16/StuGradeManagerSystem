@@ -25,7 +25,6 @@
 	text-decoration: none;
 	color: black;
 }
-
    .layui-table{
        width: 1000px;
        border: 1px;
@@ -35,6 +34,9 @@
     }
     ol,ul{
         padding-left: 0em;
+    }
+    .rrr{
+        width:100px ;
     }
 	</style>
 
@@ -58,14 +60,14 @@
         </ul>
     </div>
     <!-- 顶部结束 -->
-	<%--<div class="x-body">
-       <div class="layui-row">
+	<div class="x-body">
+       <%--<div class="layui-row">
         <form class="layui-form layui-col-md12 x-so" action="" id="searchByInfo"  method="post">               
           <input type="text" name="searchtime" id="searchtime" placeholder="Select a semester" autocomplete="off" class="layui-input">
           <button class="layui-btn layui-btn-danger"><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>--%>
-
+      
       <!-- 中部开始 -->
      <!-- 左侧菜单开始 -->
     <div class="left-nav">
@@ -77,8 +79,8 @@
                          <cite>Main Page</cite>
                      </a>
                  </form>
-            <li>
-
+             <li>
+             
             <li>
                 <a href="javascript:;">
                     <cite>Student action</cite>
@@ -114,23 +116,25 @@
                     </li>
                 </ul>
             </li>
-
-
         </ul>
       </div>
     </div>
+    <!-- <div class="x-slide_left"></div> -->
+    <!-- 左侧菜单结束 -->
       <hr color="green">
       <table class = "layui-table">
+
+
         <%
             ArrayList<ArrayList<String>>list;
-            list = (ArrayList<ArrayList<String>>) request.getAttribute("Stu_id");
+            list = (ArrayList<ArrayList<String>>) request.getAttribute("Stu_class");
         %>
 
         <%
             for(int i=0;i<list.size();i=i+1)
             {
         %>
-        <tr>
+        <tr >
             <th><%=list.get(i).get(0)%></th>
             <th><%=list.get(i).get(1)%></th>
             <th><%=list.get(i).get(2)%></th>
@@ -141,10 +145,9 @@
             }
         %>
       </table>
+      
+
   </div>
-    <div class="footer">
-        <div class="copyright" align="center">华南师范大学</div>
-    </div>
  
  <!--用户操作使用form表单提交信息-->
  <form action="" id="sendOrder" name="sendOrder" method="post">
@@ -181,6 +184,6 @@ layui.use('laydate', function(){
 
 
 
-</script>
+</script>	
 </body>
 </html>

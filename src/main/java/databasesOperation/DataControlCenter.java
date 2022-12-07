@@ -195,25 +195,33 @@ public class DataControlCenter {
 
 // Get Function
 
-    /**
-     * Gain all grade for all courses taken by the student
-     * <p>
-     * caller need to make sure student ID is legal
-     * </p>
-     *
-     * @param student_id student ID
-     * @return a table which raw is each student and col is StuNo, StuName, Grade in
-     *         a Course;
-     *         if return empty means that there is something error in this function
-     */
-    public ArrayList<ArrayList<String>> getStudentCourseGrade(String student_id) {
+    public String getStudentName(String student_id) {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
             String sql = String.format("" +
-                    "SELECT CourseName, Grade " +
-                    "FROM Student, Course, ExClass, Learn " +
-                    "WHERE Student.StuNo = Learn.StuNo AND ExClass.ExClassNo = Learn.ExClassNo AND " +
-                    "      ExClass.CourseNo = Course.CourseNo AND Student.StuNo = \"%s\";", student_id);
+                    "SELECT Student.StuName " +
+                    "FROM Student " +
+                    "WHERE Student.StuNo = '%s' ", student_id);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            res = ResultSetOperation.convertResultSetIntoArrayList(rs);
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res.isEmpty() ? "" : res.get(0).get(0);
+    }
+
+    public ArrayList<ArrayList<String>> getExClassGradeForStudent(String student_id, String ex_class_no) {
+        ArrayList<ArrayList<String>> res = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT Student.StuNo, Student.StuName, Course.CourseName, Learn.Grade, ExClass.Year, ExClass.semester " +
+                    "FROM Student, Learn, ExClass, Course " +
+                    "WHERE Student.StuNo = Learn.StuNo AND Learn.ExClassNo = ExClass.ExClassNo AND ExClass.CourseNo = Course.CourseNo " +
+                    "AND ExClass.ExClassNo = \"%s\" AND Student.StuNo = \"%s\" ;", ex_class_no, student_id);
             log.debug(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
             res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
@@ -226,15 +234,81 @@ public class DataControlCenter {
         return res;
     }
 
-    public ArrayList<ArrayList<String>> getStudentExClassHIstory(String StudentID) {
+    /**
+     * Gain all grade for all courses taken by the student
+     * <p>
+     * caller need to make sure student ID is legal
+     * </p>
+     *
+     * @param student_id student ID
+     * @return a table which raw is each student and col is ExClassNo, CourseName, Grade, Year, Semester in
+     * a Course;
+     * if return empty means that there is something error in this function
+     */
+    public ArrayList<ArrayList<String>> getStudentCourseGrade(String student_id) {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
+//            String sql = String.format("" +
+//                    "WITH b AS ( " +
+//                    "   select ExClassNo, TechName from ( " +
+//                    "       select ExClass.ExClassNo, Teaching.TechNo " +
+//                    "       from ExClass LEFT JOIN Teaching ON Teaching.ExClassNo = ExClass.ExClassNo " +
+//                    "   ) as a " +
+//                    "   LEFT JOIN Teacher ON Teacher.TechNo = a.TechNo ORDER BY ExClassNo " +
+//                    ") " +
+//                    "SELECT ExClass.ExClassNo, Course.CourseName, Learn.Grade, ExClass.Year, ExClass.semester, b.TechName " +
+//                    "FROM Student, Learn, ExClass, b, Course\n" +
+//                    "WHERE Student.StuNo = Learn.StuNo AND ExClass.ExClassNo = Learn.ExClassNo AND ExClass.ExClassNo = b.ExClassNo AND ExClass.CourseNo = Course.CourseNo " +
+//                    "AND Student.StuNo = \"%s\" ;", student_id);
             String sql = String.format("" +
-                    "SELECT Course.CourseName,Teacher.TechName,ExClass.Year " +
-                    "FROM Course,Learn,ExClass,Teaching,Teacher " +
-                    "WHERE Learn.StuNo=\"%s\" AND Learn.ExClassNo=ExClass.ExClassNo And" +
-                    " ExClass.CourseNo=Course.CourseNo And Learn.ExClassNo=Teaching.ExClassNo " +
-                    "AND Teaching.TechNo=Teacher.TechNo ", StudentID);
+                    "SELECT ExClass.ExClassNo, Course.CourseName, Learn.Grade, ExClass.Year, ExClass.semester, Teacher.TechName " +
+                    "FROM ExClass, Course, Learn, Teacher, Teaching, Student " +
+                    "WHERE Student.StuNo = Learn.StuNo AND Learn.ExClassNo = ExClass.ExClassNo " +
+                    "AND ExClass.CourseNo = Course.CourseNo AND ExClass.ExClassNo = Teaching.ExClassNo " +
+                    "AND Teaching.TechNo = Teacher.TechNo " +
+                    "AND Student.StuNo = '%s' ", student_id);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
+    }
+
+    /**
+     * get student course information by student id (without grade output)
+     *
+     * @param student_id
+     * @return
+     */
+    public ArrayList<ArrayList<String>> getStudentExClassHistory(String student_id) {
+        ArrayList<ArrayList<String>> res = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+//            String sql = String.format("" +
+//                    "WITH b as ( " +
+//                    "   WITH a AS (" +
+//                    "SELECT Course.CourseName, Student.StuNo, Student.StuName, ExClass.ExClassNo " +
+//                    "FROM Course, ExClass, Learn, Student " +
+//                    "WHERE Course.CourseNo = ExClass.CourseNo AND ExClass.ExClassNo = Learn.ExClassNo AND Learn.StuNo = Student.StuNo " +
+//                    "AND Student.StuNo = \"%s\" " +
+//                    ")" +
+//                    "SELECT a.CourseName, a.StuName, Teaching.TechNo " +
+//                    "FROM a LEFT JOIN Teaching on a.ExClassNo = Teaching.ExClassNo " +
+//                    ") " +
+//                    "SELECT b.CourseName, b.StuName, Teacher.TechName " +
+//                    "FROM Teacher LEFT JOIN b on Teacher.TechNo = b.TechNo ;" +
+//                    "", student_id);
+            String sql = String.format("" +
+                    "SELECT ExClass.ExClassNo, Course.CourseName, ExClass.Year, ExClass.semester, Teacher.TechName " +
+                    "FROM ExClass, Course, Learn, Teacher, Teaching, Student " +
+                    "WHERE Student.StuNo = Learn.StuNo AND Learn.ExClassNo = ExClass.ExClassNo " +
+                    "AND ExClass.CourseNo = Course.CourseNo AND ExClass.ExClassNo = Teaching.ExClassNo " +
+                    "AND Teaching.TechNo = Teacher.TechNo " +
+                    "AND Student.StuNo = '%s' ", student_id);
             log.debug(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
             res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
@@ -644,7 +718,7 @@ class Test {
         System.out.println(dcc.getGradeList());
         System.out.println(dcc.getTeacherList());
         System.out.println(dcc.getClassList());
-        System.out.println(dcc.getStudentExClassHIstory("20200740002"));
+        System.out.println(dcc.getStudentExClassHistory("20200740002"));
         log.info("test password update complete! ");
         System.out.println(dcc.getTeacherName("20200010002"));
     }
@@ -668,8 +742,32 @@ class Test {
         log.info("finish");
     }
 
+    private static void check_for_student_history() {
+        DataControlCenter dcc = new DataControlCenter();
+        System.out.println(dcc.getStudentExClassHistory("20200740001"));
+    }
+
+    private static void check_for_get_student_grade() {
+        DataControlCenter dcc = new DataControlCenter();
+        System.out.println(dcc.getStudentCourseGrade("20200740001"));
+        System.out.println(dcc.getStudentCourseGrade("20200740029"));
+
+    }
+
+    private static void check_get_student_name_by_student_id() {
+        DataControlCenter dcc = new DataControlCenter();
+        System.out.println(dcc.getStudentName("20200740001"));
+        System.out.println(dcc.getStudentName("20200740031"));
+    }
+
+    private static void check_get_student_exclass_grade() {
+        DataControlCenter dcc = new DataControlCenter();
+        System.out.println(dcc.getExClassGradeForStudent("20200740001", "00001015"));
+        System.out.println(dcc.getExClassGradeForStudent("20200740001", "00000015"));
+    }
+
     public static void main(String[] args) {
         log.setLogLevel(LogLevel.Debug);
-        test_for_password_update();
+        check_get_student_exclass_grade();
     }
 }

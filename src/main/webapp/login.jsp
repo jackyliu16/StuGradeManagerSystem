@@ -100,28 +100,28 @@
 <body>
 <form class="layui-form" action="/StuGradeManagerSystem_war/login" id="loginForm" method="post">
 	<div class="layui-form-item">
-		<h1>学生成绩管理系统</h1>
+		<h1>Student Management System</h1>
 	</div>
 	<div class="layui-form-item">
 		<div class="layui-input-block">
-			<span class="decrib">账号：</span> <input type="text" name="id"
-													 placeholder="请输入账号" autocomplete="off" class="layui-input"
+			<span class="decrib">Account：</span>&nbsp&nbsp &nbsp<input type="text" name="id"
+													 placeholder="Please input account" autocomplete="off" class="layui-input"
 													 autofocus required>
 		</div>
 	</div>
 
 	<div class="layui-form-item">
 		<div class="layui-input-block">
-			<span class="decrib">密码：</span> <input type="password"
-													 name="password" placeholder="请输入密码" autocomplete="off"
+			<span class="decrib">Password：</span> <input type="password"
+													 name="password" placeholder="Please input password" autocomplete="off"
 													 class="layui-input" required>
 		</div>
 	</div>
 
 	<div class="layui-form-item">
 		<div class="layui-input-block">
-			<span class="decrib">类型：</span> <input type="text" name="status"
-													 placeholder="请选择账号类型" autocomplete="off" class="layui-input"
+			<span class="decrib">Type：</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" name="status"
+													 placeholder="Please input type" autocomplete="off" class="layui-input"
 													 list="list" required>
 			<datalist id="list">
 				<option>student</option>
@@ -134,9 +134,14 @@
 	<div class="layui-form-item">
 		<div class="layui-input-block">
 			<button class="layui-btn layui-btn-normal layui-btn-fluid"
-					id="submit">登 录</button>
+					id="submit">Login</button>
+		</div>
+		<div style="height: 30px;">
+
 		</div>
 	</div>
+
+
 </form>
 </body>
 <script src="layui/layui.js"></script>
