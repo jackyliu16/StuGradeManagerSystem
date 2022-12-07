@@ -65,7 +65,7 @@
           <button class="layui-btn layui-btn-danger"><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>--%>
-      
+
       <!-- 中部开始 -->
      <!-- 左侧菜单开始 -->
     <div class="left-nav">
@@ -78,7 +78,7 @@
                      </a>
                  </form>
             <li>
-             
+
             <li>
                 <a href="javascript:;">
                     <cite>Student action</cite>
@@ -114,8 +114,8 @@
                     </li>
                 </ul>
             </li>
-           
-            
+
+
         </ul>
       </div>
     </div>
@@ -181,6 +181,6 @@ layui.use('laydate', function(){
 
 
 
-</script>	
+</script>
 </body>
 </html>

@@ -21,7 +21,7 @@
     <script type="text/javascript" src="js/xadmin.js"></script>
 
     </style>
-    <title>List Of Student Grade</title>
+    <title>List Of Course</title>
 </head>
 
 <body>
@@ -34,26 +34,31 @@
             </button>
         </form>
     </div>
-    <xblock>
-        <button class="layui-btn" onclick="x_admin_show('Add Grade','TeachGradeAdd.jsp')"><i class="layui-icon"></i>添加</button>
-    </xblock>
     <hr color="green">
+    <table class="layui-table">
+        <%
+            ArrayList<ArrayList<String>>list;
+            list = (ArrayList<ArrayList<String>>) request.getAttribute("Tech_list");
+        %>
 
-    <span class="decrib">查询列表：</span>
-
-    <form action="/StuGradeManagerSystem_war/admin_inquery" type="post">
-    <input type="text" name="type" autocomplete="off" class="layui-input" list="list" required>
-            <datalist id="list">
-                <option>student</option>
-                <option>teacher</option>
-                <option>class</option>
-                <option>grade</option>
-            </datalist>
-        <input type="submit" value="submit" class="layui-btn">
-    </form>
+        <%
+            for(int i=0;i<list.size();i=i+1)
+            {
+        %>
+        <tr>
+            <th><%=list.get(i).get(0)%></th>
+            <th><%=list.get(i).get(1)%></th>
+            <th><%=list.get(i).get(2)%></th>
+            <th><%=list.get(i).get(3)%></th>
+        </tr>
+        <%
+            }
+        %>
+    </table>
 
     <!--page begin-->
     <div class="am-cf">
+
         <div class="am-fr">
             <ul class="am-pagination">
                 <li><a href="javascript:;" onclick="book_getFirstPage(this,'${sessionScope.currentPage}')" >Home</a></li>

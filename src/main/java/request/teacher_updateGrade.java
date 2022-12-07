@@ -21,7 +21,7 @@ public class teacher_updateGrade extends myHttpServelet{
         result=dcc.updateStudentExCourseGrade(stu_id,course_id,grade_number);
         if(!result) {
             res.getWriter().println("<script>alert('Wrong ')</script>");
-            res.getWriter().println("<script>window.location.href='./teacher_insert.jsp'</script>");
+            res.getWriter().println("<script>window.location.href='./teacher_updateGrade.jsp'</script>");
         }
         else {
             res.getWriter().println("<script>alert('update Successfully')</script>");

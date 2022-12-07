@@ -10,12 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet("/student_inquery")
-public class student_inquery extends myHttpServelet{
-
+@WebServlet("/teacher_inqueryclass")
+public class teacher_inqueryclass extends myHttpServelet{
     @Override
     protected void doPost(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
-        ArrayList<ArrayList<String>> Stu_id;
+        ArrayList<ArrayList<String>> Tech_list;
         DataControlCenter doc = new DataControlCenter();
         String id=new String();
         Cookie[] cookies=req.getCookies();
@@ -26,23 +25,13 @@ public class student_inquery extends myHttpServelet{
                 break;
             }
         }
-        Stu_id = doc.getStudentCourseGrade(id);
-/*      String strRequest = "request传值";
-        String strSession = "session传值";
-        request.setAttribute("strRequest", strRequest);
-        request.getSession().setAttribute("strSession", strSession);
-//JSP
-<%
-        String strRequest = (String)request.getAttribute("strRequest");
-        String strSession = (String)request.getSession().getAttribute("strSession");
-%>*/
-
-        req.setAttribute("Stu_id", Stu_id);
-        req.getRequestDispatcher("/studentgrade.jsp").forward(req,res);
+        Tech_list = doc.getTeacherteachList(id);
+        req.setAttribute("Tech_list",Tech_list);
+        req.getRequestDispatcher("/teacher_ClassList.jsp").forward(req,res);
     }
 
     @Override
     protected void doGet(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
-        this.doGet(res,req);
+        this.doPost(res,req);
     }
 }
