@@ -248,18 +248,25 @@ public class DataControlCenter {
     public ArrayList<ArrayList<String>> getStudentCourseGrade(String student_id) {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
+//            String sql = String.format("" +
+//                    "WITH b AS ( " +
+//                    "   select ExClassNo, TechName from ( " +
+//                    "       select ExClass.ExClassNo, Teaching.TechNo " +
+//                    "       from ExClass LEFT JOIN Teaching ON Teaching.ExClassNo = ExClass.ExClassNo " +
+//                    "   ) as a " +
+//                    "   LEFT JOIN Teacher ON Teacher.TechNo = a.TechNo ORDER BY ExClassNo " +
+//                    ") " +
+//                    "SELECT ExClass.ExClassNo, Course.CourseName, Learn.Grade, ExClass.Year, ExClass.semester, b.TechName " +
+//                    "FROM Student, Learn, ExClass, b, Course\n" +
+//                    "WHERE Student.StuNo = Learn.StuNo AND ExClass.ExClassNo = Learn.ExClassNo AND ExClass.ExClassNo = b.ExClassNo AND ExClass.CourseNo = Course.CourseNo " +
+//                    "AND Student.StuNo = \"%s\" ;", student_id);
             String sql = String.format("" +
-                    "WITH b AS ( " +
-                    "   select ExClassNo, TechName from ( " +
-                    "       select ExClass.ExClassNo, Teaching.TechNo " +
-                    "       from ExClass LEFT JOIN Teaching ON Teaching.ExClassNo = ExClass.ExClassNo " +
-                    "   ) as a " +
-                    "   LEFT JOIN Teacher ON Teacher.TechNo = a.TechNo ORDER BY ExClassNo " +
-                    ") " +
-                    "SELECT ExClass.ExClassNo, Course.CourseName, Learn.Grade, ExClass.Year, ExClass.semester, b.TechName " +
-                    "FROM Student, Learn, ExClass, b, Course\n" +
-                    "WHERE Student.StuNo = Learn.StuNo AND ExClass.ExClassNo = Learn.ExClassNo AND ExClass.ExClassNo = b.ExClassNo AND ExClass.CourseNo = Course.CourseNo " +
-                    "AND Student.StuNo = \"%s\" ;", student_id);
+                    "SELECT ExClass.ExClassNo, Course.CourseName, Learn.Grade, ExClass.Year, ExClass.semester, Teacher.TechName " +
+                    "FROM ExClass, Course, Learn, Teacher, Teaching, Student " +
+                    "WHERE Student.StuNo = Learn.StuNo AND Learn.ExClassNo = ExClass.ExClassNo " +
+                    "AND ExClass.CourseNo = Course.CourseNo AND ExClass.ExClassNo = Teaching.ExClassNo " +
+                    "AND Teaching.TechNo = Teacher.TechNo " +
+                    "AND Student.StuNo = '%s' ", student_id);
             log.debug(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
             res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
@@ -281,20 +288,27 @@ public class DataControlCenter {
     public ArrayList<ArrayList<String>> getStudentExClassHistory(String student_id) {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
+//            String sql = String.format("" +
+//                    "WITH b as ( " +
+//                    "   WITH a AS (" +
+//                    "SELECT Course.CourseName, Student.StuNo, Student.StuName, ExClass.ExClassNo " +
+//                    "FROM Course, ExClass, Learn, Student " +
+//                    "WHERE Course.CourseNo = ExClass.CourseNo AND ExClass.ExClassNo = Learn.ExClassNo AND Learn.StuNo = Student.StuNo " +
+//                    "AND Student.StuNo = \"%s\" " +
+//                    ")" +
+//                    "SELECT a.CourseName, a.StuName, Teaching.TechNo " +
+//                    "FROM a LEFT JOIN Teaching on a.ExClassNo = Teaching.ExClassNo " +
+//                    ") " +
+//                    "SELECT b.CourseName, b.StuName, Teacher.TechName " +
+//                    "FROM Teacher LEFT JOIN b on Teacher.TechNo = b.TechNo ;" +
+//                    "", student_id);
             String sql = String.format("" +
-                    "WITH b as ( " +
-                    "   WITH a AS (" +
-                    "SELECT Course.CourseName, Student.StuNo, Student.StuName, ExClass.ExClassNo " +
-                    "FROM Course, ExClass, Learn, Student " +
-                    "WHERE Course.CourseNo = ExClass.CourseNo AND ExClass.ExClassNo = Learn.ExClassNo AND Learn.StuNo = Student.StuNo " +
-                    "AND Student.StuNo = \"%s\" " +
-                    ")" +
-                    "SELECT a.CourseName, a.StuName, Teaching.TechNo " +
-                    "FROM a LEFT JOIN Teaching on a.ExClassNo = Teaching.ExClassNo " +
-                    ") " +
-                    "SELECT b.CourseName, b.StuName, Teacher.TechName " +
-                    "FROM Teacher LEFT JOIN b on Teacher.TechNo = b.TechNo ;" +
-                    "", student_id);
+                    "SELECT ExClass.ExClassNo, Course.CourseName, ExClass.Year, ExClass.semester, Teacher.TechName " +
+                    "FROM ExClass, Course, Learn, Teacher, Teaching, Student " +
+                    "WHERE Student.StuNo = Learn.StuNo AND Learn.ExClassNo = ExClass.ExClassNo " +
+                    "AND ExClass.CourseNo = Course.CourseNo AND ExClass.ExClassNo = Teaching.ExClassNo " +
+                    "AND Teaching.TechNo = Teacher.TechNo " +
+                    "AND Student.StuNo = '%s' ", student_id);
             log.debug(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
             res = ResultSetOperation.convertResultSetIntoArrayListWithColumnName(rs);
@@ -718,6 +732,8 @@ class Test {
     private static void check_for_get_student_grade() {
         DataControlCenter dcc = new DataControlCenter();
         System.out.println(dcc.getStudentCourseGrade("20200740001"));
+        System.out.println(dcc.getStudentCourseGrade("20200740029"));
+
     }
 
     private static void check_get_student_name_by_student_id() {
@@ -734,6 +750,6 @@ class Test {
 
     public static void main(String[] args) {
         log.setLogLevel(LogLevel.Debug);
-        check_get_student_name_by_student_id();
+        check_for_student_history();
     }
 }
