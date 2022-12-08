@@ -46,7 +46,7 @@
             <li class="layui-nav-item">
                 <a href="javascript:">Student</a>
                 <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                    <dd><a href="login.jsp">exit</a></dd>
+                    <dd><a href="login.jsp">Exit</a></dd>
                 </dl>
             </li>
         </ul>
@@ -69,7 +69,7 @@
 
                     <li>
                         <a href="javascript:">
-                            <cite>Student action</cite>
+                            <cite>Student Action</cite>
                         </a>
                         <ul class="sub-menu">
                             <li>

@@ -38,7 +38,7 @@
     </div>
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
+            <a href="javascript:;">Admin</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
                 <dd><a href="login.jsp">Exit</a></dd>
             </dl>
@@ -60,48 +60,48 @@
             <li>
             <li>
                 <a href="javascript:;">
-                    <cite>Admin action</cite>
+                    <cite>Admin Action</cite>
                 </a>
                 <ul class="sub-menu">
                     <li>
                         <form action="/StuGradeManagerSystem_war/admin_inquery.jsp" method="post" name="form1">
                             <a href="javascript:document.form1.submit();">
-                                <cite>inquery</cite>
+                                <cite>Inquery</cite>
                             </a>
                         </form>
                     </li >
                     <li>
                         <form action="/StuGradeManagerSystem_war/admin_registerstudent.jsp" method="post" name="form2">
                             <a href="javascript:document.form2.submit();">
-                                <cite>student register</cite>
+                                <cite>Student Register</cite>
                             </a>
                         </form>
                     </li >
                     <li>
                         <form action="/StuGradeManagerSystem_war/admin_registerteacher.jsp" method="post" name="form3">
                             <a href="javascript:document.form3.submit();">
-                                <cite>teacher register</cite>
+                                <cite>Teacher Register</cite>
                             </a>
                         </form>
                     </li>
                     <li>
                         <form action="/StuGradeManagerSystem_war/admin_deletestudentclass.jsp" method="post" name="form4">
                             <a href="javascript:document.form4.submit();">
-                                <cite>delete student from exclass</cite>
+                                <cite>Delete Student from Exclass</cite>
                             </a>
                         </form>
                     </li>
                     <li>
                         <form action="/StuGradeManagerSystem_war/admin_deleteteaching.jsp" method="post" name="form5">
                             <a href="javascript:document.form5.submit();">
-                                <cite>delete teaching relationship</cite>
+                                <cite>Delete Teaching Relationship</cite>
                             </a>
                         </form>
                     </li>
                     <li>
                         <form action="/StuGradeManagerSystem_war/admin_updatemajor.jsp" method="post" name="form6">
                             <a href="javascript:document.form6.submit();">
-                                <cite>update student major</cite>
+                                <cite>Update Student Major</cite>
                             </a>
                         </form>
                     </li>

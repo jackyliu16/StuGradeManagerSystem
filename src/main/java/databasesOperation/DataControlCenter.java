@@ -719,6 +719,7 @@ class Test {
         System.out.println(dcc.getTeacherList());
         System.out.println(dcc.getClassList());
         System.out.println(dcc.getStudentExClassHistory("20200740002"));
+
         log.info("test password update complete! ");
         System.out.println(dcc.getTeacherName("20200010002"));
     }

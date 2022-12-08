@@ -34,12 +34,9 @@
             </button>
         </form>
     </div>
-    <xblock>
-        <button class="layui-btn" onclick="x_admin_show('Add Grade','TeachGradeAdd.jsp')"><i class="layui-icon"></i>添加</button>
-    </xblock>
     <hr color="green">
 
-    <span class="decrib">查询列表：</span>
+    <span class="decrib">Search Table：</span>
 
     <form action="/StuGradeManagerSystem_war/admin_inquery" type="post">
     <input type="text" name="type" autocomplete="off" class="layui-input" list="list" required>

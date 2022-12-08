@@ -21,7 +21,15 @@
 	a:link {
 	text-decoration: none;
 	color: black;
-}
+    }
+    body {
+        background-image: url('img/Home.jpg');
+        background-position: 14px 14px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: fixed;
+        background-size: cover;
+    }
 	</style>
 
 <meta charset="UTF-8">
@@ -111,13 +119,7 @@
                     </marquee>
                 </blockquote>
             </div>
-            <div class="layui-fluid" style="font-size: 60px">
-                <font class="text" >
-                    1.文件上传时候文件大小不得超过3G内容。<br>
-                    2.文件上传时候文件大小不得超过3G内容。<br>
-                    3.文件上传时候文件大小不得超过3G内容。<br>
-                </font>
-            </div>
+
         </div>
     </div>
     <!-- 右侧主体结束 -->
