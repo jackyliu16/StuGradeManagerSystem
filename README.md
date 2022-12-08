@@ -31,5 +31,6 @@ Not everyone is involved in the repository for cooperation.
   controller and view part is a kind of hybrid submission? view part didn't submit there code directly but give they file to control part, then they test the context integration and update the work. 
   
   controller part: [姚垚 - 20202033025](https://github.com/yaoyao4527) and [李文轩](https://github.com/levinener)
+  
   view part:        彭桐，雷佳乐
 
