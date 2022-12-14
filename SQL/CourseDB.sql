@@ -35,23 +35,24 @@ CREATE TABLE
 
 CREATE TABLE
     IF NOT EXISTS Teacher(
-        TechNo char(11) NOT NULL,
-        TechName char(32) NOT NULL,
-        DeptNo char(4) NOT NULL,
-        Pwd varchar(32) not null DEFAULT "123456",
-        PRIMARY KEY(TechNo),
-        Foreign Key (DeptNo) REFERENCES Department(DeptNo)
-    );
+                             TechNo   char(11)    NOT NULL,
+                             TechName char(32)    NOT NULL,
+                             DeptNo   char(4)     NOT NULL,
+                             Pwd      varchar(32) not null,
+                             PRIMARY KEY (TechNo),
+                             Foreign Key (DeptNo) REFERENCES Department (DeptNo)
+);
 
 CREATE TABLE
-    IF NOT EXISTS Student(
-        StuNo char(11) NOT NULL,
-        StuName varchar(32) NOT NULL,
-        MajorNo char(4) NOT NULL,
-        Pwd varchar(32) not null DEFAULT "123456",
-        PRIMARY KEY(StuNo),
-        Foreign Key (MajorNo) REFERENCES Major(MajorNo)
-    );
+    IF NOT EXISTS Student
+(
+    StuNo   char(11)    NOT NULL,
+    StuName varchar(32) NOT NULL,
+    MajorNo char(4)     NOT NULL,
+    Pwd     varchar(32) not null,
+    PRIMARY KEY (StuNo),
+    Foreign Key (MajorNo) REFERENCES Major (MajorNo)
+);
 
 CREATE table
     if not exists Course(
@@ -76,17 +77,18 @@ CREATE TABLE
     );
 
 CREATE TABLE
-    IF NOT EXISTS Learn(
-        StuNo char(11) NOT NULL,
-        ExClassNo char(8) NOT NULL,
-        Grade DECIMAL(5, 2) check(
-            Grade >= 0
-            and Grade <= 100
-        ) ,
-        PRIMARY KEY (StuNo, ExClassNo),
-        Foreign Key (StuNo) REFERENCES Student(StuNo),
-        Foreign Key (ExClassNo) REFERENCES ExClass(ExClassNo)
-    );
+    IF NOT EXISTS Learn
+(
+    StuNo     char(11) NOT NULL,
+    ExClassNo char(8)  NOT NULL,
+    Grade     DECIMAL(5, 2) check (
+                Grade >= 0.00
+            and Grade <= 100.00
+        ),
+    PRIMARY KEY (StuNo, ExClassNo),
+    Foreign Key (StuNo) REFERENCES Student (StuNo),
+    Foreign Key (ExClassNo) REFERENCES ExClass (ExClassNo)
+);
 
 CREATE TABLE
     IF NOT EXISTS Teaching(
