@@ -41,7 +41,7 @@
       <a href="javascript:;">Teacher</a>
       <dl class="layui-nav-child"> <!-- 二级菜单 -->
         <dd><a onclick="x_admin_show('Information','Information.jsp')">Information</a></dd>
-        <dd><a href="Login.jsp">Exit</a></dd>
+        <dd><a href="login.jsp">Exit</a></dd>
       </dl>
     </li>
   </ul>
@@ -53,9 +53,11 @@
   <div id="side-nav">
     <ul id="nav">
       <li>
-        <a _href="MainPage.html">
-          <cite>Main Page</cite>
-        </a>
+        <form action="/StuGradeManagerSystem_war/teacher.jsp" method="post" name="form7">
+          <a href="javascript:document.form7.submit();">
+            <cite>Main Page</cite>
+          </a>
+        </form>
       <li>
       <li>
         <a href="javascript:;">
@@ -86,14 +88,14 @@
           <li>
             <form action="/StuGradeManagerSystem_war/teacher_updateGrade.jsp" method="post" name="form4">
               <a href="javascript:document.form4.submit();">
-                <cite>insert student grade</cite>
+                <cite>update student grade</cite>
               </a>
             </form>
           </li>
           <li>
             <form action="/StuGradeManagerSystem_war/teacher_information.jsp" method="post" name="form5">
               <a href="javascript:document.form5.submit();">
-                <cite>update password</cite>
+                <cite>information</cite>
               </a>
             </form>
           </li>

@@ -32,7 +32,7 @@
                 padding-left: 0em;
             }
         </style>
-	<title>Exam score information</title>
+	<title>Statistics of student grade</title>
 	</head>
 	
 	<body>
@@ -40,7 +40,7 @@
     <div class="container">
         <div class="logo"><a href="#">Hello!!Student</a><a href="#"></a></div>
         <div class="left_open">
-            <i title="展开左侧栏" class="iconfont">&#9668;</i>
+            <i title="Expand list" class="iconfont">&#9668;</i>
         </div>
         <ul class="layui-nav right" lay-filter="">
             <li class="layui-nav-item">
@@ -75,28 +75,28 @@
                             <li>
                                 <form action="/StuGradeManagerSystem_war/student_inquery" method="post" name="form1">
                                     <a href="Javascript:document.form1.submit()">
-                                        <cite>Student achievement results</cite>
+                                        <cite>Student Grade List</cite>
                                     </a>
                                 </form>
                             </li >
                             <li>
                                 <form action="/StuGradeManagerSystem_war/student_inqueryclass" method="post" name="form2">
                                     <a href="Javascript:document.form2.submit()">
-                                        <cite>Student belong class</cite>
+                                        <cite>Student Class List</cite>
                                     </a>
                                 </form>
                             </li>
                             <li>
                                 <form action="/StuGradeManagerSystem_war/StuGradeStaticpost.jsp" method="post" name="form3">
                                     <a href="Javascript:document.form3.submit()">
-                                        <cite>Student achievement statistics</cite>
+                                        <cite>Student Grade Statistics</cite>
                                     </a>
                                 </form>
                             </li>
                             <li>
                                 <form action="/StuGradeManagerSystem_war/information.jsp" method="post" name="form4">
                                     <a href="Javascript:document.form4.submit()">
-                                        <cite>information</cite>
+                                        <cite>Information</cite>
                                     </a>
                                 </form>
                             </li>
@@ -148,7 +148,7 @@
  <div id="container"  style="height: 380px"></div>
 
     <div class="footer">
-        <div class="copyright" align="center">华南师范大学</div>
+        <div class="copyright" align="center">South China Normal University</div>
     </div>
     </div>
 <script>

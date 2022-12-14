@@ -134,7 +134,7 @@
 	<div class="layui-form-item">
 		<div class="layui-input-block">
 			<button class="layui-btn layui-btn-normal layui-btn-fluid"
-					id="submit">Login</button>
+					id="submit">login</button>
 		</div>
 		<div style="height: 30px;">
 

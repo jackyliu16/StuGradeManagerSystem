@@ -60,8 +60,8 @@
         </ul>
     </div>
     <!-- 顶部结束 -->
-	<div class="x-body">
-       <%--<div class="layui-row">
+    <%--<div class="x-body">
+       <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so" action="" id="searchByInfo"  method="post">               
           <input type="text" name="searchtime" id="searchtime" placeholder="Select a semester" autocomplete="off" class="layui-input">
           <button class="layui-btn layui-btn-danger"><i class="layui-icon">&#xe615;</i></button>
@@ -89,28 +89,28 @@
                     <li>
                         <form action="/StuGradeManagerSystem_war/student_inquery" method="post" name="form1">
                             <a href="Javascript:document.form1.submit()">
-                                <cite>Student achievement results</cite>
+                                <cite>Student Grade List</cite>
                             </a>
                         </form>
                     </li >
                     <li>
                         <form action="/StuGradeManagerSystem_war/student_inqueryclass" method="post" name="form2">
                             <a href="Javascript:document.form2.submit()">
-                                <cite>Student belong class</cite>
+                                <cite>Student Class List</cite>
                             </a>
                         </form>
                     </li>
                     <li>
                         <form action="/StuGradeManagerSystem_war/StuGradeStaticpost.jsp" method="post" name="form3">
                             <a href="Javascript:document.form3.submit()">
-                                <cite>Student achievement statistics</cite>
+                                <cite>Student Grade Statistics</cite>
                             </a>
                         </form>
                     </li>
                     <li>
                         <form action="/StuGradeManagerSystem_war/information.jsp" method="post" name="form4">
                             <a href="Javascript:document.form4.submit()">
-                                <cite>information</cite>
+                                <cite>Information</cite>
                             </a>
                         </form>
                     </li>

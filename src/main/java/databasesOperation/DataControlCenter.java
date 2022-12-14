@@ -9,8 +9,6 @@ package databasesOperation;
  * @reference:
  *      basic mysql operation: https://blog.csdn.net/zollty/article/details/7291896#:~:text=%E4%B8%80%E8%88%AC%E7%94%A8%E6%B3%95%EF%BC%9AStatement%20stmt%20%3D%20conn.createStatement%20%28%29%3B,%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95%EF%BC%9AStatement%20stmt%20%3D%20conn.createStatement%20%28ResultSet.TYPE_SCROLL_SENSITIVE%2C%20ResultSet.CONCUR_READ_ONLY%29%3B
  *      doc :   https://blog.csdn.net/qq_60750453/article/details/121024414
- *      how to catch a mysql exception:
- *          1. https://blog.csdn.net/u013632755/article/details/114787545
  */
 
 import tool.LogLevel;
@@ -500,9 +498,6 @@ public class DataControlCenter {
             stmt.close();
             log.debug("query success!");
             return rs == 1;
-        } catch (SQLIntegrityConstraintViolationException e) {
-            log.debug("SQL Integrity Constraint Violation Exception");
-            throw new RuntimeException(e);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -556,10 +551,6 @@ public class DataControlCenter {
             return false;
         }
         try (Statement stmt = conn.createStatement()) {
-//            DecimalFormat df = new DecimalFormat("###.##");
-//            String sql = String.format("" +
-//                    "UPDATE Learn " +
-//                    "SET Grade=\"%s\" WHERE StuNo='%s' AND ExClassNo = '%s';", df.format(grade), student_id, ExCourse_id);
             String sql = String.format("" +
                     "UPDATE Learn " +
                     "SET Grade='%s' WHERE StuNo='%s' AND ExClassNo = '%s';", grade, student_id, ExCourse_id);
@@ -574,8 +565,7 @@ public class DataControlCenter {
                 return false;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            throw new RuntimeException(e);
         }
     }
 
@@ -776,13 +766,8 @@ class Test {
         System.out.println(dcc.getExClassGradeForStudent("20200740001", "00000015"));
     }
 
-    private static void update_student_grade() {
-        DataControlCenter dcc = new DataControlCenter();
-        System.out.println(dcc.updateStudentExCourseGrade("20200740002", "00000002", 215.00));
-    }
-
     public static void main(String[] args) {
         log.setLogLevel(LogLevel.Debug);
-        update_student_grade();
+        check_get_student_exclass_grade();
     }
 }
