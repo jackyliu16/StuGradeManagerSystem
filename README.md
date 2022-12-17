@@ -6,27 +6,38 @@ student grade manager system（MVC）
 // UI
 
 [] UI interface optimization
-  - Prompt information beautification
-  - Administrator interface beautification
+
+- Prompt information beautification
+- Administrator interface beautification
 
 [] Try to optimize the human-computer interaction experience
-  - Input data is achieved by some sort of selection of tables
-  - Insert data by uploading xlsx or csv rather that input data one by one
+
+- Input data is achieved by some sort of selection of tables
+- Insert data by uploading xlsx or csv rather that input data one by one
 
 // tool
 
-[] Data validity check
-  - jacky will update tool.check to helping controler to check if data is valid
-  - controller need to make sure all update or select use of database with a kinds of valid check and message output to user
-  
-  
-  
-  
+---
+[Doing] Data validity check
+> Having update the DBException, which cover the basic exception just like `parameter length incorrect`
+> , `parameter type incorrect`, `value overflow`, `relationship not exist` and the normal exception such
+> sa `SQL_Exception`
+
+Problem:
+
+1. Error type are not necessarily classified correctly.
+    1. seem SQL_Exception should be deprecation.
+2. some part haven't been finished (sent to 庄重)
+
+- jacky will update tool.check to helping controler to check if data is valid
+- controller need to make sure all update or select use of database with a kinds of valid check and message output to
+  user
+
 ### Appendix
 
 Not everyone is involved in the repository for cooperation.
 
-  database part all people has using git repo to update work [@jackyliu - 20200740029](https://github.com/jackyliu16), [@jack - 20202033014](https://github.com/Jack5057)
+database part all people has using git repo to update work [@jackyliu - 20200740029](https://github.com/jackyliu16), [@jack - 20202033014](https://github.com/Jack5057)
   
   controller and view part is a kind of hybrid submission? view part didn't submit there code directly but give they file to control part, then they test the context integration and update the work. 
   

@@ -12,6 +12,7 @@ package databasesOperation;
 
 public enum DBExceptionEnums {
     //    PARAMETER_ABNORMALITY("0000", "Parameter is not legal"),
+    // TODO Error type are not necessarily classified correctly.
     PARAMETER_LENGTH_INCORRECT("0001", "Parameter length incorrect"),
     PARAMETER_TYPE_INCORRECT("0002", "Parameter type incorrect"),
     PARAMETER_NOT_EXIST("0003", "Parameter not existed"),
