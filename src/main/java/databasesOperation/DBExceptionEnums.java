@@ -10,14 +10,19 @@ package databasesOperation;
  *      1. https://www.cnblogs.com/xinzhisoft/p/10108211.html
  */
 
-public enum DatabaseExceptionEnums {
-//    PARAMETER_ABNORMALITY("0000", "Parameter is not legal"),
+public enum DBExceptionEnums {
+    //    PARAMETER_ABNORMALITY("0000", "Parameter is not legal"),
     PARAMETER_LENGTH_INCORRECT("0001", "Parameter length incorrect"),
-    PARAMETER_TYPE_INCORRECT("0002", "Parameter type incorrect");
+    PARAMETER_TYPE_INCORRECT("0002", "Parameter type incorrect"),
+    PARAMETER_NOT_EXIST("0003", "Parameter not existed"),
+    VALUE_OVERFLOW("0004", "The input value overflow"),
+    RELATIONSHIP_NOT_EXIST("0005", "the relationship not exist"),
+    SQL_EXCEPTION("0006", "unknown SQL Exception");
 
     private final String ecode;
     private final String emsg;
-    DatabaseExceptionEnums(String ecode, String emsg) {
+
+    DBExceptionEnums(String ecode, String emsg) {
         this.ecode = ecode;
         this.emsg = emsg;
     }
@@ -30,8 +35,8 @@ public enum DatabaseExceptionEnums {
         return emsg;
     }
 
-    public static DatabaseExceptionEnums statOf(String ecode) {
-        for (DatabaseExceptionEnums state: values()) {
+    public static DBExceptionEnums statOf(String ecode) {
+        for (DBExceptionEnums state : values()) {
             return state;
         }
         return null;
