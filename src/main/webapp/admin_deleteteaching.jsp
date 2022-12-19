@@ -22,6 +22,9 @@
             text-decoration: none;
             color: black;
         }
+        .layui-input{
+            width: 50%;
+        }
     </style>
 
     <meta charset="UTF-8">
@@ -130,12 +133,12 @@
         <div class="layui-fluid" style="font-size: 60px">
             <form action="/StuGradeManagerSystem_war/admin_deleteteaching" method="post">
                 <a>teacher no</a>
-                <input placeholder="please enter the student id" name="teacher_no">
+                <input placeholder="please enter the student id" name="teacher_no"  class = "layui-input">
                 <br/><br/>
                 <a>Exclass id</a>
-                <input placeholder="please enter the exclass_id" name="exclass_id">
+                <input placeholder="please enter the exclass_id" name="exclass_id"  class = "layui-input">
                 <br/><br/>
-                <input type="submit" >
+                <button type="submit" class = "layui-btn layui-btn-radius">submit</button>
                 <br/>
             </form>
         </div>

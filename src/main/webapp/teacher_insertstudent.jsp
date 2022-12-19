@@ -22,6 +22,9 @@
             text-decoration: none;
             color: black;
         }
+        .layui-input{
+            width: 50%;
+        }
     </style>
 
     <meta charset="UTF-8">
@@ -124,12 +127,12 @@
         <div class="layui-fluid" style="font-size: 60px">
             <form action="/StuGradeManagerSystem_war/teacher_insertstudent" method="post">
                 <a>student id</a>
-                <input placeholder="please enter the student id" name="stu_id">
+                <input placeholder="please enter the student id" name="stu_id" class = "layui-input">
                 <br/><br/>
                 <a>course id</a>
-                <input placeholder="please enter the course id" name="course_id">
+                <input placeholder="please enter the course id" name="course_id" class = "layui-input">
                 <br/><br/>
-                <input type="submit" >
+                <button type="submit" class = "layui-btn layui-btn-radius">submit</button>
                 <br/>
             </form>
         </div>

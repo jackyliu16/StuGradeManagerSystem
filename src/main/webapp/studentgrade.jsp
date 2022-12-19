@@ -119,6 +119,7 @@
         </ul>
       </div>
     </div>
+    <div class="page-content">
       <hr color="green">
       <table class = "layui-table">
         <%
@@ -141,7 +142,8 @@
             }
         %>
       </table>
-  </div>
+
+    </div>
     <div class="footer">
         <div class="copyright" align="center">South China Normal University</div>
     </div>

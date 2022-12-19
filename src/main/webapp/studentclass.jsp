@@ -121,6 +121,7 @@
     </div>
     <!-- <div class="x-slide_left"></div> -->
     <!-- 左侧菜单结束 -->
+    <div class="page-content">
       <hr color="green">
       <table class = "layui-table">
 
@@ -147,7 +148,7 @@
       </table>
       
 
-  </div>
+
  
  <!--用户操作使用form表单提交信息-->
  <form action="" id="sendOrder" name="sendOrder" method="post">
@@ -156,7 +157,10 @@
  <div id="mianFromDiv" style="display:none;">
  </div>
  <!--弹框页面操作 end-->
- 
+    </div>
+    <div class="footer">
+        <div class="copyright" align="center">South China Normal University</div>
+    </div>
 <script>
 //layui自启动
 layui.use('layer', function(){

@@ -109,6 +109,7 @@
         </div>
         <!-- <div class="x-slide_left"></div> -->
         <!-- 左侧菜单结束 -->
+    <div class="page-content">
 	<div class="x-body">
       <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so" action="/StuGradeManagerSystem_war/studentDump" id="searchByInfo"  method="post">
@@ -145,7 +146,7 @@
  <hr class="layui-bg-green">
  <!--echart_part-->
  <div id="container"  style="height: 380px"></div>
-
+    </div>
     <div class="footer">
         <div class="copyright" align="center">South China Normal University</div>
     </div>
