@@ -129,8 +129,8 @@
         </div>
         <div class="layui-fluid" style="font-size: 60px">
             <form action="/StuGradeManagerSystem_war/admin_deleteteaching" method="post">
-                <a>teacher no</a>
-                <input placeholder="please enter the student id" name="stu_id">
+                <a>teacher id</a>
+                <input placeholder="please enter the teacher id" name="teacher_id">
                 <br/><br/>
                 <a>Exclass id</a>
                 <input placeholder="please enter the exclass_id" name="exclass_id">
