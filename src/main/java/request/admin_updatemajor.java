@@ -20,7 +20,7 @@ public class admin_updatemajor extends myHttpServelet{
 
         result=dcc.updateStudentMajor(id,major);
         if(result){
-            res.getWriter().println("<script>alert('Register success')</script>");
+            res.getWriter().println("<script>alert('Update success')</script>");
         }
         else {
             res.getWriter().println("<script>alert('Wrong')</script>");

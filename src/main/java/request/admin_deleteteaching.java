@@ -12,7 +12,7 @@ public class admin_deleteteaching extends myHttpServelet{
     @Override
     protected void doPost(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
 
-        String teacher_no = req.getParameter("teacher_no");
+        String teacher_no = req.getParameter("teacher_id");
         String exclass_id = req.getParameter("exclass_id");
 
         DataControlCenter dcc = new DataControlCenter();
@@ -21,7 +21,7 @@ public class admin_deleteteaching extends myHttpServelet{
         result=dcc.deleteTeachingRelationship(teacher_no,exclass_id);
 
         if(result){
-            res.getWriter().println("<script>alert('Register success')</script>");
+            res.getWriter().println("<script>alert('Delete success')</script>");
         }
         else {
             res.getWriter().println("<script>alert('Wrong')</script>");
