@@ -19,8 +19,9 @@ import tool.Logger;
 import java.sql.*;
 import java.util.ArrayList;
 
-//我们不负责权限管理，确保所有的输入都是合法的（默认用户会sql）
-
+//~~我们不负责权限管理，确保所有的输入都是合法的（默认用户会sql）~~
+// 根据目前最新的要求，内部需要实现数据输入合法性筛查，以`DBException`的方式抛出内部的错误
+// 外界通过对于错误的检查实现对于不同错误的显示
 public class DataControlCenter {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/CourseDB";
