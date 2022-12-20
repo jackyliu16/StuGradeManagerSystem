@@ -47,18 +47,18 @@ public class DataControlCenter {
     /**
      * Check If Student Pwd is Correct
      *
-     * @param Student_id An input id which indicate as a student
+     * @param student_id An input id which indicate as a student
      * @param password   the input password of student
      * @return Whether the authentication was successful
      */
-    public Boolean checkStudentPwd(String Student_id, String password) {
+    public Boolean checkStudentPwd(String student_id, String password) {
         boolean flag = false;
         // NOTE just need normal check, do not need check if exist
         try (Statement stmt = conn.createStatement()) {
             String sql = String.format("" +
                     "SELECT * " +
                     "FROM Student " +
-                    "WHERE StuNo=\"%s\" AND Pwd=\"%s\" ", Student_id, password);
+                    "WHERE StuNo=\"%s\" AND Pwd=\"%s\" ", student_id, password);
             log.debug(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
             // ResultSetOperation.printResultSet(rs); // 不允许添加输出，这样会使迭代器运行到结尾
@@ -527,55 +527,58 @@ public class DataControlCenter {
     }
 
     public Boolean insertNewStudentUser(String StuNo, String StuName, String MajorNo, String Pwd) throws DBException {
-        // TODO 相比与通过ValidityOfParameters 转一手，似乎直接在这里调一次查询会更快
-//        try (Statement stmt = conn.createStatement()) {
-//            String sql = String.format("insert into Student values ('%s', '%s', '%s','%s');", StuNo, StuName, MajorNo, Pwd);
-//            log.debug(String.format("sql: %s", sql));
-//            int rs = stmt.executeUpdate(sql);
-//            log.trace(String.format("rs: %s", rs));
-//            stmt.close();
-//            log.debug("query success!");
-//            return rs == 1;
-//        } catch (SQLException e) {
-//            return false;
-
+        // NOTE 相比与通过ValidityOfParameters 转一手，似乎直接在这里调一次查询会更快
         // NOTE make sure student match formatter
-//        ValidityOfParameters.check_char11_num(StuNo);
+        ValidityOfParameters.check_char11_num(StuNo);
         ValidityOfParameters.check_char32(StuName);
         ValidityOfParameters.check_major(MajorNo);
         ValidityOfParameters.check_char32(Pwd);
-        try {
-            ValidityOfParameters.check_stu_id(StuNo);
-        } catch (DBException e) {
-            if (DBException.checkIfExceptionInCollections(e,
-                    DBExceptionEnums.PARAMETER_TYPE_INCORRECT,
-                    DBExceptionEnums.PARAMETER_LENGTH_INCORRECT)) {
-                // NOTE if it is normal error => just throw it
-                throw e;
-            } else if (e.getExceptionEnums() == DBExceptionEnums.PARAMETER_NOT_EXIST) {
-                // NOTE if it's parameter not exist -> will not case primary conflict
-                try (Statement stmt = conn.createStatement()) {
-                    String sql = String.format("" +
-                            "insert into Student " +
-                            "values ('%s', '%s', '%s','%s');", StuNo, StuName, MajorNo, Pwd);
-                    log.debug(String.format("sql: %s", sql));
-                    int rs = stmt.executeUpdate(sql);
-                    log.trace(String.format("rs: %s", rs));
-                    stmt.close();
-                    log.debug("query success!");
-                    return rs == 1;
-                } catch (SQLException e2) {
-                    throw new DBException(DBExceptionEnums.SQL_EXCEPTION);
-                }
-            } else {
-                return false;
-            }
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("insert into Student values ('%s', '%s', '%s','%s');", StuNo, StuName, MajorNo, Pwd);
+            log.debug(String.format("sql: %s", sql));
+            int rs = stmt.executeUpdate(sql);
+            log.trace(String.format("rs: %s", rs));
+            stmt.close();
+            log.debug("query success!");
+            return rs == 1;
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new DBException(DBExceptionEnums.INTEGRITY_VIOLATION);
+        } catch (SQLException e) {
+            return false;
         }
-        return false;   // TODO 我给整不会了,这个地方应该有问题但是不知道咋改 （感觉所有可行分支都处理了啊）
+
+//        try {
+//            ValidityOfParameters.check_stu_id(StuNo);
+//        } catch (DBException e) {
+//            if (DBException.checkIfExceptionInCollections(e,
+//                    DBExceptionEnums.PARAMETER_TYPE_INCORRECT,
+//                    DBExceptionEnums.PARAMETER_LENGTH_INCORRECT)) {
+//                // NOTE if it is normal error => just throw it
+//                throw e;
+//            } else if (e.getExceptionEnums() == DBExceptionEnums.PARAMETER_NOT_EXIST) {
+//                // NOTE if it's parameter not exist -> will not case primary conflict
+//                try (Statement stmt = conn.createStatement()) {
+//                    String sql = String.format("" +
+//                            "insert into Student " +
+//                            "values ('%s', '%s', '%s','%s');", StuNo, StuName, MajorNo, Pwd);
+//                    log.debug(String.format("sql: %s", sql));
+//                    int rs = stmt.executeUpdate(sql);
+//                    log.trace(String.format("rs: %s", rs));
+//                    stmt.close();
+//                    log.debug("query success!");
+//                    return rs == 1;
+//                } catch (SQLException e2) {
+//                    throw new DBException(DBExceptionEnums.SQL_EXCEPTION);
+//                }
+//            } else {
+//                return false;
+//            }
+//        }
+//        return false;
     }
 
     public Boolean insertNewTeacherUser(String TechNo, String TechName, String DeptNo, String Pwd) throws DBException {
-        // TODO 完成TechNo 插入前主键为空判断
+        // NOTE 完成TechNo 插入前主键为空判断（目前认为不用完成这个会更好，直接插，插到冲突再处理）
         ValidityOfParameters.check_tech_id(TechNo);
         ValidityOfParameters.check_char32(TechName);
         ValidityOfParameters.check_dept(DeptNo);
@@ -588,6 +591,8 @@ public class DataControlCenter {
             stmt.close();
             log.debug("query success!");
             return rs == 1;
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new DBException(DBExceptionEnums.INTEGRITY_VIOLATION);
         } catch (SQLException e) {
             return false;
         }

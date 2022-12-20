@@ -10,9 +10,11 @@ package databasesOperation;
  *      1. https://www.cnblogs.com/xinzhisoft/p/10108211.html
  */
 
+import tool.Logger;
+
 public class DBException extends Exception implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
-
+    static final Logger log = Logger.INSTANCE;
     private DBExceptionEnums exceptionEnums;
     private String errorDetail;
 
@@ -35,6 +37,14 @@ public class DBException extends Exception implements java.io.Serializable {
 
     public void setErrorDetail(String errorDetail) {
         this.errorDetail = errorDetail;
+    }
+
+    public String getErrorMsg() {
+        return this.exceptionEnums.getEmsg();
+    }
+
+    public void show_err_type() {
+        log.debug(String.format("%s: %s", this.exceptionEnums.getEcode(), this.exceptionEnums.getEmsg()));
     }
 
     public static boolean checkIfExceptionInCollections(DBException exception, DBExceptionEnums... enums) {
