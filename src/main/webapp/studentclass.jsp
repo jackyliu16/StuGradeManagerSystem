@@ -46,15 +46,15 @@
 	<body>
 	<!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="#">Hello!!Student</a><a href="#"></a></div>
+        <div class="logo"><a href="#">Hello! Student</a><a href="#"></a></div>
         <div class="left_open">
-            <i title="展开左侧栏" class="iconfont">&#9668;</i>
+            <i title="E" class="iconfont">&#9668;</i>
         </div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
-            <a href="javascript:;">student</a>
+            <a href="javascript:;">Student</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a href="login.jsp">exit</a></dd>
+              <dd><a href="login.jsp">Exit</a></dd>
             </dl>
           </li>
         </ul>
@@ -83,7 +83,7 @@
              
             <li>
                 <a href="javascript:;">
-                    <cite>Student action</cite>
+                    <cite>Student Action</cite>
                 </a>
                 <ul class="sub-menu">
                     <li>
@@ -121,6 +121,7 @@
     </div>
     <!-- <div class="x-slide_left"></div> -->
     <!-- 左侧菜单结束 -->
+    <div class="page-content">
       <hr color="green">
       <table class = "layui-table">
 
@@ -147,7 +148,7 @@
       </table>
       
 
-  </div>
+
  
  <!--用户操作使用form表单提交信息-->
  <form action="" id="sendOrder" name="sendOrder" method="post">
@@ -156,7 +157,10 @@
  <div id="mianFromDiv" style="display:none;">
  </div>
  <!--弹框页面操作 end-->
- 
+    </div>
+    <div class="footer">
+        <div class="copyright" align="center">South China Normal University</div>
+    </div>
 <script>
 //layui自启动
 layui.use('layer', function(){

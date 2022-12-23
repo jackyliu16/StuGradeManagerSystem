@@ -34,9 +34,6 @@
       </button>
     </form>
   </div>
-  <xblock>
-    <button class="layui-btn" onclick="x_admin_show('Add Grade','TeachGradeAdd.jsp')"><i class="layui-icon"></i>添加</button>
-  </xblock>
   <hr color="green">
   <table class="layui-table">
     <%

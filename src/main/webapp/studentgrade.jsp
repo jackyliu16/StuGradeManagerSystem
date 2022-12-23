@@ -50,9 +50,9 @@
         </div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
-            <a href="javascript:;">student</a>
+            <a href="javascript:;">Student</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a href="login.jsp">exit</a></dd>
+              <dd><a href="login.jsp">Exit</a></dd>
             </dl>
           </li>
         </ul>
@@ -81,7 +81,7 @@
 
             <li>
                 <a href="javascript:;">
-                    <cite>Student action</cite>
+                    <cite>Student Action</cite>
                 </a>
                 <ul class="sub-menu">
                     <li>
@@ -119,6 +119,7 @@
         </ul>
       </div>
     </div>
+    <div class="page-content">
       <hr color="green">
       <table class = "layui-table">
         <%
@@ -141,7 +142,8 @@
             }
         %>
       </table>
-  </div>
+
+    </div>
     <div class="footer">
         <div class="copyright" align="center">South China Normal University</div>
     </div>

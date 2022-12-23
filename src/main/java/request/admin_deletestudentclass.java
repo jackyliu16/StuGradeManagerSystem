@@ -14,7 +14,7 @@ import java.io.IOException;
 public class admin_deletestudentclass extends myHttpServelet{
     @Override
     protected void doPost(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
-        String id = req.getParameter("id");
+        String id = req.getParameter("stu_id");
         String exclass_id = req.getParameter("exclass_id");
 
         DataControlCenter dcc = new DataControlCenter();
@@ -42,7 +42,7 @@ public class admin_deletestudentclass extends myHttpServelet{
         }
 
         if(result){
-            res.getWriter().println("<script>alert('Register success')</script>");
+            res.getWriter().println("<script>alert('Delete success')</script>");
         }
         else {
             res.getWriter().println("<script>alert('Wrong')</script>");

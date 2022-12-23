@@ -22,6 +22,9 @@
       text-decoration: none;
       color: black;
     }
+    .layui-input{
+      width: 50%;
+    }
   </style>
 
   <meta charset="UTF-8">
@@ -40,7 +43,6 @@
     <li class="layui-nav-item">
       <a href="javascript:;">Teacher</a>
       <dl class="layui-nav-child"> <!-- 二级菜单 -->
-        <dd><a onclick="x_admin_show('Information','Information.jsp')">Information</a></dd>
         <dd><a href="login.jsp">Exit</a></dd>
       </dl>
     </li>
@@ -61,7 +63,7 @@
       <li>
       <li>
         <a href="javascript:;">
-          <cite>Teacher action</cite>
+          <cite>Teacher Action</cite>
         </a>
         <ul class="sub-menu">
           <li>
@@ -74,28 +76,28 @@
           <li>
             <form action="/StuGradeManagerSystem_war/teacher_inqueryclass" method="post" name="form2">
               <a href="javascript:document.form2.submit();">
-                <cite>Teacher Gclass List</cite>
+                <cite>Teacher Glass List</cite>
               </a>
             </form>
           </li >
           <li>
             <form action="/StuGradeManagerSystem_war/teacher_insertstudent.jsp" method="post" name="form3">
               <a href="javascript:document.form3.submit();">
-                <cite>insert student grade</cite>
+                <cite>Insert Student Grade</cite>
               </a>
             </form>
           </li>
           <li>
             <form action="/StuGradeManagerSystem_war/teacher_updateGrade.jsp" method="post" name="form4">
               <a href="javascript:document.form4.submit();">
-                <cite>update student grade</cite>
+                <cite>Update Student Grade</cite>
               </a>
             </form>
           </li>
           <li>
             <form action="/StuGradeManagerSystem_war/teacher_information.jsp" method="post" name="form5">
               <a href="javascript:document.form5.submit();">
-                <cite>information</cite>
+                <cite>Information</cite>
               </a>
             </form>
           </li>
@@ -125,15 +127,15 @@
     <div class="layui-fluid" style="font-size: 60px">
       <form action="/StuGradeManagerSystem_war/teacher_updateGrade" method="post">
         <a>student id</a>
-        <input placeholder="please enter the student id" name="stu_id">
+        <input placeholder="please enter the student id" name="stu_id"  class = "layui-input">
         <br/><br/>
         <a>course id</a>
-        <input placeholder="please enter the course id" name="course_id">
+        <input placeholder="please enter the course id" name="course_id"  class = "layui-input">
         <br/><br/>
         <a>new grade</a>
-        <input placeholder="please enter the new grade" name="grade">
+        <input placeholder="please enter the new grade" name="grade"  class = "layui-input">
         <br/><br/>
-        <input type="submit" >
+        <button type="submit" class = "layui-btn layui-btn-radius">submit</button>
         <br/>
       </form>
     </div>

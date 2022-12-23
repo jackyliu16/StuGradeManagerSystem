@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>登录界面</title>
+	<title>login</title>
 	<meta name="viewport"
 		  content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
 	<!--basic_css-->

@@ -22,6 +22,14 @@
             text-decoration: none;
             color: black;
         }
+        body {
+            background-image: url('img/Home.jpg');
+            background-position: 14px 14px;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            background-size: cover;
+        }
     </style>
 
     <meta charset="UTF-8">
@@ -40,7 +48,6 @@
         <li class="layui-nav-item">
             <a href="javascript:;">Teacher</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                <dd><a onclick="x_admin_show('Information','Information.jsp')">Information</a></dd>
                 <dd><a href="login.jsp">Exit</a></dd>
             </dl>
         </li>
@@ -61,7 +68,7 @@
             <li>
             <li>
                 <a href="javascript:;">
-                    <cite>Teacher action</cite>
+                    <cite>Teacher Action</cite>
                 </a>
                 <ul class="sub-menu">
                     <li>
@@ -74,28 +81,28 @@
                     <li>
                         <form action="/StuGradeManagerSystem_war/teacher_inqueryclass" method="post" name="form2">
                             <a href="javascript:document.form2.submit();">
-                                <cite>Teacher class List</cite>
+                                <cite>Teacher Class List</cite>
                             </a>
                         </form>
                     </li >
                     <li>
                         <form action="/StuGradeManagerSystem_war/teacher_insertstudent.jsp" method="post" name="form3">
                             <a href="javascript:document.form3.submit();">
-                                <cite>insert student grade</cite>
+                                <cite>Insert Student Grade</cite>
                             </a>
                         </form>
                     </li>
                     <li>
                         <form action="/StuGradeManagerSystem_war/teacher_updateGrade.jsp" method="post" name="form4">
                             <a href="javascript:document.form4.submit();">
-                                <cite>update student grade</cite>
+                                <cite>Update Student Grade</cite>
                             </a>
                         </form>
                     </li>
                     <li>
                         <form action="/StuGradeManagerSystem_war/teacher_information.jsp" method="post" name="form5">
                             <a href="javascript:document.form5.submit();">
-                                <cite>information</cite>
+                                <cite>Information</cite>
                             </a>
                         </form>
                     </li>
@@ -119,13 +126,7 @@
                 </marquee>
             </blockquote>
         </div>
-        <div class="layui-fluid" style="font-size: 60px">
-            <font class="text" >
-                1.文件上传时候文件大小不得超过3G内容。<br>
-                2.文件上传时候文件大小不得超过3G内容。<br>
-                3.文件上传时候文件大小不得超过3G内容。<br>
-            </font>
-        </div>
+
     </div>
 </div>
 <!-- 右侧主体结束 -->

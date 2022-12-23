@@ -38,15 +38,15 @@
 	<body>
     <!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="#">Hello!!Student</a><a href="#"></a></div>
+        <div class="logo"><a href="#">Hello! Student</a><a href="#"></a></div>
         <div class="left_open">
             <i title="Expand list" class="iconfont">&#9668;</i>
         </div>
         <ul class="layui-nav right" lay-filter="">
             <li class="layui-nav-item">
-                <a href="javascript:">student</a>
+                <a href="javascript:">Student</a>
                 <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                    <dd><a href="login.jsp">exit</a></dd>
+                    <dd><a href="login.jsp">Exit</a></dd>
                 </dl>
             </li>
         </ul>
@@ -69,7 +69,7 @@
 
                     <li>
                         <a href="javascript:">
-                            <cite>Student action</cite>
+                            <cite>Student Action</cite>
                         </a>
                         <ul class="sub-menu">
                             <li>
@@ -109,6 +109,7 @@
         </div>
         <!-- <div class="x-slide_left"></div> -->
         <!-- 左侧菜单结束 -->
+
     <div class="page-content">
 	<div class="x-body">
       <div class="layui-row">
@@ -146,10 +147,10 @@
  <hr class="layui-bg-green">
  <!--echart_part-->
  <div id="container"  style="height: 380px"></div>
+    </div>
 
     <div class="footer">
         <div class="copyright" align="center">South China Normal University</div>
-    </div>
     </div>
 <script>
 //layui自启动
