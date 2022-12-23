@@ -758,7 +758,7 @@ public class DataControlCenter {
 
     public Boolean insertNewTeacherUser(String TechNo, String TechName, String DeptNo, String Pwd) throws DBException {
         // NOTE 完成TechNo 插入前主键为空判断（目前认为不用完成这个会更好，直接插，插到冲突再处理）
-        ValidityOfParameters.check_tech_id(TechNo);
+        ValidityOfParameters.check_char11_num(TechNo);
         ValidityOfParameters.check_char32(TechName);
         ValidityOfParameters.check_dept(DeptNo);
         ValidityOfParameters.check_char32(Pwd);
