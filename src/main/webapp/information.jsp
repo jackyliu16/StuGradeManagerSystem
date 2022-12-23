@@ -140,17 +140,11 @@ margin-top: 0rem;
 				}
 			}
 			DataControlCenter dcc = new DataControlCenter();
+			String name = null;
 			try {
-				String name = dcc.getStudentName(id);
+				name = dcc.getStudentName(id);
 			} catch (DBException e) {
-				// NOTE module of exception operation
-				if (DBException.checkIfExceptionInCollections(e,
-						DBExceptionEnums.PARAMETER_NOT_EXIST)) {
-					System.out.println("student not exist");
-					// TODO add message handler of student not exist
-				} else {
-					// TODO add normal message handler (i guess it will never have other error)
-				}
+				throw new RuntimeException(e);
 			}
 		%>
 	<div class="layui-tab page-content-wrap long">

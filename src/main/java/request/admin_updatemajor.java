@@ -1,5 +1,7 @@
 package request;
 
+import databasesOperation.DBException;
+import databasesOperation.DBExceptionEnums;
 import databasesOperation.DataControlCenter;
 
 import javax.servlet.ServletException;
@@ -16,9 +18,23 @@ public class admin_updatemajor extends myHttpServelet{
         String major = req.getParameter("major");
 
         DataControlCenter dcc = new DataControlCenter();
-        Boolean result;
+        Boolean result = false;
 
-        result=dcc.updateStudentMajor(id,major);
+        try {
+            result=dcc.updateStudentMajor(id,major);
+        } catch (DBException e) {
+            if (DBException.checkIfExceptionInCollections(e,
+                    DBExceptionEnums.PARAMETER_LENGTH_INCORRECT,
+                    DBExceptionEnums.PARAMETER_TYPE_INCORRECT)) {
+                res.getWriter().println("<script>alert('Parameter Illegal')</script>");
+                res.getWriter().println("<script>window.location.href='./admin.jsp'</script>");
+            }
+            if (DBException.checkIfExceptionInCollections(e,
+                    DBExceptionEnums.PARAMETER_NOT_EXIST)) {
+                res.getWriter().println("<script>alert('PARAMETER NOT EXIST')</script>");
+                res.getWriter().println("<script>window.location.href='./admin.jsp'</script>");
+            }
+        }
         if(result){
             res.getWriter().println("<script>alert('Register success')</script>");
         }

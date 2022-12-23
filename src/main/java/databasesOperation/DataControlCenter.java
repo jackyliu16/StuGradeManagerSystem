@@ -26,7 +26,7 @@ public class DataControlCenter {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/CourseDB";
     static final String USER = "root";
-    static final String PWD = "123456";
+    static final String PWD = "root";
     static final Logger log = Logger.INSTANCE;
     static Connection conn = null;
 
@@ -44,13 +44,6 @@ public class DataControlCenter {
 
     // Check Function
 
-    /**
-     * Check If Student Pwd is Correct
-     *
-     * @param student_id An input id which indicate as a student
-     * @param password   the input password of student
-     * @return Whether the authentication was successful
-     */
     public boolean checkStudentId(String ID) {
         boolean flag = false;
         try (Statement stmt = conn.createStatement()) {
@@ -219,9 +212,10 @@ public class DataControlCenter {
 
     }
 
-    public Boolean checkStudentPwd(String student_id, String password) {
+    public Boolean checkStudentPwd(String student_id, String password) throws DBException {
         boolean flag = false;
-        // NOTE just need normal check, do not need check if exist
+        ValidityOfParameters.check_char11_num(student_id);
+        ValidityOfParameters.check_char32(password);
         try (Statement stmt = conn.createStatement()) {
             String sql = String.format("" +
                     "SELECT * " +
@@ -250,8 +244,10 @@ public class DataControlCenter {
      * @param password the input password of teacher
      * @return Whether the authentication was successful
      */
-    public Boolean checkTeacherPwd(String Tech_id, String password) {
+    public Boolean checkTeacherPwd(String Tech_id, String password) throws DBException {
         boolean flag = false;
+        ValidityOfParameters.check_char11_num(Tech_id);
+        ValidityOfParameters.check_char32(password);
         try (Statement stmt = conn.createStatement()) {
             String sql = String.format("" +
                     "SELECT * " +
@@ -280,8 +276,10 @@ public class DataControlCenter {
      * @param password the input password of teacher
      * @return Whether the authentication was successful
      */
-    public Boolean checkAdminPwd(String Admin_id, String password) {
+    public Boolean checkAdminPwd(String Admin_id, String password) throws DBException {
         boolean flag = false;
+        ValidityOfParameters.check_char4_num(Admin_id) ;
+        ValidityOfParameters.check_char32(password);
         try (Statement stmt = conn.createStatement()) {
             String sql = String.format("" +
                     "SELECT * " +

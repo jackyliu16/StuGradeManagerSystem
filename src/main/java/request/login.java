@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import databasesOperation.DBException;
+import databasesOperation.DBExceptionEnums;
 import databasesOperation.DataControlCenter;
 import tool.LogLevel;
 import tool.Logger;
@@ -31,28 +33,67 @@ public class login extends HttpServlet {
         Cookie cookie=new Cookie("id",id);
         res.addCookie(cookie);
 
-       if(status.equals("student")){
+        if(status.equals("student")) {
             //*ArrayList<ArrayList<String>> data = dcc.getStudentCourseGrade(id);*//*
-            if(dcc.checkStudentPwd(id,password)){
-                req.getRequestDispatcher("/StuMain.jsp").forward(req,res);
+            try {
+                if(dcc.checkStudentPwd(id,password)){
+                   req.getRequestDispatcher("/StuMain.jsp").forward(req,res);
+                }
+                else {
+                    res.getWriter().println("<script>alert('Wrong password or ID')</script>");
+                    res.getWriter().println("<script>window.location.href='./login.jsp'</script>");
+                }
+            } catch (DBException e) {
+                if (DBException.checkIfExceptionInCollections(e,
+                       DBExceptionEnums.PARAMETER_LENGTH_INCORRECT,
+                       DBExceptionEnums.PARAMETER_TYPE_INCORRECT)) {
+                   res.getWriter().println("<script>alert('Parameter Illegal')</script>");
+                   res.getWriter().println("<script>window.location.href='./login.jsp'</script>");
+                }
             }
         }
         else if (status.equals("teacher")) {
-            if(dcc.checkTeacherPwd(id,password)){
-                req.getRequestDispatcher("/teacher.jsp").forward(req,res);
+            try {
+               if(dcc.checkTeacherPwd(id,password)){
+                   req.getRequestDispatcher("/teacher.jsp").forward(req,res);
+               }
+               else {
+                   res.getWriter().println("<script>alert('Wrong password or ID')</script>");
+                   res.getWriter().println("<script>window.location.href='./login.jsp'</script>");
+               }
+            } catch (DBException e) {
+               if (DBException.checkIfExceptionInCollections(e,
+                       DBExceptionEnums.PARAMETER_LENGTH_INCORRECT,
+                       DBExceptionEnums.PARAMETER_TYPE_INCORRECT)) {
+                   res.getWriter().println("<script>alert('Parameter Illegal')</script>");
+                   res.getWriter().println("<script>window.location.href='./login.jsp'</script>");
+               }
             }
         }
         else if (status.equals("admin")){
-            if(dcc.checkAdminPwd(id,password)){
-                req.getRequestDispatcher("/admin.jsp").forward(req,res);
-            }
+           try {
+               if(dcc.checkAdminPwd(id,password)) {
+                   req.getRequestDispatcher("/admin.jsp").forward(req, res);
+               }
+               else {
+                   res.getWriter().println("<script>alert('Wrong password or ID')</script>");
+                   res.getWriter().println("<script>window.location.href='./login.jsp'</script>");
+               }
+           } catch (DBException e) {
+               if (DBException.checkIfExceptionInCollections(e,
+                       DBExceptionEnums.PARAMETER_LENGTH_INCORRECT,
+                       DBExceptionEnums.PARAMETER_TYPE_INCORRECT)) {
+                   res.getWriter().println("<script>alert('Parameter Illegal')</script>");
+                   res.getWriter().println("<script>window.location.href='./login.jsp'</script>");
+               }
+           }
         }
         else{
            res.getWriter().println("<script>alert('Wrong Type')</script>");
            res.getWriter().println("<script>window.location.href='./login.jsp'</script>");
-       }
-        res.getWriter().println("<script>alert('Wrong password or ID')</script>");
-        res.getWriter().println("<script>window.location.href='./login.jsp'</script>");
+        }
+//        res.getWriter().println("<script>alert('Wrong password or ID')</script>");
+//        res.getWriter().println("<script>window.location.href='./login.jsp'</script>");
     }
 
     @Override
