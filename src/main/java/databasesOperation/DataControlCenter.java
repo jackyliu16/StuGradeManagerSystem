@@ -51,6 +51,174 @@ public class DataControlCenter {
      * @param password   the input password of student
      * @return Whether the authentication was successful
      */
+    public boolean checkStudentId(String ID)
+    {
+        boolean flag=false;
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT student.StuNo " +
+                    "FROM Student " +
+                    "WHERE student.StuNo=\"%s\" ", ID);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            // ResultSetOperation.printResultSet(rs); // 不允许添加输出，这样会使迭代器运行到结尾
+            if (rs.next()) {
+                flag = true;
+            }
+            log.debug(String.format("flag is: %s", flag));
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return flag;
+
+    }
+    public boolean checkTeacherId(String ID)
+    {
+        boolean flag=false;
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT Teacher.TechNo " +
+                    "FROM Teacher " +
+                    "WHERE Teacher.TechNo=\"%s\" ", ID);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            // ResultSetOperation.printResultSet(rs); // 不允许添加输出，这样会使迭代器运行到结尾
+            if (rs.next()) {
+                flag = true;
+            }
+            log.debug(String.format("flag is: %s", flag));
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return flag;
+
+    }
+    public boolean checkifCourseExsist(String ID)
+    {
+        boolean flag=false;
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT Course.CourseNo " +
+                    "FROM Course " +
+                    "WHERE CourseNo=\"%s\" ", ID);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            // ResultSetOperation.printResultSet(rs); // 不允许添加输出，这样会使迭代器运行到结尾
+            if (rs.next()) {
+                flag = true;
+            }
+            log.debug(String.format("flag is: %s", flag));
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return flag;
+
+    }
+    public boolean checkAdminId(String ID)
+    {
+        boolean flag=false;
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT Admin.ID " +
+                    "FROM Admin " +
+                    "WHERE Admin.ID=\"%s\" ", ID);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            // ResultSetOperation.printResultSet(rs); // 不允许添加输出，这样会使迭代器运行到结尾
+            if (rs.next()) {
+                flag = true;
+            }
+            log.debug(String.format("flag is: %s", flag));
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return flag;
+
+    }
+    public boolean checkifExclassExsist(String ID)
+    {
+        boolean flag=false;
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT ExClass.ExClassNo " +
+                    "FROM ExClass " +
+                    "WHERE ExClassNo=\"%s\" ", ID);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            // ResultSetOperation.printResultSet(rs); // 不允许添加输出，这样会使迭代器运行到结尾
+            if (rs.next()) {
+                flag = true;
+            }
+            log.debug(String.format("flag is: %s", flag));
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return flag;
+
+    }
+    public boolean checkifMajor(String ID)
+    {
+        boolean flag=false;
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT Major.MajorNo " +
+                    "FROM Major " +
+                    "WHERE MajorNo=\"%s\" ", ID);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            // ResultSetOperation.printResultSet(rs); // 不允许添加输出，这样会使迭代器运行到结尾
+            if (rs.next()) {
+                flag = true;
+            }
+            log.debug(String.format("flag is: %s", flag));
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return flag;
+
+    }
+    public boolean checkifDept(String ID)
+    {
+        boolean flag=false;
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT Department.DeptNo " +
+                    "FROM Department " +
+                    "WHERE DeptNo=\"%s\" ", ID);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            // ResultSetOperation.printResultSet(rs); // 不允许添加输出，这样会使迭代器运行到结尾
+            if (rs.next()) {
+                flag = true;
+            }
+            log.debug(String.format("flag is: %s", flag));
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return flag;
+
+    }
     public Boolean checkStudentPwd(String student_id, String password) {
         boolean flag = false;
         // NOTE just need normal check, do not need check if exist
