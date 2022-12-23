@@ -26,11 +26,17 @@ public class ValidityOfParameters {
      *                     DBExceptionEnums.PARAMETER_TYPE_INCORRECT
      */
     public static boolean check_stu_id(String id) throws DBException {
+        boolean flag=false;
         log.debug(String.format("now checking stu id : %s", id));
         check_char11_num(id);
         DataControlCenter dcc = new DataControlCenter();
+        flag=dcc.checkStudentId(id);
+        if (flag==false)
+        {
+            throw new DBException(DBExceptionEnums.PARAMETER_NOT_EXIST);
+        }
         // TODO check if student existed (return DBException.PAR...NOT_EXIST)
-        return true;
+        return flag;
     }
 
     /**
@@ -44,8 +50,15 @@ public class ValidityOfParameters {
      */
     public static boolean check_tech_id(String id) throws DBException {
         log.debug(String.format("now checking tech id : %s", id));
+        DataControlCenter dcc = new DataControlCenter();
+        boolean flag=false;
+        flag=dcc.checkTeacherId(id);
+        if(flag==false)
+        {
+            throw new DBException(DBExceptionEnums.PARAMETER_NOT_EXIST);
+        }
         // TODO imitate check_stu_id complete it.
-        return true;
+        return flag;
     }
 
     /**
@@ -60,6 +73,13 @@ public class ValidityOfParameters {
     public static boolean check_admin_id(String id) throws DBException {
         log.debug(String.format("now checking admin id : %s", id));
         // TODO imitate check_stu_id complete it.
+        boolean flag=false;
+        DataControlCenter dcc=new DataControlCenter();
+        flag=dcc.checkAdminId(id);
+        if(flag==false)
+        {
+            throw new DBException(DBExceptionEnums.PARAMETER_NOT_EXIST);
+        }
         return true;
     }
 
@@ -76,7 +96,14 @@ public class ValidityOfParameters {
         log.debug(String.format("now checking course id : %s", id));
         check_char8_num(id);
         // TODO if course exist
-        return true;
+        boolean flag=false;
+        DataControlCenter dcc=new DataControlCenter();
+        flag=dcc.checkifCourseExsist(id);
+        if(flag==false)
+        {
+            throw new DBException(DBExceptionEnums.PARAMETER_NOT_EXIST);
+        }
+        return flag;
     }
 
     /**
@@ -92,7 +119,14 @@ public class ValidityOfParameters {
         log.debug(String.format("now checking ex course id : %s", id));
         check_char8_num(id);
         // TODO if ex course exist
-        return true;
+        DataControlCenter dcc=new DataControlCenter();
+        boolean flag=false;
+        flag=dcc.checkifCourseExsist(id);
+        if(flag==false)
+        {
+            throw new DBException(DBExceptionEnums.PARAMETER_NOT_EXIST);
+        }
+        return flag;
     }
 
     /**
@@ -108,7 +142,14 @@ public class ValidityOfParameters {
         log.debug(String.format("now checking major: %s", id));
         check_char4_num(id);
         // TODO check if majorNo is correct
-        return true;
+        boolean flag=false;
+        DataControlCenter dcc=new DataControlCenter();
+        flag=dcc.checkifMajor(id);
+        if(flag==false)
+        {
+            throw new DBException(DBExceptionEnums.PARAMETER_NOT_EXIST);
+        }
+        return flag;
     }
 
     /**
@@ -124,7 +165,14 @@ public class ValidityOfParameters {
         log.debug(String.format("now checking dept: %s", id));
         check_char4_num(id);
         // TODO check if this DeptNo is existed
-        return true;
+        boolean flag=false;
+        DataControlCenter dcc=new DataControlCenter();
+        flag=dcc.checkifDept(id);
+        if(flag==false)
+        {
+            throw new DBException(DBExceptionEnums.PARAMETER_NOT_EXIST);
+        }
+        return flag;
     }
 
     // NOTE only analyzer if number length and it's type is correct

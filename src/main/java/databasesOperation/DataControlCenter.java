@@ -42,7 +42,7 @@ public class DataControlCenter {
         }
     }
 
-// Check Function
+    // Check Function
 
     /**
      * Check If Student Pwd is Correct
@@ -51,6 +51,174 @@ public class DataControlCenter {
      * @param password   the input password of student
      * @return Whether the authentication was successful
      */
+    public boolean checkStudentId(String ID) {
+        boolean flag = false;
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT student.StuNo " +
+                    "FROM Student " +
+                    "WHERE student.StuNo=\"%s\" ", ID);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            // ResultSetOperation.printResultSet(rs); // 不允许添加输出，这样会使迭代器运行到结尾
+            if (rs.next()) {
+                flag = true;
+            }
+            log.debug(String.format("flag is: %s", flag));
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return flag;
+
+    }
+
+    public boolean checkTeacherId(String ID) {
+        boolean flag = false;
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT Teacher.TechNo " +
+                    "FROM Teacher " +
+                    "WHERE Teacher.TechNo=\"%s\" ", ID);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            // ResultSetOperation.printResultSet(rs); // 不允许添加输出，这样会使迭代器运行到结尾
+            if (rs.next()) {
+                flag = true;
+            }
+            log.debug(String.format("flag is: %s", flag));
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return flag;
+
+    }
+
+    public boolean checkifCourseExsist(String ID) {
+        boolean flag = false;
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT Course.CourseNo " +
+                    "FROM Course " +
+                    "WHERE CourseNo=\"%s\" ", ID);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            // ResultSetOperation.printResultSet(rs); // 不允许添加输出，这样会使迭代器运行到结尾
+            if (rs.next()) {
+                flag = true;
+            }
+            log.debug(String.format("flag is: %s", flag));
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return flag;
+
+    }
+
+    public boolean checkAdminId(String ID) {
+        boolean flag = false;
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT Admin.ID " +
+                    "FROM Admin " +
+                    "WHERE Admin.ID=\"%s\" ", ID);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            // ResultSetOperation.printResultSet(rs); // 不允许添加输出，这样会使迭代器运行到结尾
+            if (rs.next()) {
+                flag = true;
+            }
+            log.debug(String.format("flag is: %s", flag));
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return flag;
+
+    }
+
+    public boolean checkifExclassExsist(String ID) {
+        boolean flag = false;
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT ExClass.ExClassNo " +
+                    "FROM ExClass " +
+                    "WHERE ExClassNo=\"%s\" ", ID);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            // ResultSetOperation.printResultSet(rs); // 不允许添加输出，这样会使迭代器运行到结尾
+            if (rs.next()) {
+                flag = true;
+            }
+            log.debug(String.format("flag is: %s", flag));
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return flag;
+
+    }
+
+    public boolean checkifMajor(String ID) {
+        boolean flag = false;
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT Major.MajorNo " +
+                    "FROM Major " +
+                    "WHERE MajorNo=\"%s\" ", ID);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            // ResultSetOperation.printResultSet(rs); // 不允许添加输出，这样会使迭代器运行到结尾
+            if (rs.next()) {
+                flag = true;
+            }
+            log.debug(String.format("flag is: %s", flag));
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return flag;
+
+    }
+
+    public boolean checkifDept(String ID) {
+        boolean flag = false;
+        try (Statement stmt = conn.createStatement()) {
+            String sql = String.format("" +
+                    "SELECT Department.DeptNo " +
+                    "FROM Department " +
+                    "WHERE DeptNo=\"%s\" ", ID);
+            log.debug(String.format("sql: %s", sql));
+            ResultSet rs = stmt.executeQuery(sql);
+            // ResultSetOperation.printResultSet(rs); // 不允许添加输出，这样会使迭代器运行到结尾
+            if (rs.next()) {
+                flag = true;
+            }
+            log.debug(String.format("flag is: %s", flag));
+            rs.close();
+            stmt.close();
+            log.debug("query success!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return flag;
+
+    }
+
     public Boolean checkStudentPwd(String student_id, String password) {
         boolean flag = false;
         // NOTE just need normal check, do not need check if exist
@@ -201,7 +369,7 @@ public class DataControlCenter {
         return flag;
     }
 
-// Get Function
+    // Get Function
 
     public String getStudentName(String student_id) throws DBException {
         ValidityOfParameters.check_stu_id(student_id);
@@ -223,15 +391,18 @@ public class DataControlCenter {
         return res.isEmpty() ? "" : res.get(0).get(0);
     }
 
-    public ArrayList<ArrayList<String>> getExClassGradeForStudent(String student_id, String ex_class_no) throws DBException {
+    public ArrayList<ArrayList<String>> getExClassGradeForStudent(String student_id, String ex_class_no)
+            throws DBException {
         ValidityOfParameters.check_stu_id(student_id);
         ValidityOfParameters.check_ex_course(ex_class_no);
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
             String sql = String.format("" +
-                    "SELECT Student.StuNo, Student.StuName, Course.CourseName, Learn.Grade, ExClass.Year, ExClass.semester " +
+                    "SELECT Student.StuNo, Student.StuName, Course.CourseName, Learn.Grade, ExClass.Year, ExClass.semester "
+                    +
                     "FROM Student, Learn, ExClass, Course " +
-                    "WHERE Student.StuNo = Learn.StuNo AND Learn.ExClassNo = ExClass.ExClassNo AND ExClass.CourseNo = Course.CourseNo " +
+                    "WHERE Student.StuNo = Learn.StuNo AND Learn.ExClassNo = ExClass.ExClassNo AND ExClass.CourseNo = Course.CourseNo "
+                    +
                     "AND ExClass.ExClassNo = \"%s\" AND Student.StuNo = \"%s\" ;", ex_class_no, student_id);
             log.debug(String.format("sql: %s", sql));
             ResultSet rs = stmt.executeQuery(sql);
@@ -252,28 +423,34 @@ public class DataControlCenter {
      * </p>
      *
      * @param student_id student ID
-     * @return a table which raw is each student and col is ExClassNo, CourseName, Grade, Year, Semester in
-     * a Course;
-     * if return empty means that there is something error in this function
+     * @return a table which raw is each student and col is ExClassNo, CourseName,
+     *         Grade, Year, Semester in
+     *         a Course;
+     *         if return empty means that there is something error in this function
      */
     public ArrayList<ArrayList<String>> getStudentCourseGrade(String student_id) throws DBException {
         ValidityOfParameters.check_stu_id(student_id);
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
-//            String sql = String.format("" +
-//                    "WITH b AS ( " +
-//                    "   select ExClassNo, TechName from ( " +
-//                    "       select ExClass.ExClassNo, Teaching.TechNo " +
-//                    "       from ExClass LEFT JOIN Teaching ON Teaching.ExClassNo = ExClass.ExClassNo " +
-//                    "   ) as a " +
-//                    "   LEFT JOIN Teacher ON Teacher.TechNo = a.TechNo ORDER BY ExClassNo " +
-//                    ") " +
-//                    "SELECT ExClass.ExClassNo, Course.CourseName, Learn.Grade, ExClass.Year, ExClass.semester, b.TechName " +
-//                    "FROM Student, Learn, ExClass, b, Course\n" +
-//                    "WHERE Student.StuNo = Learn.StuNo AND ExClass.ExClassNo = Learn.ExClassNo AND ExClass.ExClassNo = b.ExClassNo AND ExClass.CourseNo = Course.CourseNo " +
-//                    "AND Student.StuNo = \"%s\" ;", student_id);
+            // String sql = String.format("" +
+            // "WITH b AS ( " +
+            // " select ExClassNo, TechName from ( " +
+            // " select ExClass.ExClassNo, Teaching.TechNo " +
+            // " from ExClass LEFT JOIN Teaching ON Teaching.ExClassNo = ExClass.ExClassNo "
+            // +
+            // " ) as a " +
+            // " LEFT JOIN Teacher ON Teacher.TechNo = a.TechNo ORDER BY ExClassNo " +
+            // ") " +
+            // "SELECT ExClass.ExClassNo, Course.CourseName, Learn.Grade, ExClass.Year,
+            // ExClass.semester, b.TechName " +
+            // "FROM Student, Learn, ExClass, b, Course\n" +
+            // "WHERE Student.StuNo = Learn.StuNo AND ExClass.ExClassNo = Learn.ExClassNo
+            // AND ExClass.ExClassNo = b.ExClassNo AND ExClass.CourseNo = Course.CourseNo "
+            // +
+            // "AND Student.StuNo = \"%s\" ;", student_id);
             String sql = String.format("" +
-                    "SELECT ExClass.ExClassNo, Course.CourseName, Learn.Grade, ExClass.Year, ExClass.semester, Teacher.TechName " +
+                    "SELECT ExClass.ExClassNo, Course.CourseName, Learn.Grade, ExClass.Year, ExClass.semester, Teacher.TechName "
+                    +
                     "FROM ExClass, Course, Learn, Teacher, Teaching, Student " +
                     "WHERE Student.StuNo = Learn.StuNo AND Learn.ExClassNo = ExClass.ExClassNo " +
                     "AND ExClass.CourseNo = Course.CourseNo AND ExClass.ExClassNo = Teaching.ExClassNo " +
@@ -301,20 +478,22 @@ public class DataControlCenter {
         ValidityOfParameters.check_stu_id(student_id);
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
-//            String sql = String.format("" +
-//                    "WITH b as ( " +
-//                    "   WITH a AS (" +
-//                    "SELECT Course.CourseName, Student.StuNo, Student.StuName, ExClass.ExClassNo " +
-//                    "FROM Course, ExClass, Learn, Student " +
-//                    "WHERE Course.CourseNo = ExClass.CourseNo AND ExClass.ExClassNo = Learn.ExClassNo AND Learn.StuNo = Student.StuNo " +
-//                    "AND Student.StuNo = \"%s\" " +
-//                    ")" +
-//                    "SELECT a.CourseName, a.StuName, Teaching.TechNo " +
-//                    "FROM a LEFT JOIN Teaching on a.ExClassNo = Teaching.ExClassNo " +
-//                    ") " +
-//                    "SELECT b.CourseName, b.StuName, Teacher.TechName " +
-//                    "FROM Teacher LEFT JOIN b on Teacher.TechNo = b.TechNo ;" +
-//                    "", student_id);
+            // String sql = String.format("" +
+            // "WITH b as ( " +
+            // " WITH a AS (" +
+            // "SELECT Course.CourseName, Student.StuNo, Student.StuName, ExClass.ExClassNo
+            // " +
+            // "FROM Course, ExClass, Learn, Student " +
+            // "WHERE Course.CourseNo = ExClass.CourseNo AND ExClass.ExClassNo =
+            // Learn.ExClassNo AND Learn.StuNo = Student.StuNo " +
+            // "AND Student.StuNo = \"%s\" " +
+            // ")" +
+            // "SELECT a.CourseName, a.StuName, Teaching.TechNo " +
+            // "FROM a LEFT JOIN Teaching on a.ExClassNo = Teaching.ExClassNo " +
+            // ") " +
+            // "SELECT b.CourseName, b.StuName, Teacher.TechName " +
+            // "FROM Teacher LEFT JOIN b on Teacher.TechNo = b.TechNo ;" +
+            // "", student_id);
             String sql = String.format("" +
                     "SELECT ExClass.ExClassNo, Course.CourseName, ExClass.Year, ExClass.semester, Teacher.TechName " +
                     "FROM ExClass, Course, Learn, Teacher, Teaching, Student " +
@@ -413,8 +592,9 @@ public class DataControlCenter {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return res.isEmpty() ?"" :res.get(0).get(0);
+        return res.isEmpty() ? "" : res.get(0).get(0);
     }
+
     public ArrayList<ArrayList<String>> getStudentList() {
         ArrayList<ArrayList<String>> res = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
@@ -534,7 +714,8 @@ public class DataControlCenter {
         ValidityOfParameters.check_major(MajorNo);
         ValidityOfParameters.check_char32(Pwd);
         try (Statement stmt = conn.createStatement()) {
-            String sql = String.format("insert into Student values ('%s', '%s', '%s','%s');", StuNo, StuName, MajorNo, Pwd);
+            String sql = String.format("insert into Student values ('%s', '%s', '%s','%s');", StuNo, StuName, MajorNo,
+                    Pwd);
             log.debug(String.format("sql: %s", sql));
             int rs = stmt.executeUpdate(sql);
             log.trace(String.format("rs: %s", rs));
@@ -547,34 +728,34 @@ public class DataControlCenter {
             return false;
         }
 
-//        try {
-//            ValidityOfParameters.check_stu_id(StuNo);
-//        } catch (DBException e) {
-//            if (DBException.checkIfExceptionInCollections(e,
-//                    DBExceptionEnums.PARAMETER_TYPE_INCORRECT,
-//                    DBExceptionEnums.PARAMETER_LENGTH_INCORRECT)) {
-//                // NOTE if it is normal error => just throw it
-//                throw e;
-//            } else if (e.getExceptionEnums() == DBExceptionEnums.PARAMETER_NOT_EXIST) {
-//                // NOTE if it's parameter not exist -> will not case primary conflict
-//                try (Statement stmt = conn.createStatement()) {
-//                    String sql = String.format("" +
-//                            "insert into Student " +
-//                            "values ('%s', '%s', '%s','%s');", StuNo, StuName, MajorNo, Pwd);
-//                    log.debug(String.format("sql: %s", sql));
-//                    int rs = stmt.executeUpdate(sql);
-//                    log.trace(String.format("rs: %s", rs));
-//                    stmt.close();
-//                    log.debug("query success!");
-//                    return rs == 1;
-//                } catch (SQLException e2) {
-//                    throw new DBException(DBExceptionEnums.SQL_EXCEPTION);
-//                }
-//            } else {
-//                return false;
-//            }
-//        }
-//        return false;
+        // try {
+        // ValidityOfParameters.check_stu_id(StuNo);
+        // } catch (DBException e) {
+        // if (DBException.checkIfExceptionInCollections(e,
+        // DBExceptionEnums.PARAMETER_TYPE_INCORRECT,
+        // DBExceptionEnums.PARAMETER_LENGTH_INCORRECT)) {
+        // // NOTE if it is normal error => just throw it
+        // throw e;
+        // } else if (e.getExceptionEnums() == DBExceptionEnums.PARAMETER_NOT_EXIST) {
+        // // NOTE if it's parameter not exist -> will not case primary conflict
+        // try (Statement stmt = conn.createStatement()) {
+        // String sql = String.format("" +
+        // "insert into Student " +
+        // "values ('%s', '%s', '%s','%s');", StuNo, StuName, MajorNo, Pwd);
+        // log.debug(String.format("sql: %s", sql));
+        // int rs = stmt.executeUpdate(sql);
+        // log.trace(String.format("rs: %s", rs));
+        // stmt.close();
+        // log.debug("query success!");
+        // return rs == 1;
+        // } catch (SQLException e2) {
+        // throw new DBException(DBExceptionEnums.SQL_EXCEPTION);
+        // }
+        // } else {
+        // return false;
+        // }
+        // }
+        // return false;
     }
 
     public Boolean insertNewTeacherUser(String TechNo, String TechName, String DeptNo, String Pwd) throws DBException {
@@ -584,7 +765,8 @@ public class DataControlCenter {
         ValidityOfParameters.check_dept(DeptNo);
         ValidityOfParameters.check_char32(Pwd);
         try (Statement stmt = conn.createStatement()) {
-            String sql = String.format("insert into Student values ('%s', '%s', '%s','%s');", TechNo, TechName, DeptNo, Pwd);
+            String sql = String.format("insert into Student values ('%s', '%s', '%s','%s');", TechNo, TechName, DeptNo,
+                    Pwd);
             log.debug(String.format("sql: %s", sql));
             int rs = stmt.executeUpdate(sql);
             log.trace(String.format("rs: %s", rs));
@@ -598,7 +780,7 @@ public class DataControlCenter {
         }
     }
 
-// Update Function
+    // Update Function
 
     /**
      * update a student grade in a ExCourse</br>
@@ -723,7 +905,7 @@ public class DataControlCenter {
             throw new RuntimeException(e);
         }
     }
-// Delete Function
+    // Delete Function
 
     public Boolean deleteStudentFromExCourse(String student_id, String ex_course_id) throws DBException {
         // first check if student in Excourse
