@@ -132,18 +132,22 @@
         %>
 
         <%
-            for(int i=0;i<list.size();i=i+1)
-            {
+            for (ArrayList<String> strings : list) {
         %>
-        <tr >
-            <th><%=list.get(i).get(0)%></th>
-            <th><%=list.get(i).get(1)%></th>
-            <th><%=list.get(i).get(2)%></th>
-            <th><%=list.get(i).get(3)%></th>
-            <th><%=list.get(i).get(4)%></th>
-        </tr>
-        <%
-            }
+          <tr>
+              <th><%=strings.get(0)%>
+              </th>
+              <th><%=strings.get(1)%>
+              </th>
+              <th><%=strings.get(2)%>
+              </th>
+              <th><%=strings.get(3)%>
+              </th>
+              <th><%=strings.get(4)%>
+              </th>
+          </tr>
+          <%
+              }
         %>
       </table>
       

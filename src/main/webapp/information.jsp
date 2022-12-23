@@ -1,16 +1,19 @@
 <%@ page import="databasesOperation.DataControlCenter" %>
+<%@ page import="databasesOperation.DBException" %>
+<%@ page import="databasesOperation.DBExceptionEnums" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-		 pageEncoding="UTF-8"%>
+		 pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
 <meta name="renderer" content="webkit">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-<link type = "text/css" rel = "stylesheet" href = "css/font.css"/>
+<meta name="viewport"
+	  content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+<link type="text/css" rel="stylesheet" href="css/font.css"/>
 
 
-	<!--basic_css-->
+<!--basic_css-->
 	<link rel="stylesheet" href="css/xadmin.css" type = "text/css">
 	<link rel="stylesheet" href="layui/css/layui.css" media="all" type = "text/css">
     <link rel="stylesheet" href="css/amazeui.min.css"/>
@@ -128,16 +131,21 @@ margin-top: 0rem;
     <div class="page-content">
 		<%
 			String id = new String();
-			Cookie[] cookies=request.getCookies();
-			for(Cookie cookie:cookies){
-				String name=cookie.getName();
-				if("id".equals(name)){
-					id=cookie.getValue();
+			Cookie[] cookies = request.getCookies();
+			for (Cookie cookie : cookies) {
+				String name = cookie.getName();
+				if ("id".equals(name)) {
+					id = cookie.getValue();
 					break;
 				}
 			}
-			DataControlCenter doc = new DataControlCenter();
-			String name = doc.getStudentName(id);
+			DataControlCenter dcc = new DataControlCenter();
+			String name = null;
+			try {
+				name = dcc.getStudentName(id);
+			} catch (DBException e) {
+				throw new RuntimeException(e);
+			}
 		%>
 	<div class="layui-tab page-content-wrap long">
 		  <ul class="layui-tab-title">

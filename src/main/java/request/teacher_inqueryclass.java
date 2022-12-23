@@ -1,5 +1,6 @@
 package request;
 
+import databasesOperation.DBException;
 import databasesOperation.DataControlCenter;
 
 import javax.servlet.ServletException;
@@ -25,7 +26,11 @@ public class teacher_inqueryclass extends myHttpServelet{
                 break;
             }
         }
-        Tech_list = doc.getTeacherteachList(id);
+        try {
+            Tech_list = doc.getTeacherteachList(id);
+        } catch (DBException e) {
+            throw new RuntimeException(e);
+        }
         req.setAttribute("Tech_list",Tech_list);
         req.getRequestDispatcher("/teacher_ClassList.jsp").forward(req,res);
     }

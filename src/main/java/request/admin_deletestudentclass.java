@@ -1,5 +1,7 @@
 package request;
 
+import databasesOperation.DBException;
+import databasesOperation.DBExceptionEnums;
 import databasesOperation.DataControlCenter;
 
 import javax.servlet.ServletException;
@@ -16,9 +18,28 @@ public class admin_deletestudentclass extends myHttpServelet{
         String exclass_id = req.getParameter("exclass_id");
 
         DataControlCenter dcc = new DataControlCenter();
-        Boolean result;
+        Boolean result = false;
 
-        result=dcc.deleteStudentFromExCourse(id,exclass_id);
+        try {
+            result=dcc.deleteStudentFromExCourse(id,exclass_id);
+        } catch (DBException e) {
+            if (DBException.checkIfExceptionInCollections(e,
+                    DBExceptionEnums.PARAMETER_LENGTH_INCORRECT,
+                    DBExceptionEnums.PARAMETER_TYPE_INCORRECT)) {
+                res.getWriter().println("<script>alert('Parameter Illegal')</script>");
+                res.getWriter().println("<script>window.location.href='./admin.jsp'</script>");
+            }
+            if (DBException.checkIfExceptionInCollections(e,
+                    DBExceptionEnums.PARAMETER_NOT_EXIST)) {
+                res.getWriter().println("<script>alert('PARAMETER NOT EXIST')</script>");
+                res.getWriter().println("<script>window.location.href='./admin.jsp'</script>");
+            }
+            if (DBException.checkIfExceptionInCollections(e,
+                    DBExceptionEnums.INTEGRITY_VIOLATION)) {
+                res.getWriter().println("<script>alert('INTEGRITY_VIOLATION')</script>");
+                res.getWriter().println("<script>window.location.href='./admin.jsp'</script>");
+            }
+        }
 
         if(result){
             res.getWriter().println("<script>alert('Delete success')</script>");

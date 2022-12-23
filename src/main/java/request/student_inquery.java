@@ -1,5 +1,6 @@
 package request;
 
+import databasesOperation.DBException;
 import databasesOperation.DataControlCenter;
 
 import javax.servlet.ServletException;
@@ -26,7 +27,11 @@ public class student_inquery extends myHttpServelet{
                 break;
             }
         }
-        Stu_id = doc.getStudentCourseGrade(id);
+        try {
+            Stu_id = doc.getStudentCourseGrade(id);
+        } catch (DBException e) {
+            throw new RuntimeException(e);
+        }
 /*      String strRequest = "request传值";
         String strSession = "session传值";
         request.setAttribute("strRequest", strRequest);

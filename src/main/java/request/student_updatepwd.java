@@ -1,5 +1,6 @@
 package request;
 
+import databasesOperation.DBException;
 import databasesOperation.DataControlCenter;
 
 import javax.servlet.ServletException;
@@ -30,7 +31,11 @@ public class student_updatepwd extends myHttpServelet{
             }
         }
         if(req.getParameter("newpassword").equals(req.getParameter("password"))) {
-            result = doc.updateStudentPwd(id, req.getParameter("oldpassword"), req.getParameter("newpassword"));
+            try {
+                result = doc.updateStudentPwd(id, req.getParameter("oldpassword"), req.getParameter("newpassword"));
+            } catch (DBException e) {
+                throw new RuntimeException(e);
+            }
             if (!result) {
                 res.getWriter().println("<script>alert('Wrong password')</script>");
                 res.getWriter().println("<script>window.location.href='./information.jsp'</script>");

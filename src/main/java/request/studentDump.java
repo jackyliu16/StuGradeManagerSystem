@@ -1,5 +1,6 @@
 package request;
 
+import databasesOperation.DBException;
 import databasesOperation.DataControlCenter;
 
 import javax.servlet.ServletException;
@@ -29,7 +30,11 @@ public class studentDump extends myHttpServelet{
 
         int a=0,b=0,c=0,d=0,e=0;
         String exclass=req.getParameter("exclass");
-        Stu_Rank = doc.getStudentInfoBelongExCourse(exclass);
+        try {
+            Stu_Rank = doc.getStudentInfoBelongExCourse(exclass);
+        } catch (DBException ex) {
+            throw new RuntimeException(ex);
+        }
         for(int i = 1 ; i < Stu_Rank.size() ; i++){
             //System.out.println(Double.parseDouble(Stu_Rank.get(i).get(4)));
             if(Double.parseDouble(Stu_Rank.get(i).get(4))<60 && Double.parseDouble(Stu_Rank.get(i).get(4))>0)
@@ -54,7 +59,11 @@ public class studentDump extends myHttpServelet{
             }
         }
         DataControlCenter docc = new DataControlCenter();
-        Stu_id = docc.getExClassGradeForStudent(id,exclass);
+        try {
+            Stu_id = docc.getExClassGradeForStudent(id,exclass);
+        } catch (DBException ex) {
+            throw new RuntimeException(ex);
+        }
 
         req.setAttribute("Stu_id", Stu_id);
         req.setAttribute("a", a);

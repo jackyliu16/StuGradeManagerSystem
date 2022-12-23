@@ -1,5 +1,7 @@
 package request;
 
+import databasesOperation.DBException;
+import databasesOperation.DBExceptionEnums;
 import databasesOperation.DataControlCenter;
 
 import javax.servlet.ServletException;
@@ -11,14 +13,33 @@ import java.io.IOException;
 public class teacher_updateGrade extends myHttpServelet{
     @Override
     protected void doPost(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException {
-        Boolean result;
+        Boolean result = false;
         String stu_id=req.getParameter("stu_id");
         String course_id=req.getParameter("course_id");
         String grade = req.getParameter("grade");
         Double grade_number=Double.parseDouble(grade);
         DataControlCenter dcc = new DataControlCenter();
 
-        result=dcc.updateStudentExCourseGrade(stu_id,course_id,grade_number);
+        try {
+            result=dcc.updateStudentExCourseGrade(stu_id,course_id,grade_number);
+        } catch (DBException e) {
+            if (DBException.checkIfExceptionInCollections(e,
+                    DBExceptionEnums.PARAMETER_LENGTH_INCORRECT,
+                    DBExceptionEnums.PARAMETER_TYPE_INCORRECT)) {
+                res.getWriter().println("<script>alert('Parameter Illegal')</script>");
+                res.getWriter().println("<script>window.location.href='./teacher.jsp'</script>");
+            }
+            if (DBException.checkIfExceptionInCollections(e,
+                    DBExceptionEnums.PARAMETER_NOT_EXIST)) {
+                res.getWriter().println("<script>alert('PARAMETER NOT EXIST')</script>");
+                res.getWriter().println("<script>window.location.href='./teacher.jsp'</script>");
+            }
+            if (DBException.checkIfExceptionInCollections(e,
+                    DBExceptionEnums.INTEGRITY_VIOLATION)) {
+                res.getWriter().println("<script>alert('INTEGRITY_VIOLATION')</script>");
+                res.getWriter().println("<script>window.location.href='./teacher.jsp'</script>");
+            }
+        }
         if(!result) {
             res.getWriter().println("<script>alert('Wrong ')</script>");
             res.getWriter().println("<script>window.location.href='./teacher_updateGrade.jsp'</script>");

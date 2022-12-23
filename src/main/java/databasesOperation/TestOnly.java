@@ -1,5 +1,6 @@
 package databasesOperation;
 
+import tool.LogLevel;
 import tool.Logger;
 
 public class TestOnly {
@@ -18,8 +19,16 @@ public class TestOnly {
         log.trace("trace message");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
+        log.setLogLevel(LogLevel.Debug);
         DataControlCenter dcc = new DataControlCenter();
-        dcc.insertStudentIntoExCourse("20200740029", "00000001");
+        try {
+            dcc.checkStudentPwd("20200740029", "123456");
+        } catch (DBException e) {
+            System.out.println(e.getErrorMsg());
+            System.out.println(e.getErrorDetail());
+            System.out.println(e.getMessage());
+        }
+        System.out.println("END");
     }
 }
