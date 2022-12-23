@@ -1,5 +1,6 @@
 package request;
 
+import databasesOperation.DBException;
 import databasesOperation.DataControlCenter;
 
 import javax.servlet.ServletException;
@@ -27,7 +28,11 @@ public class studentInfo extends myHttpServelet{
             }
         }
         //System.out.println("id: "+id);
-        StuInfo = doc.getStudentInfo(id);/*req.getParameter("id")*/
+        try {
+            StuInfo = doc.getStudentInfo(id);/*req.getParameter("id")*/
+        } catch (DBException e) {
+            throw new RuntimeException(e);
+        }
         req.setAttribute("StuInfo",StuInfo);
         req.getRequestDispatcher("/information.jsp").forward(req,res);
 

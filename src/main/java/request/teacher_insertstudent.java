@@ -1,5 +1,6 @@
 package request;
 
+import databasesOperation.DBException;
 import databasesOperation.DataControlCenter;
 
 import javax.servlet.ServletException;
@@ -18,7 +19,11 @@ public class teacher_insertstudent extends myHttpServelet{
 
         DataControlCenter dcc = new DataControlCenter();
 
-        result=dcc.insertStudentIntoExCourse(stu_id,course_id);
+        try {
+            result=dcc.insertStudentIntoExCourse(stu_id,course_id);
+        } catch (DBException e) {
+            throw new RuntimeException(e);
+        }
         if(!result) {
             res.getWriter().println("<script>alert('Wrong ')</script>");
             res.getWriter().println("<script>window.location.href='./teacher_insertstudent.jsp'</script>");
