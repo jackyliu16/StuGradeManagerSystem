@@ -92,9 +92,11 @@ CREATE TABLE
 
 CREATE TABLE
     IF NOT EXISTS Teaching(
-        TechNo char(11) NOT NULL,
-        ExClassNo char(8) NOT NULL,
-        PRIMARY KEY(TechNo, ExClassNo)
+    TechNo char(11) NOT NULL,
+    ExClassNo char(8) NOT NULL,
+    PRIMARY KEY(TechNo, ExClassNo),
+    Foreign Key (TechNo) REFERENCES Teacher (TechNo),
+    Foreign Key (ExClassNo) REFERENCES ExClass (ExClassNo)
     );
 
 CREATE TABLE

@@ -23,6 +23,7 @@ public class admin_deleteteaching extends myHttpServelet{
             result=dcc.deleteTeachingRelationship(teacher_no,exclass_id);
         } catch (DBException e) {
             throw new RuntimeException(e);
+
         }
 
         if(result){

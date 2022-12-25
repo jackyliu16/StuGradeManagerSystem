@@ -116,7 +116,7 @@ public class ValidityOfParameters {
         check_char8_num(id);
         DataControlCenter dcc=new DataControlCenter();
         boolean flag=false;
-        flag=dcc.checkifCourseExsist(id);
+        flag=dcc.checkifExclassExsist(id);
         if(flag==false)
         {
             throw new DBException(DBExceptionEnums.PARAMETER_NOT_EXIST);
