@@ -134,7 +134,7 @@
         <div class="layui-fluid" style="font-size: 60px">
             <form action="/StuGradeManagerSystem_war/admin_deletestudentclass" method="post">
                 <a>student id</a>
-                <input placeholder="please enter the student id" name="id"  class = "layui-input">
+                <input placeholder="please enter the student id" name="stu_id"  class = "layui-input">
                 <br/><br/>
                 <a>Exclass id</a>
                 <input placeholder="please enter the exclass_id" name="exclass_id"  class = "layui-input">
