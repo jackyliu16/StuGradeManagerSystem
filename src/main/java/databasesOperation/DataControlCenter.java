@@ -26,11 +26,12 @@ public class DataControlCenter {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/CourseDB";
     static final String USER = "root";
-    static final String PWD = "root";
+    static final String PWD = "666666";
     static final Logger log = Logger.INSTANCE;
     static Connection conn = null;
 
     public DataControlCenter() {
+        log.setLogLevel(LogLevel.Debug);
         try {
             Class.forName(JDBC_DRIVER);
             // Driver Class Create Connect Object
