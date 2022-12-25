@@ -700,6 +700,8 @@ public class DataControlCenter {
             stmt.close();
             log.debug("query success!");
             return rs == 1;
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new DBException(DBExceptionEnums.INTEGRITY_VIOLATION);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

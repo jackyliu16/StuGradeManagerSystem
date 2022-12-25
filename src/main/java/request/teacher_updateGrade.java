@@ -17,6 +17,11 @@ public class teacher_updateGrade extends myHttpServelet{
         String stu_id=req.getParameter("stu_id");
         String course_id=req.getParameter("course_id");
         String grade = req.getParameter("grade");
+        if (grade.isEmpty()) {
+            res.getWriter().println("<script>alert('not be empty')</script>");
+            res.getWriter().println("<script>window.location.href='./teacher_updateGrade.jsp'</script>");
+            return;
+        }
         Double grade_number=Double.parseDouble(grade);
         DataControlCenter dcc = new DataControlCenter();
 

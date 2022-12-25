@@ -50,7 +50,7 @@ public class teacher_updatepwd extends myHttpServelet{
         }
         if(!result) {
             res.getWriter().println("<script>alert('Wrong password')</script>");
-            res.getWriter().println("<script>window.location.href='./teacher_updatepwd.jsp'</script>");
+            res.getWriter().println("<script>window.location.href='./teacher.jsp'</script>");
         }
         else {
             res.getWriter().println("<script>alert('Change Successfully')</script>");
